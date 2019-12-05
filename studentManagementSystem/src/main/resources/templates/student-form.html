@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Product Form</title>
+</head>
+<body>
+   <form action="/student/processForm" method="post" th:object="${student}" th:action="@{/student/processForm}">
+   
+   <fieldset>
+   NAME: <input type="text" th:field="*{firstName}" />
+   </fieldset>
+   <fieldset>
+   LASTNAME: <input type="text" th:field="*{lastName}" />
+   </fieldset>
+   <fieldset>
+   GENDER: <input type="text" th:field="*{gender}" />
+   </fieldset>
+   <fieldset>
+			<button type="submit">Save</button>
+		</fieldset>
+   </form>
+</body>
+</html>

@@ -9,6 +9,7 @@ public class SpringmvcdemoApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringmvcdemoApplication.class, args);
+		System.out.println("Test");
 	}
 	
 }

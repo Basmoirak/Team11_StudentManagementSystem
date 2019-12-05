@@ -12,7 +12,7 @@
   <td th:text=${faculty.firstName}>First Name</td>
   <td th:text=${faculty.middleName}>Middle Name</td>
   <td th:text=${faculty.lastName}>Last Name</td>
-  <td th:text=${faculty.department.firstName}>Department</td>
+  <td th:text=${faculty.department.name}>Department</td>
   <td><a th:href="@{/faculty/update/{id}(id=${faculty.faculty})}">Edit</a></td>
   <td><a th:href="@{/faculty/delete/{id}(id=${faculty.faculty})}">Delete</a></td>
   </tr>

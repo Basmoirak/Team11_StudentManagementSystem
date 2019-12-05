@@ -20,7 +20,7 @@
    DEPARTMENT : 
    <select class="form-control" th:field="*{departmentID}">
     	<option value="0">Select department</option>
-    	<option th:each="department : ${departments}" th:value="${department.id}" th:text="${department.firstName}"></option>
+    	<option th:each="department : ${departments}" th:value="${department.id}" th:text="${department.name}"></option>
     
     </select>
    

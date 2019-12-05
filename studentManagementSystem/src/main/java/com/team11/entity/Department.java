@@ -11,7 +11,7 @@ public class Department {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int Id;
-	private String firstName;
+	private String name;
 	
 	//Constructors
 	public Department() {}
@@ -25,17 +25,17 @@ public class Department {
 		Id = id;
 	}
 
-	public String getFirstName() {
-		return firstName;
+	public String getName() {
+		return name;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	@Override
 	public String toString() {
-		return "Department [Id=" + Id + ", firstName=" + firstName + "]";
+		return "Department [Id=" + Id + ", Name=" + name + "]";
 	}
 	
 }

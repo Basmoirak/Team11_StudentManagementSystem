@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Department Form</title>
+</head>
+<body>
+   <form action="/department/save" method="post" th:object="${department}" th:action="@{/department/save}">
+   
+   <fieldset>
+   NAME: <input type="text" th:field="*{firstName}" />
+   </fieldset>
+   <fieldset>
+		<button type="submit">Save</button>
+	</fieldset>
+   </form>
+</body>
+</html>

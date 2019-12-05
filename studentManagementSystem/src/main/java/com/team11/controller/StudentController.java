@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.team11.dao.StudentRepository;
 import com.team11.entity.Student;
 import com.team11.service.StudentService;
 import com.team11.service.StudentServiceImpl;

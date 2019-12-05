@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 
 @Entity
@@ -23,9 +24,11 @@ public class Student {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int Id;
+	
+	@NotBlank(message = "first name is mandatory")
 	private String firstName;
+	@NotBlank(message = "last name is mandatory")
 	private String lastName;
-	private String middleName;
 	private String gender;
 	private Date birthDate;
 	private String degree;
@@ -53,11 +56,11 @@ public class Student {
 	// Constructors
 	public Student() {}
 	
-	public Student(String firstName, String lastName, String middleName, String gender, Date birthDate,
+	public Student(String firstName, String lastName, String gender, Date birthDate,
 			String degree, String address, String mobile, Level level, Semester semester, tblGPA cgpa, Status status) {
+		
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.middleName = middleName;
 		this.gender = gender;
 		this.birthDate = birthDate;
 		this.degree = degree;
@@ -92,14 +95,6 @@ public class Student {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
-	}
-
-	public String getMiddleName() {
-		return middleName;
-	}
-
-	public void setMiddleName(String middleName) {
-		this.middleName = middleName;
 	}
 
 	public String getGender() {
@@ -180,6 +175,14 @@ public class Student {
 
 	public void setStudentGrades(List<StudentGrades> studentGrades) {
 		this.studentGrades = studentGrades;
+	}
+
+	@Override
+	public String toString() {
+		return "Student [Id=" + Id + ", firstName=" + firstName + ", lastName=" + lastName + ", gender=" + gender
+				+ ", birthDate=" + birthDate + ", degree=" + degree + ", address=" + address + ", mobile=" + mobile
+				+ ", level=" + level + ", semester=" + semester + ", cgpa=" + cgpa + ", status=" + status
+				+ ", studentGrades=" + studentGrades + "]";
 	}
 	
 }

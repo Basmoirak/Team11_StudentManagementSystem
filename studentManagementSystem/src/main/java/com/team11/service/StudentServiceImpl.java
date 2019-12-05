@@ -24,14 +24,14 @@ public class StudentServiceImpl implements StudentService {
 	
 	//Get full list of students
 	@Override
-
+	@Transactional
 	public List<Student> getStudents() {
 		return studentRepository.findAll();
 	}
 	
 	//Save or Update student
 	@Override
-
+	@Transactional
 	public void saveStudent(Student student) {
 		studentRepository.save(student);
 	}

@@ -2,14 +2,16 @@ package com.team11.controller;
 
 import java.util.ArrayList;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.team11.entity.Student;
 import com.team11.service.StudentService;
@@ -28,28 +30,21 @@ public class StudentController {
 		this.studentService = studentService;
 	}
 	
-	// show list of students
 	@GetMapping("/list")
 	public String listAll(Model model) {
 		ArrayList<Student> studentList = new ArrayList<Student>();
 		studentList.addAll(studentService.getStudents());
 		model.addAttribute("students", studentList);
-		return "list-students";
+		return "student-list";
 	}
 	
-	@GetMapping("/showFormForAdd")
-	public String showAddForm(Model model) {
-		
-		// Create model attribute to bind form data
-		Student student = new Student();
-		
-		model.addAttribute("student", student);
-		
+	@GetMapping("/showForm")
+	public String showForm(Student student) {
 		return "student-form";
 	}
 	
-	@GetMapping("/showFormForUpdate")
-	public String showFormForUpdate(@RequestParam("customerId") int theId, Model theModel) {
+	@GetMapping("/update/{id}")
+	public String update(@PathVariable("id") int theId, Model theModel) {
 		
 		// get the student from our service
 		Student theStudent = studentService.getStudent(theId);
@@ -61,14 +56,24 @@ public class StudentController {
 		return "student-form";
 	}
 	
+	@GetMapping("/delete/{id}")
+	public String delete(@PathVariable("id") int theId) {
+		studentService.deleteStudent(theId);
+		return "redirect:/student/list";
+	}
+	
 	@PostMapping("/save")
-	public String insertStudent(@ModelAttribute Student student) {
-	//	System.out.print(student);
+	public String add(@Valid Student student, BindingResult result) {
+		System.out.println(result);
+		//Don't allow user to add student if there are any form validation errors
+		if(result.hasErrors()) {
+			return "student-form";
+		}
+		
 		// save the student using our service
 		studentService.saveStudent(student);
 		
 		return "redirect:/student/list";
 	}	
-	
 }
 

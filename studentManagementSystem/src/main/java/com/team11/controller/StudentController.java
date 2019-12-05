@@ -61,9 +61,9 @@ public class StudentController {
 		return "student-form";
 	}
 	
-	@PostMapping("/saveStudent")
-	public String insertProduct(@ModelAttribute Student student) {
-		
+	@PostMapping("/save")
+	public String insertStudent(@ModelAttribute Student student) {
+	//	System.out.print(student);
 		// save the student using our service
 		studentService.saveStudent(student);
 		

@@ -1,7 +1,10 @@
 package com.team11.entity;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -11,27 +14,32 @@ public class Faculty {
 	
 	//Fields
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int faculty;
 	private String firstName;
 	private String lastName;
 	private String middleName;
+	@Column(name = "department_id")
+	private int departmentID;
 	
 	@ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-	@JoinColumn(name = "department_id")
-	private Department departmentID;
+	@JoinColumn(name = "department_id", insertable = false, updatable = false, nullable = false)
+	private Department department;
 	
 	//Constructor
-	public Faculty() {}
+	public Faculty() {
+	
+	}
 
-	public Faculty(int faculty, String firstName, String lastName, String middleName, Department departmentID) {
-		this.faculty = faculty;
+	public Faculty(String firstName, String lastName, String middleName, int departmentID) {
+		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.middleName = middleName;
 		this.departmentID = departmentID;
 	}
 
-	//Getters & Setters
+	
 	public int getFaculty() {
 		return faculty;
 	}
@@ -64,12 +72,20 @@ public class Faculty {
 		this.middleName = middleName;
 	}
 
-	public Department getDepartmentID() {
+	public int getDepartmentID() {
 		return departmentID;
 	}
 
-	public void setDepartmentID(Department departmentID) {
+	public void setDepartmentID(int departmentID) {
 		this.departmentID = departmentID;
+	}
+
+	public Department getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(Department department) {
+		this.department = department;
 	}
 
 	@Override

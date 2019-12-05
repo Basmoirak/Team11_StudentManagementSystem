@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Faculty Form</title>
+</head>
+<body>
+   <form action="/faculty/save" method="post" th:object="${faculty}" th:action="@{/faculty/save}">
+   <input type="hidden" th:field="*{faculty}">
+   <fieldset>
+   FIRST NAME: <input type="text" th:field="*{firstName}" />
+   </fieldset>
+   <fieldset>
+   MIDDLE NAME: <input type="text" th:field="*{middleName}" />
+   </fieldset>
+   <fieldset>
+   LAST NAME: <input type="text" th:field="*{lastName}" />
+   </fieldset>
+   <fieldset>
+   DEPARTMENT : 
+   <select class="form-control" th:field="*{departmentID}">
+    	<option value="0">Select department</option>
+    	<option th:each="department : ${departments}" th:value="${department.id}" th:text="${department.firstName}"></option>
+    
+    </select>
+   
+   </fieldset>
+   <fieldset>
+			<button type="submit">Save</button>
+		</fieldset>
+   </form>
+</body>
+</html>

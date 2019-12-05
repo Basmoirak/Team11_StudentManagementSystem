@@ -45,14 +45,14 @@ public class StudentController {
 	
 	@GetMapping("/update/{id}")
 	public String update(@PathVariable("id") int theId, Model theModel) {
-		
 		// get the student from our service
 		Student theStudent = studentService.getStudent(theId);
 		
-		// set student as a model attribute to pre-populate the form
-		theModel.addAttribute("student", theStudent);
+		if(theStudent == null) {
+			return "redirect:/student/list";
+		}
 		
-		//send over our form
+		theModel.addAttribute("student", theStudent);
 		return "student-form";
 	}
 	

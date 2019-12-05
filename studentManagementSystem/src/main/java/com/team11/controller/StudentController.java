@@ -64,7 +64,7 @@ public class StudentController {
 	
 	@PostMapping("/save")
 	public String add(@Valid Student student, BindingResult result) {
-		System.out.println(result);
+		
 		//Don't allow user to add student if there are any form validation errors
 		if(result.hasErrors()) {
 			return "student-form";

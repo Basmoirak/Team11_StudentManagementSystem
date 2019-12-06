@@ -7,19 +7,40 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.team11.dao.LevelRepository;
+import com.team11.dao.SemesterRepository;
+import com.team11.dao.StatusRepository;
 import com.team11.dao.StudentRepository;
+import com.team11.entity.Level;
+import com.team11.entity.Semester;
+import com.team11.entity.Status;
 import com.team11.entity.Student;
 
 @Service
 public class StudentServiceImpl implements StudentService {
 	
-	//Inject StudentRepository
+	//Inject Repositories
 	private StudentRepository studentRepository;
+	private LevelRepository levelRepository;
+	private SemesterRepository semesterRepository;
+	private StatusRepository statusRepository;
 	
 	//Setter Injection
 	@Autowired
 	public void setStudentRepository(StudentRepository studentRepository) {
 		this.studentRepository = studentRepository;
+	}
+	@Autowired
+	public void setLevelRepository(LevelRepository levelRepository) {
+		this.levelRepository = levelRepository;
+	}
+	@Autowired
+	public void setSemesterRepository(SemesterRepository semesterRepository) {
+		this.semesterRepository = semesterRepository;
+	}
+	@Autowired
+	public void setStatusRepository(StatusRepository statusRepository) {
+		this.statusRepository = statusRepository;
 	}
 	
 	//Get full list of students
@@ -48,6 +69,27 @@ public class StudentServiceImpl implements StudentService {
 	@Transactional
 	public void deleteStudent(int theId) {
 		studentRepository.deleteById(theId);
+	}
+	
+	//Retrieve all student levels
+	@Override
+	@Transactional
+	public List<Level> getLevels() {
+		return levelRepository.findAll();
+	}
+	
+	//Retrieve all student semesters
+	@Override
+	@Transactional
+	public List<Semester> getSemesters() {
+		return semesterRepository.findAll();
+	}
+	
+	//Retrieve all student statuses
+	@Override
+	@Transactional
+	public List<Status> getStatuses() {
+		return statusRepository.findAll();
 	}
 
 }

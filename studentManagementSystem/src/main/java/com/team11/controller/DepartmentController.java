@@ -1,7 +1,5 @@
 package com.team11.controller;
 
-import java.util.ArrayList;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,9 +31,7 @@ public class DepartmentController {
 	//show list of departments
 	@GetMapping("/list")
 	public String listAll(Model model) {
-		ArrayList<Department> departments = new ArrayList<Department>();
-		departments.addAll(departmentService.getDepartments());
-		model.addAttribute("departments", departments);
+		model.addAttribute("departments", departmentService.getDepartments());
 		return "department-list";
 	}
 	

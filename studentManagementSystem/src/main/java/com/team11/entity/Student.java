@@ -13,7 +13,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 @Entity
@@ -30,6 +34,8 @@ public class Student {
 	@NotBlank(message = "last name is mandatory")
 	private String lastName;
 	private String gender;
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date birthDate;
 	private String degree;
 	private String address;

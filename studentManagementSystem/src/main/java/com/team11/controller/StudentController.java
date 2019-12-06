@@ -1,6 +1,5 @@
 package com.team11.controller;
 
-import java.util.ArrayList;
 
 import javax.validation.Valid;
 
@@ -32,14 +31,19 @@ public class StudentController {
 	
 	@GetMapping("/list")
 	public String listAll(Model model) {
-		ArrayList<Student> studentList = new ArrayList<Student>();
-		studentList.addAll(studentService.getStudents());
-		model.addAttribute("students", studentList);
+//		ArrayList<Student> studentList = new ArrayList<Student>();
+//		studentList.addAll(studentService.getStudents());
+		model.addAttribute("students", studentService.getStudents());
 		return "student-list";
 	}
 	
 	@GetMapping("/showForm")
-	public String showForm(Student student) {
+	public String showForm(Student student, Model model) {
+		
+		model.addAttribute("levels", studentService.getLevels());
+		model.addAttribute("semesters", studentService.getSemesters());
+		model.addAttribute("statuses", studentService.getStatuses());
+		
 		return "student-form";
 	}
 	
@@ -63,10 +67,13 @@ public class StudentController {
 	}
 	
 	@PostMapping("/save")
-	public String add(@Valid Student student, BindingResult result) {
+	public String add(@Valid Student student, BindingResult result, Model model) {
 		
 		//Don't allow user to add student if there are any form validation errors
 		if(result.hasErrors()) {
+			model.addAttribute("levels", studentService.getLevels());
+			model.addAttribute("semesters", studentService.getSemesters());
+			model.addAttribute("statuses", studentService.getStatuses());
 			return "student-form";
 		}
 		

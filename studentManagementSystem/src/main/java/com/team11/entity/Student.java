@@ -20,7 +20,6 @@ import javax.validation.constraints.Pattern;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-
 @Entity
 @Table(name = "student")
 public class Student {
@@ -34,6 +33,7 @@ public class Student {
 	private String firstName;
 	@NotBlank(message = "last name is required")
 	private String lastName;
+	@NotBlank
 	private String gender;
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")

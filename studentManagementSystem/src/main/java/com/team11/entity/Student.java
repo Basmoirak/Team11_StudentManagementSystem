@@ -16,6 +16,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -29,18 +30,22 @@ public class Student {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int Id;
 	
-	@NotBlank(message = "first name is mandatory")
+	@NotBlank(message = "first name is required")
 	private String firstName;
-	@NotBlank(message = "last name is mandatory")
+	@NotBlank(message = "last name is required")
 	private String lastName;
 	private String gender;
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date birthDate;
+	@NotBlank(message = "Degree is required")
 	private String degree;
+	@NotBlank(message = "Address is required")
 	private String address;
+	@NotBlank(message = "Phone number is required")
+	@Pattern(regexp="^(8|9)[0-9]{7}$", message = "Singaporean Mobile Numbers only")
 	private String mobile;
-
+	
 	@ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
 	@JoinColumn(name = "level")
 	private Level level;

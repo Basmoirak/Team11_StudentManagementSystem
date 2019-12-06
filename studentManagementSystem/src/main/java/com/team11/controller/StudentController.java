@@ -48,7 +48,7 @@ public class StudentController {
 	}
 	
 	@GetMapping("/update/{id}")
-	public String update(@PathVariable("id") int theId, Model theModel) {
+	public String update(@PathVariable("id") int theId, Model model) {
 		// get the student from our service
 		Student theStudent = studentService.getStudent(theId);
 		
@@ -56,7 +56,11 @@ public class StudentController {
 			return "redirect:/student/list";
 		}
 		
-		theModel.addAttribute("student", theStudent);
+		model.addAttribute("student", theStudent);
+		model.addAttribute("levels", studentService.getLevels());
+		model.addAttribute("semesters", studentService.getSemesters());
+		model.addAttribute("statuses", studentService.getStatuses());
+		
 		return "student-form";
 	}
 	

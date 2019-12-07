@@ -31,8 +31,7 @@ public class StudentController {
 	
 	@GetMapping("/list")
 	public String listAll(Model model) {
-//		ArrayList<Student> studentList = new ArrayList<Student>();
-//		studentList.addAll(studentService.getStudents());
+
 		model.addAttribute("students", studentService.getStudents());
 		return "student-list";
 	}

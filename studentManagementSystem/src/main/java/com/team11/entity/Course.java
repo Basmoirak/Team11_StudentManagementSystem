@@ -32,6 +32,17 @@ public class Course {
 	@OneToMany(mappedBy = "course")
 	private List<StudentGrades> studentGrades;
 	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "course")
+	private List<CourseApplicant> courseApplicants;
+	
+	public List<CourseApplicant> getCourseApplicants() {
+		return courseApplicants;
+	}
+
+	public void setCourseApplicants(List<CourseApplicant> courseApplicants) {
+		this.courseApplicants = courseApplicants;
+	}
+
 	//Constructors
 	public Course() {}
 

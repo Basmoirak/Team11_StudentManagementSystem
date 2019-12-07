@@ -64,6 +64,18 @@ public class Student {
 	@OneToMany(mappedBy = "student")
 	private List<StudentGrades> studentGrades;
 	
+	//course applicant  one to many
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "course")
+	private List<CourseApplicant> courseApplicants;
+	
+	public List<CourseApplicant> getCourseApplicants() {
+		return courseApplicants;
+	}
+
+	public void setCourseApplicants(List<CourseApplicant> courseApplicants) {
+		this.courseApplicants = courseApplicants;
+	}
+	
 	// Constructors
 	public Student() {}
 	

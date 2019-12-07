@@ -5,6 +5,8 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.team11.dao.DepartmentRepository;
@@ -42,6 +44,11 @@ public class DepartmentServiceImpl implements DepartmentService{
 	public Department getDepartment(int theId) {
 		return departmentRepository.getOne(theId);
 	}
-	
+
+	@Override
+	@Transactional
+	public Page<Department> getPaginated(Pageable pageable) {
+		return departmentRepository.findAll(pageable);
+	}
 	
 }

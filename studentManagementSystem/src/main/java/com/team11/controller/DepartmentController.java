@@ -1,8 +1,10 @@
 package com.team11.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.team11.entity.Department;
 import com.team11.service.DepartmentService;
@@ -28,10 +31,21 @@ public class DepartmentController {
 		this.departmentService = departmentService;
 	}
 	
-	//show list of departments
+	//show paginated list of departments
 	@GetMapping("/list")
-	public String listAll(Model model) {
-		model.addAttribute("departments", departmentService.getDepartments());
+	public String listAll(Model model, HttpServletRequest request) {
+
+		int page = 0;
+		int size = 5; 
+		
+		if(request.getParameter("page") != null && !request.getParameter("page").isEmpty()) {
+			page = Integer.parseInt(request.getParameter("page")) - 1; }
+		
+		if(request.getParameter("size") != null && !request.getParameter("size").isEmpty()) {
+			size=Integer.parseInt(request.getParameter("size")); }
+		
+		model.addAttribute("departments", departmentService.getPaginated(PageRequest.of(page, size)));
+		
 		return "department-list";
 	}
 	

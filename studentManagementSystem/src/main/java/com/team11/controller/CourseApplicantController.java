@@ -43,6 +43,8 @@ public class CourseApplicantController {
 		return "available-courses";
 	}
 	
+	
+	
 	@GetMapping("/courses/apply/{id}")
 	public String applyCourse(@PathVariable("id") int id,CourseApplicant courseApplicant, RedirectAttributes redirectAttributes) {
 		
@@ -70,14 +72,36 @@ public class CourseApplicantController {
 			courseApplicantService.saveCourseApplicant(courseApplicant);
 			return "redirect:/applications";
 		}
-			
-		
-		
 	}
 	
 	@GetMapping("/applications")
 	public String applications(Model model) {
 		model.addAttribute("appliedCourses", courseApplicantService.findCourseApplicantsByStudentID(1));
+		return "applications";
+	}
+	
+	@GetMapping("/applications/approved")
+	public String approvedApplications(Model model) {
+		model.addAttribute("appliedCourses", courseApplicantService.findCourseApplicantsByStudentIDAndStatus(1, 1));
+		return "applications";
+	}
+	
+	//for admin
+	@GetMapping("/admin/applications/pending")
+	public String adminPendingApplications(Model model) {
+		model.addAttribute("pendingCourses", courseApplicantService.findCourseApplicantsByStatus(0));
+		return "admin-pending";
+	}
+	
+	@GetMapping("/admin/applications/pending/approve/{id}")
+	public String approve(@PathVariable("id") int id) {
+		courseApplicantService.approvePendingApplicant(id);
+		return "redirect:/admin/applications/pending";
+	}
+	
+	@GetMapping("/applications/pending")
+	public String pendingApplications(Model model) {
+		model.addAttribute("appliedCourses", courseApplicantService.findCourseApplicantsByStudentIDAndStatus(1, 0));
 		return "applications";
 	}
 	

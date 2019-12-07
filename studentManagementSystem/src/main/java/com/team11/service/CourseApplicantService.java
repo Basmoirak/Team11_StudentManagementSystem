@@ -7,7 +7,7 @@ import com.team11.entity.CourseApplicant;
 
 public interface CourseApplicantService {
 	
-	public List<CourseApplicant> getCourses();
+	public List<CourseApplicant> getCourseApplicants();
 	
 	public void saveCourseApplicant(CourseApplicant courseApplicant);
 	
@@ -16,5 +16,11 @@ public interface CourseApplicantService {
 	public void deleteCourseApplicant(int id);
 
 	public ArrayList<CourseApplicant> findCourseApplicantsByStudentID(int studentId);
+	
+	public ArrayList<CourseApplicant> findCourseApplicantsByStudentIDAndStatus(int studentId, int status);
+	
+	public ArrayList<CourseApplicant> findCourseApplicantsByStatus(int status);
+	
+	public void approvePendingApplicant(int id);
 	
 }

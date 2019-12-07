@@ -1,6 +1,5 @@
 package com.team11.controller;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.team11.dao.CourseApplicantRepository;
 import com.team11.entity.CourseApplicant;
 import com.team11.service.CourseApplicantService;
 import com.team11.service.CourseService;
@@ -49,21 +47,14 @@ public class CourseApplicantController {
 	public String applyCourse(@PathVariable("id") int id,CourseApplicant courseApplicant, RedirectAttributes redirectAttributes) {
 		
 		String error = "You have already booked the course.";
-		//default is true
-		boolean flag = true;
 		
 		//checking student has already booked a course or not
 		//assume that default student id is 1 for testing purposes
-		for(CourseApplicant ca : courseApplicantService.findCourseApplicantsByStudentID(1)) {
-			
-			if(ca.getCourseID() == id) {
-				flag = false;
-			}
-			
-		}
+		boolean flag = courseApplicantService.findCourseApplicantsByStudentID(1)
+					.stream().anyMatch(ca -> ca.getCourseID() == id);
 		
 		//if false send error to front end
-		if(flag == false) {
+		if(flag) {
 			redirectAttributes.addFlashAttribute("error", error);
 			return "redirect:/courses";
 		} else {

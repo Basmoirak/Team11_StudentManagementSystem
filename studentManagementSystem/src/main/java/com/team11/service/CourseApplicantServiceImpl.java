@@ -6,6 +6,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 
 import com.team11.dao.CourseApplicantRepository;
@@ -24,7 +25,7 @@ public class CourseApplicantServiceImpl implements CourseApplicantService{
 	
 	@Override
 	@Transactional
-	public List<CourseApplicant> getCourses() {
+	public List<CourseApplicant> getCourseApplicants() {
 		// TODO Auto-generated method stub
 		return courseApplicantRepository.findAll();
 	}
@@ -55,6 +56,32 @@ public class CourseApplicantServiceImpl implements CourseApplicantService{
 	public ArrayList<CourseApplicant> findCourseApplicantsByStudentID(int studentId) {
 		// TODO Auto-generated method stub
 		return courseApplicantRepository.findCourseApplicantsByStudentID(studentId);
+	}
+
+
+	@Override
+	@Transactional
+	public ArrayList<CourseApplicant> findCourseApplicantsByStudentIDAndStatus(int studentId, int status) {
+		// TODO Auto-generated method stub
+		return courseApplicantRepository.findCourseApplicantsByStudentIDAndStatus(studentId, status);
+	}
+
+
+	@Override
+	@Transactional
+	public ArrayList<CourseApplicant> findCourseApplicantsByStatus(int status) {
+		// TODO Auto-generated method stub
+		return courseApplicantRepository.findCourseApplicantsByStatus(status);
+	}
+
+
+	@Override
+	@Modifying
+	@Transactional
+	public void approvePendingApplicant(int id) {
+		// TODO Auto-generated method stub
+		courseApplicantRepository.approvePendingApplicant(id);
+		
 	}
 
 

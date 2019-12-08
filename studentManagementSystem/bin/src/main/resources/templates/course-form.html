@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Add Course</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+        <link rel="stylesheet" href="../css/shards.min.css">
+    </head>
+    <body>
+        <div class="container my-5">
+            <h2 class="mb-5">Course Form</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <form action="#" th:action="@{/course/save}" th:object="${course}" method="POST">
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                            <input type="hidden" th:field="*{courseId}"/>
+                            
+                                <label for="courseCode" class="col-form-label">Course Code</label>
+                                <input type="text" th:field="*{courseCode}" class="form-control" id="courseCode" placeholder="Course Code" autofocus>
+                                <span th:if="${#fields.hasErrors('courseCode')}" th:errors="*{courseCode}" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="courseName" class="col-form-label">Course Name</label>
+                                <input type="text" th:field="*{courseName}" class="form-control" id="courseName" placeholder="Course Name">
+                                <span th:if="${#fields.hasErrors('courseName')}" th:errors="*{courseName}" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="courseUnit" class="col-form-label">Course Unit</label>
+                                <input type="text" th:field="*{courseUnit}" class="form-control" id="courseUnit" placeholder="Course Unit">
+                                <span th:if="${#fields.hasErrors('courseUnit')}" th:errors="*{courseUnit}" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="courseUnit" class="col-form-label">Choose Department</label>
+                                <select class="form-control" th:field="*{departmentID}">
+    								<option value="0">Select department</option>
+    								<option th:each="department : ${departments}" th:value="${department.id}" th:text="${department.name}"></option>
+    
+    							</select>
+                                <span th:if="${#fields.hasErrors('departmentID')}" th:errors="*{departmentID}" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mt-5">
+                                <input type="submit" class="btn btn-primary" value="Confirm">
+                            </div>
+                        </div>    
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+

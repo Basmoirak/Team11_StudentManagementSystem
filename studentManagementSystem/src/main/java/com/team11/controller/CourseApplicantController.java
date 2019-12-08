@@ -32,7 +32,7 @@ public class CourseApplicantController {
 		this.courseApplicantService = courseApplicantService;
 	}
 	
-	@GetMapping("/courses")
+	@GetMapping("/student/courses")
 	public String availableCourses(Model model) {
 		//returning all courses
 		model.addAttribute("courses", courseService.getCourses());
@@ -40,12 +40,12 @@ public class CourseApplicantController {
 		//returning applied courses
 		model.addAttribute("appliedCourses", courseApplicantService.findCourseApplicantsByStudentID(1));
 		
-		return "available-courses";
+		return "student/available-courses";
 	}
 	
 	
 	
-	@GetMapping("/courses/apply/{id}")
+	@GetMapping("/student/courses/apply/{id}")
 	public String applyCourse(@PathVariable("id") int id,CourseApplicant courseApplicant, RedirectAttributes redirectAttributes) {
 		
 		String error = "You have already booked the course.";
@@ -70,20 +70,20 @@ public class CourseApplicantController {
 			
 			//saving to database using our service
 			courseApplicantService.saveCourseApplicant(courseApplicant);
-			return "redirect:/applications";
+			return "redirect:/student/applications";
 		}
 	}
 	
-	@GetMapping("/applications")
+	@GetMapping("/student/applications")
 	public String applications(Model model) {
 		model.addAttribute("appliedCourses", courseApplicantService.findCourseApplicantsByStudentID(1));
-		return "applications";
+		return "student/applications";
 	}
 	
-	@GetMapping("/applications/approved")
+	@GetMapping("/student/applications/approved")
 	public String approvedApplications(Model model) {
 		model.addAttribute("appliedCourses", courseApplicantService.findCourseApplicantsByStudentIDAndStatus(1, 1));
-		return "applications";
+		return "/student/applications";
 	}
 	
 	//for admin
@@ -99,15 +99,15 @@ public class CourseApplicantController {
 		return "redirect:/admin/applications/pending";
 	}
 	
-	@GetMapping("/applications/pending")
+	@GetMapping("/student/applications/pending")
 	public String pendingApplications(Model model) {
 		model.addAttribute("appliedCourses", courseApplicantService.findCourseApplicantsByStudentIDAndStatus(1, 0));
-		return "applications";
+		return "student/applications";
 	}
 	
-	@GetMapping("/applications/delete/{id}")
+	@GetMapping("/student/applications/delete/{id}")
 	public String delete(@PathVariable("id") int id) {
 		courseApplicantService.deleteCourseApplicant(id);
-		return "redirect:/applications";
+		return "redirect:/student/applications";
 	}
 }

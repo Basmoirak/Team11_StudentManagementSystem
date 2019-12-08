@@ -50,6 +50,10 @@ public class FacultyController {
 	
 	@PostMapping("/save")
 	public String save(@Valid Faculty faculty, BindingResult bindingresult) {
+		if(bindingresult.hasErrors()) { 
+			//model.addAttribute("departments", departmentService.getDepartments());
+			return "faculty-form";
+		}
 		// Save or Update faculty
 		facultyService.saveFaculty(faculty);
 		return "redirect:/faculty/list";

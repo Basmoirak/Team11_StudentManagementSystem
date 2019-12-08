@@ -15,6 +15,7 @@ import com.team11.entity.Department;
 import com.team11.service.DepartmentService;
 import com.team11.service.DepartmentServiceImpl;
 
+
 @Controller
 @RequestMapping("/department")
 public class DepartmentController {
@@ -40,6 +41,14 @@ public class DepartmentController {
 	public String showForm(Department department) {
 		return "department-form";
 	}
+	
+//	@GetMapping("/add")
+//	public String showAddForm(Model model) {
+//		Department department = new Department();
+//		model.addAttribute("department", department);
+//		return "department-form";
+//		
+//	}
 	
 	@GetMapping("/update/{id}")
 	public String update(@PathVariable("id") int theId, Model theModel) {

@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Faculty {
@@ -16,7 +17,11 @@ public class Faculty {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int faculty;
+	
+	@Size(min = 3, max = 10)
 	private String firstName;
+	
+	@Size(min = 3, max = 10)
 	private String lastName;
 	private String middleName;
 	@Column(name = "department_id")

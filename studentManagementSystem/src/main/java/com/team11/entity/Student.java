@@ -16,6 +16,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -38,7 +39,9 @@ public class Student {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date birthDate;
 	private String degree;
+	@NotBlank(message = "Address can not be empty")
 	private String address;
+	@Size(min = 8, max = 14,message = "Phone number must be 3 to 20 characters long")
 	private String mobile;
 
 	@ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})

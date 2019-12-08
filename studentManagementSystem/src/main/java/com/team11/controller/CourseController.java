@@ -47,10 +47,11 @@ public class CourseController {
 	
 	//saving
 	@PostMapping("/save")
-	public String save(@Valid Course course, BindingResult bindingResult) {
-		if(bindingResult.hasErrors())
+	public String save(@Valid Course course, BindingResult bindingResult,Model model) {
+		if(bindingResult.hasErrors()) { 
+			model.addAttribute("departments", departmentService.getDepartments());
 			return "course-form";
-		
+		}
 		courseService.saveCourse(course);
 		return "redirect:/course/list";
 	}	

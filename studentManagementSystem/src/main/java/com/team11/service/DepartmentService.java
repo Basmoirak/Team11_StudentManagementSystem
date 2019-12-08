@@ -2,6 +2,9 @@ package com.team11.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import com.team11.entity.Department;
 
 public interface DepartmentService {
@@ -13,5 +16,5 @@ public interface DepartmentService {
 	
 	public void deleteDepartment(int theId);
 	
-	
+	public Page<Department> getPaginated(Pageable pageable);
 }

@@ -16,10 +16,9 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.Pattern;
 
 import org.springframework.format.annotation.DateTimeFormat;
-
 
 @Entity
 @Table(name = "student")
@@ -30,20 +29,23 @@ public class Student {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int Id;
 	
-	@NotBlank(message = "first name is mandatory")
+	@NotBlank(message = "first name is required")
 	private String firstName;
-	@NotBlank(message = "last name is mandatory")
+	@NotBlank(message = "last name is required")
 	private String lastName;
+	@NotBlank
 	private String gender;
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date birthDate;
+	@NotBlank(message = "Degree is required")
 	private String degree;
-	@NotBlank(message = "Address can not be empty")
+	@NotBlank(message = "Address is required")
 	private String address;
-	@Size(min = 8, max = 14,message = "Phone number must be 3 to 20 characters long")
+	@NotBlank(message = "Phone number is required")
+	@Pattern(regexp="^(8|9)[0-9]{7}$", message = "Singaporean Mobile Numbers only")
 	private String mobile;
-
+	
 	@ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
 	@JoinColumn(name = "level")
 	private Level level;
@@ -61,6 +63,18 @@ public class Student {
 	
 	@OneToMany(mappedBy = "student")
 	private List<StudentGrades> studentGrades;
+	
+	//course applicant  one to many
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "course")
+	private List<CourseApplicant> courseApplicants;
+	
+	public List<CourseApplicant> getCourseApplicants() {
+		return courseApplicants;
+	}
+
+	public void setCourseApplicants(List<CourseApplicant> courseApplicants) {
+		this.courseApplicants = courseApplicants;
+	}
 	
 	// Constructors
 	public Student() {}

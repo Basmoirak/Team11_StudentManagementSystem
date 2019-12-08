@@ -45,7 +45,7 @@
                         	<div class="form-group col-md-6">
                                 <label for="degree" class="col-form-label">Degree</label>
                                 <select class="form-control" th:field="*{degree}">
-                                	<option disabled="disabled" selected="selected" value="">Select</option>
+                                	<option selected="selected" value="">Select</option>
                                 	<option value="Computer Science">Computer Science</option>
                                 	<option value="Software Engineering">Software Engineering</option>
                                 	<option value="Mathematics">Mathematics</option>                                	
@@ -66,7 +66,7 @@
                             <div class="form-group col-md-6">
                                 <label for="level" class="col-form-label">Choose Level</label>
                                 <select class="form-control" th:field="*{level}">
-    								<option value="0">Select Level</option>
+    								<option value="">Select Level</option>
     								<option th:each="level : ${levels}" th:value="${level.id}" th:text="${level.level}"></option>
     							</select>
                                 <span th:if="${#fields.hasErrors('level')}" th:errors="*{level}" class="text-danger"></span>
@@ -74,7 +74,7 @@
                             <div class="form-group col-md-6">
                                 <label for="semester" class="col-form-label">Choose Semester</label>
                                 <select class="form-control" th:field="*{semester}">
-    								<option value="0">Select Semester</option>
+    								<option value="">Select Semester</option>
     								<option th:each="semester : ${semesters}" th:value="${semester.semester}" th:text="${semester.label}"></option>
     							</select>
                                 <span th:if="${#fields.hasErrors('semester')}" th:errors="*{semester}" class="text-danger"></span>
@@ -82,7 +82,7 @@
                             <div class="form-group col-md-6">
                                 <label for="status" class="col-form-label">Choose Status</label>
                                 <select class="form-control" th:field="*{status}">
-    								<option value="0">Select Status</option>
+    								<option value="">Select Status</option>
     								<option th:each="status : ${statuses}" th:value="${status.status}" th:text="${status.label}"></option>
     							</select>
                                 <span th:if="${#fields.hasErrors('status')}" th:errors="*{status}" class="text-danger"></span>

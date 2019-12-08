@@ -29,13 +29,9 @@ public class StudentController {
 		this.studentService = studentService;
 	}
 	
-	@GetMapping("/list")
-	public String listAll(Model model) {
-
-		model.addAttribute("students", studentService.getStudents());
-		return "student-list";
-	}
+// *** USER ROLE *** //
 	
+	//For user to view registration form
 	@GetMapping("/showForm")
 	public String showForm(Student student, Model model) {
 		
@@ -46,29 +42,7 @@ public class StudentController {
 		return "student-form";
 	}
 	
-	@GetMapping("/update/{id}")
-	public String update(@PathVariable("id") int theId, Model model) {
-		// get the student from our service
-		Student theStudent = studentService.getStudent(theId);
-		
-		if(theStudent == null) {
-			return "redirect:/student/list";
-		}
-		
-		model.addAttribute("student", theStudent);
-		model.addAttribute("levels", studentService.getLevels());
-		model.addAttribute("semesters", studentService.getSemesters());
-		model.addAttribute("statuses", studentService.getStatuses());
-		
-		return "student-form";
-	}
-	
-	@GetMapping("/delete/{id}")
-	public String delete(@PathVariable("id") int theId) {
-		studentService.deleteStudent(theId);
-		return "redirect:/student/list";
-	}
-	
+	//For all users to save student details
 	@PostMapping("/save")
 	public String add(@Valid Student student, BindingResult result, Model model) {
 		
@@ -85,5 +59,41 @@ public class StudentController {
 		
 		return "redirect:/student/list";
 	}	
+	
+// *** ADMINISTRATOR ROLE *** //
+	
+	// For admin to view list of students
+	@GetMapping("/admin/list")
+	public String listAll(Model model) {
+
+		model.addAttribute("students", studentService.getStudents());
+		return "student-list";
+	}
+	
+	// For admin to update student details, level, semester & status
+	@GetMapping("/admin/update/{id}")
+	public String update(@PathVariable("id") int theId, Model model) {
+		// get the student from our service
+		Student theStudent = studentService.getStudent(theId);
+		
+		if(theStudent == null) {
+			return "redirect:/student/list";
+		}
+		
+		model.addAttribute("student", theStudent);
+		model.addAttribute("levels", studentService.getLevels());
+		model.addAttribute("semesters", studentService.getSemesters());
+		model.addAttribute("statuses", studentService.getStatuses());
+		
+		return "student-form";
+	}
+	
+	// For admin to remove students
+	@GetMapping("/admin/delete/{id}")
+	public String delete(@PathVariable("id") int theId) {
+		studentService.deleteStudent(theId);
+		return "redirect:/student/list";
+	}
+	
 }
 

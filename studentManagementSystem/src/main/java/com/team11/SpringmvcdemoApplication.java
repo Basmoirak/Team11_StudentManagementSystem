@@ -14,7 +14,6 @@ import com.team11.entity.Level;
 import com.team11.entity.Semester;
 import com.team11.entity.Status;
 
-
 @SpringBootApplication
 public class SpringmvcdemoApplication implements CommandLineRunner{
 	

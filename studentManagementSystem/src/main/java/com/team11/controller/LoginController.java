@@ -27,25 +27,18 @@ public class LoginController {
 		User user =  userService.findByUserName(userDetail.getUsername());
 		httpRequest.getSession().setAttribute("userID", user.getId());
 		
+		//If user account has been deactivated
+		if(!user.isActive()) {
+			return "login/user-deactivated";
+		}
+		
 		return "home";
-	}
-	
-	@GetMapping("/student")
-	public String showStudent() {
-		return "Student";
-	}
-	
-	@GetMapping("/admin")
-	public String showAdmin() {
-		return "Admin";
 	}
 	
 	@GetMapping("/showMyLoginPage")
 	public String showMyLoginPage() {
 		
-		// return "plain-login";
-
-		return "fancy-login";
+		return "login/fancy-login";
 		
 	}
 	

@@ -14,6 +14,8 @@ public interface UserService extends UserDetailsService {
 	
 	public void save(User user);
 	
+	public void deactivateUser(String theId);
+	
 	public List<Role> getRoles();
 
 	User createNewUser(CrmUser crmUser, String roleName);

@@ -3,6 +3,7 @@ package com.team11.service;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
@@ -35,20 +36,20 @@ public class UserServiceImpl implements UserService{
 	@Override
 	@Transactional
 	public User findByUserName(String userName) {
-		// TODO Auto-generated method stub
 		return userRepository.findByUserName(userName);
 	}
 
 	@Override
 	@Transactional
 	public User createNewUser(CrmUser crmUser, String roleName) {
-		User user= new User();
+		User user = new User();
 		user.setUserName(crmUser.getUserName());
 		user.setPassword(passwordEncoder.encode(crmUser.getPassword()));
 		user.setFirstName(crmUser.getFirstName());
 		user.setLastName(crmUser.getLastName());
 		user.setEmail(crmUser.getEmail());
 		user.setRoles(Arrays.asList(roleRepository.findByName(roleName)));
+		user.setActive(true);
 		
 		return user;
 	}
@@ -59,11 +60,17 @@ public class UserServiceImpl implements UserService{
 		userRepository.save(user);
 	}
 
+	@Override
+	public void deactivateUser(String theId) {
+		User user = userRepository.findById(theId).orElseThrow(()->new UsernameNotFoundException(theId));
+		user.setActive(false);
+		userRepository.save(user);
+	}
 	
 	@Override
 	@Transactional
-	public UserDetails loadUserByUsername(String userName)throws UsernameNotFoundException{
-		User user=userRepository.findByUserName(userName);
+	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException{
+		User user = userRepository.findByUserName(userName);
 		if (user == null) {
 			throw new UsernameNotFoundException("Invalid username or password");
 		}
@@ -80,5 +87,6 @@ public class UserServiceImpl implements UserService{
 	public List<Role> getRoles() {
 		return roleRepository.findAll();
 	}
+
 	
 }

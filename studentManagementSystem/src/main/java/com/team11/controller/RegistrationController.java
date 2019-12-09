@@ -113,11 +113,7 @@ public class RegistrationController {
         	return "redirect:/register/registerFacultyForm";
         }
         
-        if(formRole.equals("ROLE_ADMIN")) {
-        	return "registration/registration-confirmation";
-        }
-        
-        return "registration/registration-form";
+        return "registration/welcome";
 	}
 	
 	// Register Student
@@ -146,7 +142,7 @@ public class RegistrationController {
 		}
 		
 		studentService.saveStudent(student);
-		return "registration/registration-confirmation";
+		return "registration/welcome";
 	}	
 	
 	// Register Faculty
@@ -168,6 +164,7 @@ public class RegistrationController {
 		
 		// Save or Update faculty
 		facultyService.saveFaculty(faculty);
-		return "registration/registration-confirmation";
+		return "registration/welcome";
 	}
+	
 }

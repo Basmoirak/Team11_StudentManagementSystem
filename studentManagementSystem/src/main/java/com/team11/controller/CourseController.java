@@ -36,14 +36,14 @@ public class CourseController {
 	@GetMapping("/admin/list")
 	public String list(Model model){
 		model.addAttribute("courses", courseService.getCourses());
-		return "course-list";
+		return "admin/course-list";
 	}
 	
 	//add form
 	@GetMapping("/admin/showForm")
 	public String showForm(Course course, Model model) {
 		model.addAttribute("departments", departmentService.getDepartments());
-		return "course-form";
+		return "admin/course-form";
 	}
 	
 	//saving
@@ -51,7 +51,7 @@ public class CourseController {
 	public String save(@Valid Course course, BindingResult bindingResult,Model model) {
 		if(bindingResult.hasErrors()) { 
 			model.addAttribute("departments", departmentService.getDepartments());
-			return "course-form";
+			return "admin/course-form";
 		}
 		courseService.saveCourse(course);
 		return "redirect:/course/admin/list";
@@ -69,7 +69,7 @@ public class CourseController {
 		//retrieving department list
 		model.addAttribute("departments", departmentService.getDepartments());
 		model.addAttribute("course", course);
-		return "course-form";
+		return "admin/course-form";
 	}
 	
 	//deleting

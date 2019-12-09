@@ -95,5 +95,5 @@ public class CrmUser {
 	public void setFormRole(String formRole) {
 		this.formRole = formRole;
 	}
-
+	
 }

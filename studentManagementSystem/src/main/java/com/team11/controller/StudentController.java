@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.team11.entity.Student;
 import com.team11.service.StudentService;
 import com.team11.service.StudentServiceImpl;
+import com.team11.service.UserService;
+import com.team11.service.UserServiceImpl;
 
 @Controller
 @RequestMapping("/student")
@@ -22,28 +24,22 @@ public class StudentController {
 	
 	// Inject student service
 	private StudentService studentService;
-	
-	//Setter Injection
 	@Autowired
 	public void setStudentService(StudentServiceImpl studentService) {
 		this.studentService = studentService;
 	}
 	
-// *** USER ROLE *** //
-	
-	//For user to view registration form
-	@GetMapping("/showForm")
-	public String showForm(Student student, Model model) {
-		
-		model.addAttribute("levels", studentService.getLevels());
-		model.addAttribute("semesters", studentService.getSemesters());
-		model.addAttribute("statuses", studentService.getStatuses());
-		
-		return "student-form";
+	// Inject user Service
+	private UserService userService;
+	@Autowired
+	public void setUserService(UserServiceImpl userService) {
+		this.userService = userService;
 	}
 	
+// *** ADMIN ROLE *** //
+	
 	//For all users to save student details
-	@PostMapping("/save")
+	@PostMapping("/admin/save")
 	public String add(@Valid Student student, BindingResult result, Model model) {
 		
 		//Don't allow user to add student if there are any form validation errors
@@ -51,23 +47,21 @@ public class StudentController {
 			model.addAttribute("levels", studentService.getLevels());
 			model.addAttribute("semesters", studentService.getSemesters());
 			model.addAttribute("statuses", studentService.getStatuses());
-			return "student-form";
+			return "admin/student-form";
 		}
 		
 		// save the student using our service
 		studentService.saveStudent(student);
 		
-		return "redirect:/student/list";
+		return "redirect:/student/admin/list";
 	}	
-	
-// *** ADMINISTRATOR ROLE *** //
 	
 	// For admin to view list of students
 	@GetMapping("/admin/list")
 	public String listAll(Model model) {
 
 		model.addAttribute("students", studentService.getStudents());
-		return "student-list";
+		return "admin/student-list";
 	}
 	
 	// For admin to update student details, level, semester & status
@@ -77,7 +71,7 @@ public class StudentController {
 		Student theStudent = studentService.getStudent(theId);
 		
 		if(theStudent == null) {
-			return "redirect:/student/list";
+			return "redirect:/student/admin/list";
 		}
 		
 		model.addAttribute("student", theStudent);
@@ -85,14 +79,15 @@ public class StudentController {
 		model.addAttribute("semesters", studentService.getSemesters());
 		model.addAttribute("statuses", studentService.getStatuses());
 		
-		return "student-form";
+		return "admin/student-form";
 	}
 	
 	// For admin to remove students
 	@GetMapping("/admin/delete/{id}")
 	public String delete(@PathVariable("id") String theId) {
 		studentService.deleteStudent(theId);
-		return "redirect:/student/list";
+		userService.deactivateUser(theId);
+		return "redirect:/student/admin/list";
 	}
 	
 }

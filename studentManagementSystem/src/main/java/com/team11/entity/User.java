@@ -25,7 +25,7 @@ public class User  {
 	private String password;
 	
 	@ManyToMany(cascade = {CascadeType.ALL},fetch = FetchType.EAGER)
-	@JoinTable(name = "users_roles",joinColumns = @JoinColumn(name="user_id"),
+	@JoinTable(name = "users_roles", joinColumns = @JoinColumn(name="user_id"),
 	inverseJoinColumns = @JoinColumn(name="role_id"))	
 	private Collection<Role> roles;
 	
@@ -37,6 +37,9 @@ public class User  {
 	
 	@Column(name = "email")
 	private String email;
+	
+	@Column(name = "is_active")
+	private Boolean isActive;
 	
 	public User() {
 		this.id = UUID.randomUUID().toString();
@@ -93,6 +96,15 @@ public class User  {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	public Boolean isActive() {
+		return isActive;
+	}
+
+	public void setActive(Boolean isActive) {
+		this.isActive = isActive;
+	}
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", userName=" + userName + ", password=" + password + ", roles=" + roles

@@ -48,22 +48,14 @@ public class DepartmentController {
 		
 		model.addAttribute("departments", departmentService.getPaginated(PageRequest.of(page, size)));
 		
-		return "department-list";
+		return "admin/department-list";
 	}
 	
 	//Show Department Form
 	@GetMapping("/admin/showForm")
 	public String showForm(Department department) {
-		return "department-form";
+		return "admin/department-form";
 	}
-	
-//	@GetMapping("/add")
-//	public String showAddForm(Model model) {
-//		Department department = new Department();
-//		model.addAttribute("department", department);
-//		return "department-form";
-//		
-//	}
 	
 	@GetMapping("/admin/update/{id}")
 	public String update(@PathVariable("id") int theId, Model theModel) {
@@ -74,7 +66,7 @@ public class DepartmentController {
 		}
 		
 		theModel.addAttribute(department);
-		return "department-form";
+		return "admin/department-form";
 	}
 	
 	@GetMapping("/admin/delete/{id}")
@@ -88,7 +80,7 @@ public class DepartmentController {
 		
 		//Don't allow user to add student if there are any form validation errors
 		if(result.hasErrors()) {
-			return "department-form";
+			return "admin/department-form";
 		}
 		
 		// save the student using our service

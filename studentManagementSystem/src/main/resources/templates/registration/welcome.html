@@ -13,17 +13,18 @@
 	            time = time - 1;  
 	            if(time<=0){
 	            	time = 0;
-	         window.setTimeout("location.href='/login'", 0); 
+	         window.setTimeout("location.href='/showMyLoginPage'", 0); 
 	            }
 	            document.getElementById("layer").innerHTML = time;  
 	        }  
 		</script>
+<hr><br>
 <body onload="jump()">
-   Just to test this a
    <p th:text="${param.message}">Default Message</p>
    <p th:text="${name}">Default URI Path Variable</p>
    <div >
-<a href="javascript:void(0)" onclick="window.location.href='login' " >
-<font size="5px" >Register complete ,you will return to login page after<b><span id="layer">5</span></b> seconds,or click me......</font></a></div>
+<a href="javascript:void(0)" onclick="window.location.href='/showMyLoginPage' " >
+<font size="5px" >Registration complete ,you will return to login page after <b><span id="layer">5</span></b> seconds, or click this link.</font></a></div>
+<br><hr>
 </body>
 </html>

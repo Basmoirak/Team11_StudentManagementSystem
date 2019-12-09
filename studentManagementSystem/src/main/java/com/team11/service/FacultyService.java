@@ -9,7 +9,7 @@ public List<Faculty> getFaculties();
 	
 	public void saveFaculty(Faculty faculty);
 	
-	public Faculty getFaculty(int theId);
+	public Faculty getFaculty(String theId);
 	
-	public void deleteFaculty(int theId);
+	public void deleteFaculty(String theId);
 }

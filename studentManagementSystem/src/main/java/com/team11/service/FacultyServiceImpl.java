@@ -34,14 +34,14 @@ public class FacultyServiceImpl implements FacultyService{
 
 	@Override
 	@Transactional
-	public Faculty getFaculty(int theId) {
+	public Faculty getFaculty(String theId) {
 		// TODO Auto-generated method stub
 		return facultyRepository.getOne(theId);
 	}
 
 	@Override
 	@Transactional
-	public void deleteFaculty(int theId) {
+	public void deleteFaculty(String theId) {
 		// TODO Auto-generated method stub
 		facultyRepository.deleteById(theId);
 	}

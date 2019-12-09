@@ -19,9 +19,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.team11.entity.Faculty;
 import com.team11.entity.Role;
 import com.team11.entity.Student;
 import com.team11.entity.User;
+import com.team11.service.DepartmentService;
+import com.team11.service.FacultyService;
 import com.team11.service.StudentService;
 import com.team11.service.UserService;
 import com.team11.validation.CrmUser;
@@ -33,9 +36,12 @@ public class RegistrationController {
 	
     @Autowired
     private UserService userService;
-	
     @Autowired
 	private StudentService studentService;
+    @Autowired
+    private FacultyService facultyService;
+    @Autowired
+    private DepartmentService departmentService;
     
     private Logger logger = Logger.getLogger(getClass().getName());
     
@@ -63,7 +69,7 @@ public class RegistrationController {
 		// add roles to the model for form display
 		theModel.addAttribute("roles", roles);
 		
-		return "registration-form";
+		return "registration/registration-form";
 	}
 
 	@PostMapping("/processRegistrationForm")
@@ -79,7 +85,7 @@ public class RegistrationController {
 		// form validation
 		 if (theBindingResult.hasErrors()){
 			 theModel.addAttribute("roles", roles);
-			 return "registration-form";
+			 return "registration/registration-form";
 	        }
 
 		// check the database if user already exists
@@ -90,7 +96,7 @@ public class RegistrationController {
 			theModel.addAttribute("registrationError", "User name already exists.");
 
 			logger.warning("User name already exists.");
-        	return "registration-form";
+        	return "registration/registration-form";
         }
         
         // ** CREATE USER ACCOUNT **    						
@@ -104,18 +110,19 @@ public class RegistrationController {
         }
         
         if(formRole.equals("ROLE_FACULTY")) {
-        	
+        	return "redirect:/register/registerFacultyForm";
         }
         
         if(formRole.equals("ROLE_ADMIN")) {
-        	
+        	return "registration/registration-confirmation";
         }
         
-        return "registration-form";
+        return "registration/registration-form";
 	}
 	
+	// Register Student
 	@GetMapping("/registerStudentForm")
-	public String showForm(@ModelAttribute("newUser") User newUser ,Student student, Model model) {
+	public String showStudentForm(@ModelAttribute("newUser") User newUser ,Student student, Model model) {
 		
 		student.setId(newUser.getId());
 		model.addAttribute("student", student);
@@ -123,11 +130,11 @@ public class RegistrationController {
 		model.addAttribute("semesters", studentService.getSemesters());
 		model.addAttribute("statuses", studentService.getStatuses());
 		
-		return "student-form";
+		return "registration/student-form";
 	}
 	
 	@PostMapping("/saveStudentForm")
-	public String add(@Valid Student student, BindingResult result, Model model) {
+	public String saveStudentForm(@Valid Student student, BindingResult result, Model model) {
 		
 		//Don't allow user to add student if there are any form validation errors
 		if(result.hasErrors()) {
@@ -135,11 +142,32 @@ public class RegistrationController {
 			model.addAttribute("levels", studentService.getLevels());
 			model.addAttribute("semesters", studentService.getSemesters());
 			model.addAttribute("statuses", studentService.getStatuses());
-			return "student-form";
+			return "registration/student-form";
 		}
 		
-		// save the student 
 		studentService.saveStudent(student);
-		return "registration-confirmation";
+		return "registration/registration-confirmation";
 	}	
+	
+	// Register Faculty
+	@GetMapping("/registerFacultyForm")
+	public String showFacultyForm(@ModelAttribute("newUser") User newUser ,Faculty faculty, Model model) {
+		
+		faculty.setFaculty(newUser.getId());
+		model.addAttribute("faculty", faculty);
+		model.addAttribute("departments", departmentService.getDepartments());
+		return "registration/faculty-form";
+	}
+	
+	@PostMapping("/saveFacultyForm")
+	public String saveFacultyForm(@Valid Faculty faculty, BindingResult result, Model model) {
+		if(result.hasErrors()) { 
+			model.addAttribute("departments", departmentService.getDepartments());
+			return "registration/faculty-form";
+		}
+		
+		// Save or Update faculty
+		facultyService.saveFaculty(faculty);
+		return "registration/registration-confirmation";
+	}
 }

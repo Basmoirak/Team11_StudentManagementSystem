@@ -60,7 +60,7 @@ public class FacultyController {
 	}
 	
 	@GetMapping("/update/{id}")
-	public String update(@PathVariable("id") int id, Model model) {
+	public String update(@PathVariable("id") String id, Model model) {
 		Faculty faculty = facultyService.getFaculty(id);
 		if(faculty == null)
 			return "redirect:/faculty/list";
@@ -73,7 +73,7 @@ public class FacultyController {
 	}
 	
 	@GetMapping("/delete/{id}")
-	public String delete(@PathVariable("id") int id) {
+	public String delete(@PathVariable("id") String id) {
 		facultyService.deleteFaculty(id);
 		return "redirect:/faculty/list";
 	}

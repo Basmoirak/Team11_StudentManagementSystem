@@ -13,9 +13,9 @@ public interface StudentService {
 	
 	public void saveStudent(Student student);
 	
-	public Student getStudent(int theId);
+	public Student getStudent(String theId);
 	
-	public void deleteStudent(int theId);
+	public void deleteStudent(String theId);
 	
 	public List<Level> getLevels();
 	

@@ -3,8 +3,6 @@ package com.team11.entity;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -15,15 +13,11 @@ public class Faculty {
 	
 	//Fields
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int faculty;
-	
+	private String faculty;
 	@Size(min = 3, max = 10)
 	private String firstName;
-	
 	@Size(min = 3, max = 10)
 	private String lastName;
-	private String middleName;
 	@Column(name = "department_id")
 	private int departmentID;
 	
@@ -33,23 +27,22 @@ public class Faculty {
 	
 	//Constructor
 	public Faculty() {
-	
+		
 	}
 
-	public Faculty(String firstName, String lastName, String middleName, int departmentID) {
-		super();
+	public Faculty(String facultyID, String firstName, String lastName, int departmentID) {
+		this.faculty = facultyID;
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.middleName = middleName;
 		this.departmentID = departmentID;
 	}
 
 	
-	public int getFaculty() {
+	public String getFaculty() {
 		return faculty;
 	}
 
-	public void setFaculty(int faculty) {
+	public void setFaculty(String faculty) {
 		this.faculty = faculty;
 	}
 
@@ -67,14 +60,6 @@ public class Faculty {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
-	}
-
-	public String getMiddleName() {
-		return middleName;
-	}
-
-	public void setMiddleName(String middleName) {
-		this.middleName = middleName;
 	}
 
 	public int getDepartmentID() {
@@ -95,8 +80,7 @@ public class Faculty {
 
 	@Override
 	public String toString() {
-		return "Faculty [faculty=" + faculty + ", firstName=" + firstName + ", lastName=" + lastName + ", middleName="
-				+ middleName + ", departmentID=" + departmentID + "]";
+		return "Faculty [faculty=" + faculty + ", firstName=" + firstName + ", lastName=" + lastName + ", departmentID=" + departmentID + "]";
 	}
 	
 }

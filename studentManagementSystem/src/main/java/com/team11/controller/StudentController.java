@@ -72,7 +72,7 @@ public class StudentController {
 	
 	// For admin to update student details, level, semester & status
 	@GetMapping("/admin/update/{id}")
-	public String update(@PathVariable("id") int theId, Model model) {
+	public String update(@PathVariable("id") String theId, Model model) {
 		// get the student from our service
 		Student theStudent = studentService.getStudent(theId);
 		
@@ -90,7 +90,7 @@ public class StudentController {
 	
 	// For admin to remove students
 	@GetMapping("/admin/delete/{id}")
-	public String delete(@PathVariable("id") int theId) {
+	public String delete(@PathVariable("id") String theId) {
 		studentService.deleteStudent(theId);
 		return "redirect:/student/list";
 	}

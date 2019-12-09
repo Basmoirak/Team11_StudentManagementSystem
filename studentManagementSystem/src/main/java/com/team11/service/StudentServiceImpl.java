@@ -60,14 +60,14 @@ public class StudentServiceImpl implements StudentService {
 	//Retrieve one student
 	@Override
 	@Transactional
-	public Student getStudent(int theId) {
+	public Student getStudent(String theId) {
 		return studentRepository.getOne(theId);
 	}
 	
 	//Delete student
 	@Override
 	@Transactional
-	public void deleteStudent(int theId) {
+	public void deleteStudent(String theId) {
 		studentRepository.deleteById(theId);
 	}
 	

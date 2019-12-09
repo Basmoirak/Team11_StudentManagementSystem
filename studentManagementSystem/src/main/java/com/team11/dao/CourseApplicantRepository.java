@@ -14,9 +14,9 @@ import com.team11.entity.CourseApplicant;
 @Repository
 public interface CourseApplicantRepository extends JpaRepository<CourseApplicant, Integer>{
 	
-	public ArrayList<CourseApplicant> findCourseApplicantsByStudentID(int studentId);
+	public ArrayList<CourseApplicant> findCourseApplicantsByStudentID(String studentId);
 	
-	public ArrayList<CourseApplicant> findCourseApplicantsByStudentIDAndStatus(int studentId, int status);
+	public ArrayList<CourseApplicant> findCourseApplicantsByStudentIDAndStatus(String studentId, int status);
 	
 	public ArrayList<CourseApplicant> findCourseApplicantsByStatus(int status);
 	

@@ -26,8 +26,7 @@ public class Student {
 	
 	// Fields
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int Id;
+	private String Id;
 	
 	@NotBlank(message = "first name is required")
 	private String firstName;
@@ -96,11 +95,11 @@ public class Student {
 	}
 
 	// Getters and Setters
-	public int getId() {
+	public String getId() {
 		return Id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		Id = id;
 	}
 

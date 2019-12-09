@@ -2,11 +2,14 @@ package com.team11.controller;
 
 import java.util.Date;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.team11.entity.CourseApplicant;
@@ -14,6 +17,7 @@ import com.team11.service.CourseApplicantService;
 import com.team11.service.CourseService;
 
 @Controller
+@RequestMapping("/courseApp")
 public class CourseApplicantController {
 	
 	//injecting courseService
@@ -32,36 +36,41 @@ public class CourseApplicantController {
 		this.courseApplicantService = courseApplicantService;
 	}
 	
+	// *** STUDENT ROLE ***
 	@GetMapping("/student/courses")
-	public String availableCourses(Model model) {
+	public String availableCourses(Model model, HttpServletRequest request) {
+		
 		//returning all courses
 		model.addAttribute("courses", courseService.getCourses());
 		
 		//returning applied courses
-		model.addAttribute("appliedCourses", courseApplicantService.findCourseApplicantsByStudentID(1));
+		model.addAttribute("appliedCourses", courseApplicantService.findCourseApplicantsByStudentID(
+				(String) request.getSession().getAttribute("userID")));
 		
 		return "student/available-courses";
 	}
 	
-	
-	
 	@GetMapping("/student/courses/apply/{id}")
-	public String applyCourse(@PathVariable("id") int id,CourseApplicant courseApplicant, RedirectAttributes redirectAttributes) {
+	public String applyCourse(@PathVariable("id") int id, 
+			HttpServletRequest request,
+			CourseApplicant courseApplicant, 
+			RedirectAttributes redirectAttributes) {
 		
 		String error = "You have already booked the course.";
 		
 		//checking student has already booked a course or not
 		//assume that default student id is 1 for testing purposes
-		boolean flag = courseApplicantService.findCourseApplicantsByStudentID(1)
+		boolean flag = courseApplicantService.
+				findCourseApplicantsByStudentID((String) request.getSession().getAttribute("userID"))
 					.stream().anyMatch(ca -> ca.getCourseID() == id);
 		
 		//if false send error to front end
 		if(flag) {
 			redirectAttributes.addFlashAttribute("error", error);
-			return "redirect:/courses";
+			return "redirect:/student/courses";
 		} else {
 			//setting student_id
-			courseApplicant.setStudentID(1);
+			courseApplicant.setStudentID("1");
 			courseApplicant.setCourseID(id);
 			courseApplicant.setStatus(0);
 			
@@ -75,18 +84,27 @@ public class CourseApplicantController {
 	}
 	
 	@GetMapping("/student/applications")
-	public String applications(Model model) {
-		model.addAttribute("appliedCourses", courseApplicantService.findCourseApplicantsByStudentID(1));
+	public String applications(Model model, HttpServletRequest request) {
+		model.addAttribute("appliedCourses", courseApplicantService
+				.findCourseApplicantsByStudentID((String) request.getSession().getAttribute("userID")));
 		return "student/applications";
 	}
 	
 	@GetMapping("/student/applications/approved")
-	public String approvedApplications(Model model) {
-		model.addAttribute("appliedCourses", courseApplicantService.findCourseApplicantsByStudentIDAndStatus(1, 1));
+	public String approvedApplications(Model model, HttpServletRequest request) {
+		model.addAttribute("appliedCourses", courseApplicantService
+				.findCourseApplicantsByStudentIDAndStatus((String) request.getSession().getAttribute("userID"), 1));
 		return "/student/applications";
 	}
 	
-	//for admin
+	@GetMapping("/student/applications/pending")
+	public String pendingApplications(Model model, HttpServletRequest request) {
+		model.addAttribute("appliedCourses", courseApplicantService
+				.findCourseApplicantsByStudentIDAndStatus((String) request.getSession().getAttribute("userID"), 0));
+		return "student/applications";
+	}
+	
+	// *** ADMIN ROLE ***
 	@GetMapping("/admin/applications/pending")
 	public String adminPendingApplications(Model model) {
 		model.addAttribute("pendingCourses", courseApplicantService.findCourseApplicantsByStatus(0));
@@ -99,13 +117,8 @@ public class CourseApplicantController {
 		return "redirect:/admin/applications/pending";
 	}
 	
-	@GetMapping("/student/applications/pending")
-	public String pendingApplications(Model model) {
-		model.addAttribute("appliedCourses", courseApplicantService.findCourseApplicantsByStudentIDAndStatus(1, 0));
-		return "student/applications";
-	}
 	
-	@GetMapping("/student/applications/delete/{id}")
+	@GetMapping("/admin/applications/delete/{id}")
 	public String delete(@PathVariable("id") int id) {
 		courseApplicantService.deleteCourseApplicant(id);
 		return "redirect:/student/applications";

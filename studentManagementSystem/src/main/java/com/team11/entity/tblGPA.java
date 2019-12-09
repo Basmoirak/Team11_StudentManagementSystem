@@ -13,7 +13,7 @@ public class tblGPA {
 	
 	//Fields
 	@Id
-	private int Id;
+	private String Id;
 	private float gpaCalculated;
 	
 	@OneToOne

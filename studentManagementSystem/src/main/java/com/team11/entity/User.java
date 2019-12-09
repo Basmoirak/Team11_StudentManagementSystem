@@ -2,6 +2,7 @@ package com.team11.entity;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -17,8 +18,7 @@ import javax.persistence.ManyToMany;
 @Entity
 public class User  {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private String id;
 	
 	@Column(name = "username")
 	private String userName;
@@ -41,27 +41,24 @@ public class User  {
 	private String email;
 	
 	public User() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public User(String username, String password) {
-		super();
-		this.userName = username;
-		this.password = password;
+		this.id = UUID.randomUUID().toString();
 	}
 	
 	public User(String username, String password, List<Role> roles) {
-		super();
+		this.id = UUID.randomUUID().toString();
 		this.userName = username;
 		this.password = password;
 		this.roles = roles;
 	}
-	public Integer getId() {
+	
+	public String getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+
+	public void setId(String id) {
 		this.id = id;
 	}
+
 	public String getUserName() {
 		return userName;
 	}
@@ -103,7 +100,5 @@ public class User  {
 		return "User [id=" + id + ", userName=" + userName + ", password=" + password + ", roles=" + roles
 				+ ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + "]";
 	}
-
-	
 
 }

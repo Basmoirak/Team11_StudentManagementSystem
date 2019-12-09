@@ -10,13 +10,11 @@ public class Role {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String name;
+	
 	public Role() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
 	
 	public Role(String name) {
-		super();
 		this.name = name;
 	}
 	public Integer getId() {

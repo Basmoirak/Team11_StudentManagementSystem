@@ -31,38 +31,39 @@ public class CourseController {
 		this.departmentService = departmentService;
 	}
 	
-	//showing list of courses
-	@GetMapping("/list")
+	// *** ADMIN ROLE ***
+	
+	@GetMapping("/admin/list")
 	public String list(Model model){
 		model.addAttribute("courses", courseService.getCourses());
 		return "course-list";
 	}
 	
 	//add form
-	@GetMapping("/showForm")
+	@GetMapping("/admin/showForm")
 	public String showForm(Course course, Model model) {
 		model.addAttribute("departments", departmentService.getDepartments());
 		return "course-form";
 	}
 	
 	//saving
-	@PostMapping("/save")
+	@PostMapping("/admin/save")
 	public String save(@Valid Course course, BindingResult bindingResult,Model model) {
 		if(bindingResult.hasErrors()) { 
 			model.addAttribute("departments", departmentService.getDepartments());
 			return "course-form";
 		}
 		courseService.saveCourse(course);
-		return "redirect:/course/list";
+		return "redirect:/course/admin/list";
 	}	
 	
 	//show edit form
-	@GetMapping("/update/{id}")
+	@GetMapping("/admin/update/{id}")
 	public String update(@PathVariable("id") int id, Model model) {
 		//get course by id
 		Course course = courseService.getCourse(id);
 		if(course == null) {
-			return "redirect:/course/list";
+			return "redirect:/course/admin/list";
 		}
 		
 		//retrieving department list
@@ -72,10 +73,10 @@ public class CourseController {
 	}
 	
 	//deleting
-	@GetMapping("/delete/{id}")
+	@GetMapping("/admin/delete/{id}")
 	public String delete(@PathVariable("id") int theId) {
 		courseService.deleteCourse(theId);
-		return "redirect:/course/list";
+		return "redirect:/course/admin/list";
 	}
 
 }

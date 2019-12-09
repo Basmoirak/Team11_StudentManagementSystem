@@ -15,9 +15,9 @@ public interface CourseApplicantService {
 	
 	public void deleteCourseApplicant(int id);
 
-	public ArrayList<CourseApplicant> findCourseApplicantsByStudentID(int studentId);
+	public ArrayList<CourseApplicant> findCourseApplicantsByStudentID(String studentId);
 	
-	public ArrayList<CourseApplicant> findCourseApplicantsByStudentIDAndStatus(int studentId, int status);
+	public ArrayList<CourseApplicant> findCourseApplicantsByStudentIDAndStatus(String studentId, int status);
 	
 	public ArrayList<CourseApplicant> findCourseApplicantsByStatus(int status);
 	

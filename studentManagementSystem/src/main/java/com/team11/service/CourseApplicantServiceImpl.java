@@ -22,7 +22,6 @@ public class CourseApplicantServiceImpl implements CourseApplicantService{
 		this.courseApplicantRepository = courseApplicantRepository;
 	}
 	
-	
 	@Override
 	@Transactional
 	public List<CourseApplicant> getCourseApplicants() {
@@ -53,7 +52,7 @@ public class CourseApplicantServiceImpl implements CourseApplicantService{
 
 	@Override
 	@Transactional
-	public ArrayList<CourseApplicant> findCourseApplicantsByStudentID(int studentId) {
+	public ArrayList<CourseApplicant> findCourseApplicantsByStudentID(String studentId) {
 		// TODO Auto-generated method stub
 		return courseApplicantRepository.findCourseApplicantsByStudentID(studentId);
 	}
@@ -61,7 +60,7 @@ public class CourseApplicantServiceImpl implements CourseApplicantService{
 
 	@Override
 	@Transactional
-	public ArrayList<CourseApplicant> findCourseApplicantsByStudentIDAndStatus(int studentId, int status) {
+	public ArrayList<CourseApplicant> findCourseApplicantsByStudentIDAndStatus(String studentId, int status) {
 		// TODO Auto-generated method stub
 		return courseApplicantRepository.findCourseApplicantsByStudentIDAndStatus(studentId, status);
 	}

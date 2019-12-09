@@ -6,31 +6,31 @@
     <ul class="sidebar-menu" data-widget="tree">
     
     	<!-- Available course starts -->
-        <li th:classappend="${#httpServletRequest.getRequestURI() == '/student/courses' ? 'active' : ''}">
-            <a th:href="@{/student/courses}">
+        <li th:classappend="${#httpServletRequest.getRequestURI() == '/courseApp/student/courses' ? 'active' : ''}">
+            <a th:href="@{/courseApp/student/courses}">
                 <i class="fa fa-graduation-cap" ></i><span>Available Courses</span>
             </a>
         </li>
         <!-- Available course ends -->
         
         <!-- Enrolled courses -->
-        <li th:classappend="${#httpServletRequest.getRequestURI() == '/student/courses/enrolled' ? 'active' : ''}">
-            <a th:href="@{/student/courses}">
+        <li th:classappend="${#httpServletRequest.getRequestURI() == '/courseApp/student/courses/enrolled' ? 'active' : ''}">
+            <a th:href="@{/courseApp/student/courses}">
                 <i class="fa fa-graduation-cap" ></i><span>Enrolled Courses</span>
             </a>
         </li>
         
         <!-- My applications start -->
-        <li class="treeview" th:classappend="${#httpServletRequest.getRequestURI() == '/student/applications' || #httpServletRequest.getRequestURI() == '/student/applications/pending' || #httpServletRequest.getRequestURI() == '/student/applications/approved'? 'active' : ''}">
+        <li class="treeview" th:classappend="${#httpServletRequest.getRequestURI() == '/courseApp/student/applications' || #httpServletRequest.getRequestURI() == '/courseApp/student/applications/pending' || #httpServletRequest.getRequestURI() == '/courseApp/student/applications/approved'? 'active' : ''}">
             <a>
                 <i class="fa fa-folder"></i>
                 <span>My Applications</span>
                 <i class="fa fa-angle-left pull-right"></i>
             </a>
             <ul class="treeview-menu">
-                <li th:classappend="${#httpServletRequest.getRequestURI() == '/student/applications/pending' ? 'active' : ''}"><a href="/student/applications/pending"><i class="fa fa-circle-o"></i> Pending Applications</a></li>
-            	<li th:classappend="${#httpServletRequest.getRequestURI() == '/student/applications/approved' ? 'active' : ''}"><a href="/student/applications/approved"><i class="fa fa-circle-o"></i> Approved Applications</a></li>
-            	<li th:classappend="${#httpServletRequest.getRequestURI() == '/student/applications' ? 'active' : ''}"><a href="/student/applications"><i class="fa fa-circle-o"></i> All Applications</a></li>
+                <li th:classappend="${#httpServletRequest.getRequestURI() == '/courseApp/student/applications/pending' ? 'active' : ''}"><a href="/courseApp/student/applications/pending"><i class="fa fa-circle-o"></i> Pending Applications</a></li>
+            	<li th:classappend="${#httpServletRequest.getRequestURI() == '/courseApp/student/applications/approved' ? 'active' : ''}"><a href="/courseApp/student/applications/approved"><i class="fa fa-circle-o"></i> Approved Applications</a></li>
+            	<li th:classappend="${#httpServletRequest.getRequestURI() == '/courseApp/student/applications' ? 'active' : ''}"><a href="/courseApp/student/applications"><i class="fa fa-circle-o"></i> All Applications</a></li>
             </ul>
         </li>
         <!-- My applications end -->

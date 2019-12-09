@@ -2,6 +2,7 @@ package com.team11.service;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
@@ -26,7 +27,7 @@ public class UserServiceImpl implements UserService{
 	private UserRepository userRepository;
 	
 	@Autowired
-	private RoleRepository roleRepositroy;
+	private RoleRepository roleRepository;
 	
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
@@ -40,19 +41,25 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	@Transactional
-	public void save(CrmUser crmUser) {
+	public User createNewUser(CrmUser crmUser, String roleName) {
 		User user= new User();
 		user.setUserName(crmUser.getUserName());
 		user.setPassword(passwordEncoder.encode(crmUser.getPassword()));
 		user.setFirstName(crmUser.getFirstName());
 		user.setLastName(crmUser.getLastName());
 		user.setEmail(crmUser.getEmail());
+		user.setRoles(Arrays.asList(roleRepository.findByName("ROLE_STUDENT")));
 		
-		user.setRoles(Arrays.asList(roleRepositroy.findByName("ROLE_EMPLOYEE")));
-		userRepository.save(user);
+		return user;
 	}
 	
+	@Override
+	@Transactional
+	public void save(User user) {
+		userRepository.save(user);
+	}
 
+	
 	@Override
 	@Transactional
 	public UserDetails loadUserByUsername(String userName)throws UsernameNotFoundException{
@@ -63,14 +70,15 @@ public class UserServiceImpl implements UserService{
 		return new org.springframework.security.core.userdetails.User(user.getUserName(),user.getPassword(),
 				mapRolesToAuthorities(user.getRoles()));
 	}
-//	List<SimpleGrantedAuthority> authorities=new ArrayList<>();
-//	for (Role role : user.getRoles()) {
-//		authorities.add(new SimpleGrantedAuthority("ROLE_"+role.getName()));		
-//	}
-//	return new User(user.getUsername(), user.getPassword(), authorities);
-	
+
 	private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles){
 		return roles.stream().map(role->new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
 	}
 
+	@Override
+	@Transactional
+	public List<Role> getRoles() {
+		return roleRepository.findAll();
+	}
+	
 }

@@ -6,7 +6,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
 
-import org.hibernate.validator.constraints.Range;
 
 @Entity
 public class Department {
@@ -15,7 +14,6 @@ public class Department {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int Id;
 	@NotEmpty
-	@Range(min=1, max=10,message = "Department name must be between 1 to 10")
 	private String name;
 	
 	//Constructors

@@ -31,8 +31,10 @@ public class DepartmentController {
 		this.departmentService = departmentService;
 	}
 	
+	// *** ADMIN ROLE ***
+	
 	//show paginated list of departments
-	@GetMapping("/list")
+	@GetMapping("/admin/list")
 	public String listAll(Model model, HttpServletRequest request) {
 
 		int page = 0;
@@ -50,7 +52,7 @@ public class DepartmentController {
 	}
 	
 	//Show Department Form
-	@GetMapping("/showForm")
+	@GetMapping("/admin/showForm")
 	public String showForm(Department department) {
 		return "department-form";
 	}
@@ -63,25 +65,25 @@ public class DepartmentController {
 //		
 //	}
 	
-	@GetMapping("/update/{id}")
+	@GetMapping("/admin/update/{id}")
 	public String update(@PathVariable("id") int theId, Model theModel) {
 		//get student by id
 		Department department = departmentService.getDepartment(theId);
 		if(department == null) {
-			return "redirect:/department/list";
+			return "redirect:/department/admin/list";
 		}
 		
 		theModel.addAttribute(department);
 		return "department-form";
 	}
 	
-	@GetMapping("/delete/{id}")
+	@GetMapping("/admin/delete/{id}")
 	public String delete(@PathVariable("id") int theId) {
 		departmentService.deleteDepartment(theId);
-		return "redirect:/department/list";
+		return "redirect:/department/admin/list";
 	}
 	
-	@PostMapping("/save")
+	@PostMapping("/admin/save")
 	public String add(@Valid Department department, BindingResult result) {
 		
 		//Don't allow user to add student if there are any form validation errors
@@ -92,6 +94,6 @@ public class DepartmentController {
 		// save the student using our service
 		departmentService.saveDepartment(department);
 		
-		return "redirect:/department/list";
+		return "redirect:/department/admin/list";
 	}	
 }

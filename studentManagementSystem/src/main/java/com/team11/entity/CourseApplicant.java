@@ -25,7 +25,7 @@ public class CourseApplicant {
 	@Column(name = "course_id")
 	private int courseID;
 	@Column(name = "student_id")
-	private int studentID;
+	private String studentID;
 	
 	//foreign key from course
 	@ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
@@ -45,7 +45,7 @@ public class CourseApplicant {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date submittedDate;
 
-	public CourseApplicant(int courseID, int studentID, Course course, Student student, int status,
+	public CourseApplicant(int courseID, String studentID, Course course, Student student, int status,
 			Date submittedDate) {
 		super();
 		this.courseID = courseID;
@@ -77,11 +77,11 @@ public class CourseApplicant {
 		this.courseID = courseID;
 	}
 
-	public int getStudentID() {
+	public String getStudentID() {
 		return studentID;
 	}
 
-	public void setStudentID(int studentID) {
+	public void setStudentID(String studentID) {
 		this.studentID = studentID;
 	}
 

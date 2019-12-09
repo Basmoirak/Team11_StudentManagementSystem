@@ -39,15 +39,15 @@
                             		</td>
                             		
                             		<td>
-                            			<a th:if = "${ac.status == 0}" th:href="@{/applications/delete/{id}(id=${ac.Id})}" class="btn btn-danger">Delete</a>
+                            			<a th:if = "${ac.status == 0}" th:href="@{/courseApp/student/applications/delete/{id}(id=${ac.Id})}" class="btn btn-danger">Delete</a>
                             		</td>
                             	</tr>
                                  
                             </tbody>
                         </table>
-                        <a class="btn btn-info" th:href="@{/student/applications/pending}">Pending Courses</a>
-                        <a class="btn btn-info" th:href="@{/student/applications/approved}">Enrolled/Approved Courses</a>
-                        <a class="btn btn-warning" th:href="@{/student/applications}">Show All</a>
+                        <a class="btn btn-info" th:href="@{/courseApp/student/applications/pending}">Pending Courses</a>
+                        <a class="btn btn-info" th:href="@{/courseApp/student/applications/approved}">Enrolled/Approved Courses</a>
+                        <a class="btn btn-warning" th:href="@{/courseApp/student/applications}">Show All</a>
                     </div>      
                  
                 </div>

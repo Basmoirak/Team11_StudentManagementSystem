@@ -19,7 +19,7 @@
                         <h2 class="my-5">Courses</h2>
                       
                         	<p th:if = "${appliedCourses.isEmpty()}" >No applications yet</p>
- 							<a th:unless = "${appliedCourses.isEmpty()}" th:href="@{/applications}">See your applications</a>
+ 							<a th:unless = "${appliedCourses.isEmpty()}" th:href="@{/courseApp/student/applications}">See your applications</a>
                         <table class="table table-striped table-responsive-md">
                             <thead>
                                 <tr>

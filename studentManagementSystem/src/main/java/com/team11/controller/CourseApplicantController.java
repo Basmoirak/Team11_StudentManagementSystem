@@ -67,10 +67,10 @@ public class CourseApplicantController {
 		//if false send error to front end
 		if(flag) {
 			redirectAttributes.addFlashAttribute("error", error);
-			return "redirect:/student/courses";
+			return "redirect:/courseApp/student/courses";
 		} else {
 			//setting student_id
-			courseApplicant.setStudentID("1");
+			courseApplicant.setStudentID((String) request.getSession().getAttribute("userID"));
 			courseApplicant.setCourseID(id);
 			courseApplicant.setStatus(0);
 			
@@ -79,7 +79,7 @@ public class CourseApplicantController {
 			
 			//saving to database using our service
 			courseApplicantService.saveCourseApplicant(courseApplicant);
-			return "redirect:/student/applications";
+			return "redirect:/courseApp/student/applications";
 		}
 	}
 	
@@ -104,6 +104,12 @@ public class CourseApplicantController {
 		return "student/applications";
 	}
 	
+	@GetMapping("/student/applications/delete/{id}")
+	public String delete(@PathVariable("id") int id) {
+		courseApplicantService.deleteCourseApplicant(id);
+		return "redirect:/courseApp/student/applications";
+	}
+	
 	// *** ADMIN ROLE ***
 	@GetMapping("/admin/applications/pending")
 	public String adminPendingApplications(Model model) {
@@ -114,13 +120,7 @@ public class CourseApplicantController {
 	@GetMapping("/admin/applications/pending/approve/{id}")
 	public String approve(@PathVariable("id") int id) {
 		courseApplicantService.approvePendingApplicant(id);
-		return "redirect:/admin/applications/pending";
+		return "redirect:/courseApp/admin/applications/pending";
 	}
 	
-	
-	@GetMapping("/admin/applications/delete/{id}")
-	public String delete(@PathVariable("id") int id) {
-		courseApplicantService.deleteCourseApplicant(id);
-		return "redirect:/student/applications";
-	}
 }

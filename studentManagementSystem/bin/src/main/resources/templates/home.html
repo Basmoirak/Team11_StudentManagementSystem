@@ -1,0 +1,68 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+
+<head>
+<meta charset="ISO-8859-1">
+<title>Home Page</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+	<!-- Content starts -->
+<body>
+	<div layout:fragment="content">
+	
+	<!-- Display user name & role -->
+		<div>
+			User: <span sec:authentication="name"></span>
+			<br><br>
+			Role(s): <span sec:authentication="principal.authorities"></span>
+			<br><br>
+	
+			<!-- Check for login error -->																	
+			<div th:if="${session.user}" >
+				<p th:text="'First name: ' + ${session.user.firstName} + ', Last name: ' + ${session.user.lastName} + ', Email: ' + ${session.user.email}"></p>
+			</div>		
+		</div>
+	
+		<div sec:authorize="hasRole('ROLE_STUDENT')">
+		
+			<!-- Add a link to point to /leaders ... this is for the managers -->
+			
+			<p>
+				<a th:href="@{/courseApp/student/courses}">Apply for courses</a>
+			</p>
+	
+		</div>	
+		
+		<div sec:authorize="hasRole('ROLE_ADMIN')">  
+	
+			<!-- Add a link to point to /systems ... this is for the admins -->
+			
+			<p>
+				<a th:href="@{/courseApp/admin/applications/pending}">View pending course applications!</a>
+			</p>
+		
+		</div>
+		
+		<!-- Add a logout button -->
+		<form th:action="@{/logout}" 
+				   method="POST">
+		
+			<input type="submit" value="Logout" />
+		
+		</form>	
+	</div>
+			
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+

@@ -1,6 +1,7 @@
 package com.team11.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.team11.entity.CourseApplicant;
@@ -22,5 +23,9 @@ public interface CourseApplicantService {
 	public ArrayList<CourseApplicant> findCourseApplicantsByStatus(int status);
 	
 	public void approvePendingApplicant(int id);
+
+	public List<CourseApplicant> getActiveCourses(String studentId);
+
+
 	
 }

@@ -11,7 +11,7 @@
     <ul class="sidebar-menu" data-widget="tree">
     
     	<!-- Available course starts -->
-        <li th:classappend="${#httpServletRequest.getRequestURI() == '/courseApp/student/courses' ? 'active' : ''}">
+        <li th:classappend="${#httpServletRequest.getRequestURI() == '/courseApp/student/courses' ? 'active' : '' }">
             <a th:href="@{/courseApp/student/courses}">
                 <i class="fa fa-graduation-cap" ></i><span>Available Courses</span>
             </a>
@@ -19,9 +19,9 @@
         <!-- Available course ends -->
         
         <!-- Enrolled courses -->
-        <li th:classappend="${#httpServletRequest.getRequestURI() == '/courseApp/student/courses/enrolled' ? 'active' : ''}">
-            <a th:href="@{/courseApp/student/courses}">
-                <i class="fa fa-graduation-cap" ></i><span>Enrolled Courses</span>
+        <li th:classappend="${#httpServletRequest.getRequestURI() == '/courseApp/student/courses/my' || #httpServletRequest.getRequestURI() == '/courseApp/student/courses/my/all'  ? 'active' : ''}">
+            <a th:href="@{/courseApp/student/courses/my}">
+                <i class="fa fa-graduation-cap" ></i><span>My Courses</span>
             </a>
         </li>
         
@@ -38,6 +38,14 @@
             	<li th:classappend="${#httpServletRequest.getRequestURI() == '/courseApp/student/applications' ? 'active' : ''}"><a href="/courseApp/student/applications"><i class="fa fa-circle-o"></i> All Applications</a></li>
             </ul>
         </li>
+        
+         <!-- Gradebook  -->
+        <li>
+            <a href="#">
+                <i class="fa fa-book" ></i><span>My Gradebook</span>
+            </a>
+        </li>
+        
     </ul>
 </div>	    	
 

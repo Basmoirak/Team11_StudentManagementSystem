@@ -18,5 +18,5 @@ public interface CourseService {
 	
 	public void deleteCourse(int id);
 	
-	public Page<Course> getPaginated(Pageable pageable);
+	public List<Course> getAvailableCourses();
 }

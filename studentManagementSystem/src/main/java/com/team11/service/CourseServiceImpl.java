@@ -53,8 +53,7 @@ public class CourseServiceImpl implements CourseService{
 	
 	@Override
 	@Transactional
-	public Page<Course> getPaginated(Pageable pageable) {
-		return courseRepository.findAll(pageable);
+	public List<Course> getAvailableCourses() {
+		return courseRepository.getAvailableCourses();
 	}
-	
 }

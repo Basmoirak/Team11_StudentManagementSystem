@@ -37,17 +37,33 @@ public class CourseApplicantController {
 	}
 	
 	// *** STUDENT ROLE ***
+	
+//	available courses
+	
 	@GetMapping("/student/courses")
 	public String availableCourses(Model model, HttpServletRequest request) {
 		
 		//returning all courses
-		model.addAttribute("courses", courseService.getCourses());
+		model.addAttribute("courses", courseService.getAvailableCourses());
 		
 		//returning applied courses
 		model.addAttribute("appliedCourses", courseApplicantService.findCourseApplicantsByStudentID(
 				(String) request.getSession().getAttribute("userID")));
 		
 		return "student/available-courses";
+	}
+	
+	@GetMapping("/student/courses/my")
+	public String myCourses(Model model, HttpServletRequest request) {
+		//get active courses
+		model.addAttribute("courses", courseApplicantService.getActiveCourses((String) request.getSession().getAttribute("userID")));
+		return "student/my-courses";
+	}
+	
+	@GetMapping("/student/courses/my/all")
+	public String myAllCourses(Model model, HttpServletRequest request) {
+		model.addAttribute("courses", courseApplicantService.findCourseApplicantsByStudentIDAndStatus((String) request.getSession().getAttribute("userID"), 1));
+		return "student/my-courses";
 	}
 	
 	@GetMapping("/student/courses/apply/{id}")

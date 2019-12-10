@@ -48,4 +48,9 @@ public class CourseServiceImpl implements CourseService{
 		courseRepository.deleteById(id);
 	}
 	
+	@Override
+	@Transactional
+	public List<Course> getAvailableCourses() {
+		return courseRepository.getAvailableCourses();
+	}
 }

@@ -1,5 +1,6 @@
 package com.team11.entity;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -11,10 +12,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Range;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Course {
@@ -46,6 +50,16 @@ public class Course {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "course")
 	private List<CourseApplicant> courseApplicants;
 	
+	
+//	startDate and endDate
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date startDate;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date endDate;
+	
 	public List<CourseApplicant> getCourseApplicants() {
 		return courseApplicants;
 	}
@@ -57,11 +71,13 @@ public class Course {
 	//Constructors
 	public Course() {}
 
-	public Course(String courseCode, String courseName, int courseUnit, int departmentID) {
+	public Course(String courseCode, String courseName, int courseUnit, int departmentID, Date startDate, Date endDate) {
 		this.courseCode = courseCode;
 		this.courseName = courseName;
 		this.courseUnit = courseUnit;
 		this.departmentID = departmentID;
+		this.startDate = startDate;
+		this.endDate = endDate;
 	}
 
 	public int getCourseId() {
@@ -118,6 +134,24 @@ public class Course {
 
 	public void setStudentGrades(List<StudentGrades> studentGrades) {
 		this.studentGrades = studentGrades;
+	}
+	
+	
+
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
 	}
 
 	@Override

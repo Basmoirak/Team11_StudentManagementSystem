@@ -1,0 +1,67 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+<head>
+<meta charset="ISO-8859-1">
+<title>My courses</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+	<!-- Content starts -->
+	<div layout:fragment="content">
+		<h2>My courses</h2>
+		<!-- mini nav starts -->
+		<ul class="nav nav-tabs nav-justified">
+			  <li role="presentation" th:classappend="${#httpServletRequest.getRequestURI() == '/courseApp/student/courses/my' ? 'active' : ''}"><a href="/courseApp/student/courses/my">Active Courses</a></li>
+			  <li role="presentation" th:classappend="${#httpServletRequest.getRequestURI() == '/courseApp/student/courses/my/all' ? 'active' : ''}"><a href="/courseApp/student/courses/my/all">All Courses taken</a></li>
+		</ul>
+		<hr>
+		<!-- nav ends -->
+		<div class="row">
+		<p th:if = "${#httpServletRequest.getRequestURI() == '/courseApp/student/courses/my/all'}" class="well">These are a list of modules that you have taken or are taking this semester.</p>
+		<!-- thumbnails start -->
+		
+		<div th:each ="c : ${courses}"  class="col-sm-6 col-md-4">
+				
+				
+			<div class="small-box bg-green">
+				<div class="inner">
+              		<h3 th:text="${c.course.courseName}"></h3>
+
+              		<p th:text="${c.course.department.name}"></p>
+              
+               		<p>
+						From <span th:text="${#dates.format(c.course.startDate, 'dd-MMM-yyyy')}"></span> 
+						To <span th:text="${#dates.format(c.course.endDate, 'dd-MMM-yyyy')}"></span> 
+					</p>
+				</div>
+				<div class="icon">
+             			<i class="fa fa-book"></i>
+           		</div>
+            	
+            	
+           		<a th:if = "${execInfo.now.time >= c.course.startDate && execInfo.now.time <= c.course.endDate}" class="small-box-footer">
+             		Ongoing <i class="fa fa-arrow-circle-right"></i>
+          		</a>	
+            	
+            	<a th:if = "${execInfo.now.time < c.course.startDate}" class="small-box-footer">
+             		Upcoming 
+          		</a>	
+          		
+            	<a th:if = "${execInfo.now.time > c.course.endDate}" class="small-box-footer">
+             		Completed 
+          		</a>
+          		
+			</div>	
+            
+            
+            
+          
+		</div>
+		<!-- thumbnails end -->
+		</div>
+		
+	</div>
+	
+</body>
+</html>

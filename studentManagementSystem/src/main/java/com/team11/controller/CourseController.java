@@ -1,8 +1,10 @@
 package com.team11.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -33,11 +35,25 @@ public class CourseController {
 	
 	// *** ADMIN ROLE ***
 	
+	//show paginated list of courses
 	@GetMapping("/admin/list")
-	public String list(Model model){
-		model.addAttribute("courses", courseService.getCourses());
+	public String listAll(Model model, HttpServletRequest request) {
+
+		int page = 0;
+		int size = 5; 
+		
+		if(request.getParameter("page") != null && !request.getParameter("page").isEmpty()) {
+			page = Integer.parseInt(request.getParameter("page")) - 1; }
+		
+		if(request.getParameter("size") != null && !request.getParameter("size").isEmpty()) {
+			size=Integer.parseInt(request.getParameter("size")); }
+		
+		model.addAttribute("courses", courseService.getPaginated(PageRequest.of(page, size)));
+		
 		return "admin/course-list";
 	}
+	
+
 	
 	//add form
 	@GetMapping("/admin/showForm")

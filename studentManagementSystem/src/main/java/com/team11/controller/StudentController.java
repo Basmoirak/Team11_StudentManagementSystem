@@ -1,9 +1,11 @@
 package com.team11.controller;
 
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -38,6 +40,32 @@ public class StudentController {
 	
 // *** ADMIN ROLE *** //
 	
+	//show paginated list of students
+	@GetMapping("/admin/list")
+	public String listAll(Model model, HttpServletRequest request) {
+
+		int page = 0;
+		int size = 5; 
+		
+		if(request.getParameter("page") != null && !request.getParameter("page").isEmpty()) {
+			page = Integer.parseInt(request.getParameter("page")) - 1; }
+		
+		if(request.getParameter("size") != null && !request.getParameter("size").isEmpty()) {
+			size=Integer.parseInt(request.getParameter("size")); }
+		
+		model.addAttribute("students", studentService.getPaginated(PageRequest.of(page, size)));
+		
+		return "admin/student-list";
+	}
+	
+//	// For admin to view list of students
+//		@GetMapping("/admin/list")
+//		public String listAll(Model model) {
+//
+//			model.addAttribute("students", studentService.getStudents());
+//			return "admin/student-list";
+//		}
+	
 	//For all users to save student details
 	@PostMapping("/admin/save")
 	public String add(@Valid Student student, BindingResult result, Model model) {
@@ -56,13 +84,7 @@ public class StudentController {
 		return "redirect:/student/admin/list";
 	}	
 	
-	// For admin to view list of students
-	@GetMapping("/admin/list")
-	public String listAll(Model model) {
-
-		model.addAttribute("students", studentService.getStudents());
-		return "admin/student-list";
-	}
+	
 	
 	// For admin to update student details, level, semester & status
 	@GetMapping("/admin/update/{id}")

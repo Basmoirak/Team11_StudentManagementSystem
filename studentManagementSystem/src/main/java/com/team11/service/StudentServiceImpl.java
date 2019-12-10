@@ -5,12 +5,15 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.team11.dao.LevelRepository;
 import com.team11.dao.SemesterRepository;
 import com.team11.dao.StatusRepository;
 import com.team11.dao.StudentRepository;
+import com.team11.entity.Department;
 import com.team11.entity.Level;
 import com.team11.entity.Semester;
 import com.team11.entity.Status;
@@ -90,6 +93,12 @@ public class StudentServiceImpl implements StudentService {
 	@Transactional
 	public List<Status> getStatuses() {
 		return statusRepository.findAll();
+	}
+	
+	@Override
+	@Transactional
+	public Page<Student> getPaginated(Pageable pageable) {
+		return studentRepository.findAll(pageable);
 	}
 
 }

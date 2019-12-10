@@ -1,8 +1,13 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <!-- sidebar: style can be found in sidebar.less -->
 
 <!-- IMPORTANT -- Student Sidebar starts -->
 <section class="sidebar">
-    
+
+   
+<!--################## SIDEBAR FOR STUDENT ################## -->
+
+<div sec:authorize="hasRole('ROLE_STUDENT')">
     <ul class="sidebar-menu" data-widget="tree">
     
     	<!-- Available course starts -->
@@ -33,12 +38,47 @@
             	<li th:classappend="${#httpServletRequest.getRequestURI() == '/courseApp/student/applications' ? 'active' : ''}"><a href="/courseApp/student/applications"><i class="fa fa-circle-o"></i> All Applications</a></li>
             </ul>
         </li>
-        <!-- My applications end -->
-        
-        
-       
-        
-        
     </ul>
+</div>	    	
+
+
+<!-- ################## SIDEBAR FOR ADMIN ################## -->
+
+<div sec:authorize="hasRole('ROLE_ADMIN')">
+    <ul class="sidebar-menu" data-widget="tree">
+    
+    	<!-- Pending course applications for approval start -->
+        <li th:classappend="${#httpServletRequest.getRequestURI() == '/courseApp/admin/applications/pending' ? 'active' : ''}">
+            <a th:href="@{/courseApp/admin/applications/pending}">
+                <i class="fa fa-bell-o" ></i><span>Pending Applications</span>
+            </a>
+        </li>
+        <!-- Pending course applications for approval ends -->
+        
+        <!-- CRUD for student users start -->
+        <li th:classappend="${#httpServletRequest.getRequestURI() == '/student/admin/list' ? 'active' : ''}">
+            <a th:href="@{/student/admin/list}">
+                <i class="fa fa-graduation-cap" ></i><span>Student Users</span>
+            </a>
+        </li>
+        <!-- CRUD for student users end -->
+        
+        <!-- My applications start -->
+        <li class="treeview" th:classappend="${#httpServletRequest.getRequestURI() == '/courseApp/student/applications' || #httpServletRequest.getRequestURI() == '/courseApp/student/applications/pending' || #httpServletRequest.getRequestURI() == '/courseApp/student/applications/approved'? 'active' : ''}">
+            <a>
+                <i class="fa fa-folder"></i>
+                <span>My Applications</span>
+                <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                <li th:classappend="${#httpServletRequest.getRequestURI() == '/courseApp/student/applications/pending' ? 'active' : ''}"><a href="/courseApp/student/applications/pending"><i class="fa fa-circle-o"></i> Pending Applications</a></li>
+            	<li th:classappend="${#httpServletRequest.getRequestURI() == '/courseApp/student/applications/approved' ? 'active' : ''}"><a href="/courseApp/student/applications/approved"><i class="fa fa-circle-o"></i> Approved Applications</a></li>
+            	<li th:classappend="${#httpServletRequest.getRequestURI() == '/courseApp/student/applications' ? 'active' : ''}"><a href="/courseApp/student/applications"><i class="fa fa-circle-o"></i> All Applications</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>	            
+    
+        <!-- My applications end -->
 </section>
 <!-- /.sidebar -->

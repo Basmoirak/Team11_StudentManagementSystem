@@ -1,10 +1,16 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
 <!-- Logo -->
 <a href="index2.html" class="logo">
     <!-- mini logo for sidebar mini 50x50 pixels -->
     <span class="logo-mini"><b>S</b>MS</span>
     <!-- logo for regular state and mobile devices -->
-    <span class="logo-lg"><b>Student</b>MS</span>
+    <span class="log-lg" th:each="authority : ${#authentication.getAuthorities()}"
+       th:if="${authority.getAuthority().startsWith('ROLE_')}"
+       th:text="${authority.getAuthority().replaceFirst('ROLE_', '')}">
+    </span>
 </a>
+
 <!-- Header Navbar: style can be found in header.less -->
 <nav class="navbar navbar-static-top">
     <!-- Sidebar toggle button-->
@@ -18,7 +24,7 @@
             <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image" />
-                    <span class="hidden-xs">Uzumaki Naruto</span>
+                    <span class="hidden-xs"><span sec:authentication="name"></span></span>
                 </a>
                 <ul class="dropdown-menu">
                     <!-- User image -->
@@ -26,7 +32,7 @@
                         <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
 
                         <p>
-                            Uzumaki Naruto - Hokage
+                            Welcome <span sec:authentication="name"></span>
                         </p>
                     </li>
                     <!-- Menu Footer-->
@@ -34,9 +40,12 @@
                         <div class="pull-left">
                             <a href="#" class="btn btn-default btn-flat">My Contacts</a>
                         </div>
-                        <div class="pull-right">
-                            <a href="/logout" class="btn btn-default btn-flat">Logout</a>
-                        </div>
+					<div class="pull-right">
+						<form th:action="@{/logout}" 
+								   method="POST">
+							<input type="submit" value="Logout" />
+						</form>	
+					</div>
                     </li>
                 </ul>
             </li>

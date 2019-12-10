@@ -1,9 +1,11 @@
 package com.team11.controller;
 
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -43,12 +45,24 @@ public class FacultyController {
 	}
 	
 	// *** ADMIN ROLE ***
-	@GetMapping("/admin/list")
-	public String list(Model model) {
-		// Bind list of faculties
-		model.addAttribute("faculties", facultyService.getFaculties());
-		return "admin/faculty-list";
-	}
+	//show paginated list of faculties
+		@GetMapping("/admin/list")
+		public String listAll(Model model, HttpServletRequest request) {
+
+			int page = 0;
+			int size = 5; 
+			
+			if(request.getParameter("page") != null && !request.getParameter("page").isEmpty()) {
+				page = Integer.parseInt(request.getParameter("page")) - 1; }
+			
+			if(request.getParameter("size") != null && !request.getParameter("size").isEmpty()) {
+				size=Integer.parseInt(request.getParameter("size")); }
+			
+			model.addAttribute("faculties", facultyService.getPaginated(PageRequest.of(page, size)));
+			
+			return "admin/faculty-list";
+		}
+
 	
 	@GetMapping("/admin/update/{id}")
 	public String update(@PathVariable("id") String id, Model model) {

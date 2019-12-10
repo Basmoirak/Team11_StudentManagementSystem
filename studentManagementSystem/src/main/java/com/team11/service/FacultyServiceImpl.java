@@ -5,9 +5,12 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.team11.dao.FacultyRepository;
+import com.team11.entity.Department;
 import com.team11.entity.Faculty;
 
 @Service
@@ -44,6 +47,12 @@ public class FacultyServiceImpl implements FacultyService{
 	public void deleteFaculty(String theId) {
 		// TODO Auto-generated method stub
 		facultyRepository.deleteById(theId);
+	}
+	
+	@Override
+	@Transactional
+	public Page<Faculty> getPaginated(Pageable pageable) {
+		return facultyRepository.findAll(pageable);
 	}
 
 }

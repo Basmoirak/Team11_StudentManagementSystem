@@ -37,6 +37,39 @@
                         </table>
                     </div>      
                     <!-- <p class="my-5"><a href="showForm" class="btn btn-primary"><i class="fas fa-user-plus ml-2"></i></a></p> -->
+                    
+                    <!--faculties pagination -->
+						<nav aria-label="Pagination" th:if="${faculties.totalPages gt 0}">
+						    <ul class="pagination justify-content-center font-weight-medium">
+						        <li class="page-item" th:classappend="${faculties.number eq 0} ? 'disabled'">
+						            <a class="page-link svg-icon"
+						               th:href="@{/faculty/admin/list?page={id}(id=${faculties.number lt 2 ? 1 : faculties.number})}"
+						               aria-label="Previous"
+						               title="Previous Page" rel="tooltip">
+						                <span aria-hidden="true" data-feather="chevrons-left" width="20" height="20"></span>Previous
+						            </a>
+						        </li>
+						        <li class="page-item" th:classappend="${i eq faculties.number + 1} ? 'active'"
+						            th:each="i : ${#numbers.sequence( faculties.number + 1, faculties.totalPages > 10 + faculties.number ? faculties.number + 10 : faculties.totalPages, 1)}">
+						            <a class="page-link" th:href="@{/faculty/admin/list?page={id}(id=${i})}" th:text="${i}"
+						               th:title="${'Page '+ i}"
+						               rel="tooltip"></a>
+						        </li>
+						        <li class="page-item disabled" th:if="${faculties.number + 10 < faculties.totalPages}">
+						            <a class="page-link svg-icon" href="#">
+						                <span data-feather="more-horizontal" width="20" height="20"></span>
+						            </a>
+						        </li>
+						        <li class="page-item" th:classappend="${faculties.number + 1 eq faculties.totalPages} ? 'disabled'">
+						            <a class="page-link svg-icon" th:href="@{/faculty/admin/list?page={id}(id=${faculties.number + 2})}"
+						               aria-label="Next"
+						               title="Next Page" rel="tooltip">
+						                <span aria-hidden="true" data-feather="chevrons-right" width="20" height="20"></span>Next
+						            </a>
+						        </li>
+						    </ul>
+						</nav>
+                    
                 </div>
             </div>
         </div>

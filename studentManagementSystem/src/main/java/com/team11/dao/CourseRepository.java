@@ -1,6 +1,5 @@
 package com.team11.dao;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -11,7 +10,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.team11.entity.Course;
-import com.team11.entity.CourseApplicant;
 
 
 @Repository

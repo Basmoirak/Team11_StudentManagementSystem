@@ -6,12 +6,11 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.team11.dao.CourseRepository;
 import com.team11.entity.Course;
-import com.team11.entity.Department;
 
 @Service
 public class CourseServiceImpl implements CourseService{
@@ -55,5 +54,10 @@ public class CourseServiceImpl implements CourseService{
 	@Transactional
 	public List<Course> getAvailableCourses() {
 		return courseRepository.getAvailableCourses();
+	}
+
+	@Override
+	public Page<Course> getPaginated(PageRequest pageable) {
+		return courseRepository.findAll(pageable);
 	}
 }

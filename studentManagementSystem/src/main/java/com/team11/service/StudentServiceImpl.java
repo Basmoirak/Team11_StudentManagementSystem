@@ -13,7 +13,6 @@ import com.team11.dao.LevelRepository;
 import com.team11.dao.SemesterRepository;
 import com.team11.dao.StatusRepository;
 import com.team11.dao.StudentRepository;
-import com.team11.entity.Department;
 import com.team11.entity.Level;
 import com.team11.entity.Semester;
 import com.team11.entity.Status;

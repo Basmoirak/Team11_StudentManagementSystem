@@ -10,7 +10,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.team11.dao.FacultyRepository;
-import com.team11.entity.Department;
 import com.team11.entity.Faculty;
 
 @Service

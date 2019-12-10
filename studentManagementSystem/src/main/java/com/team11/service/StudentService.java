@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.team11.entity.Department;
 import com.team11.entity.Level;
 import com.team11.entity.Semester;
 import com.team11.entity.Status;

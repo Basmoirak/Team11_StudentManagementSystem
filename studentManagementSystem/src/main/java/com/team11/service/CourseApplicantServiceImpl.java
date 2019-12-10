@@ -1,6 +1,7 @@
 package com.team11.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -82,6 +83,15 @@ public class CourseApplicantServiceImpl implements CourseApplicantService{
 		courseApplicantRepository.approvePendingApplicant(id);
 		
 	}
+	
+	
+	@Override
+	@Modifying
+	@Transactional
+	public List<CourseApplicant> getActiveCourses(String studentId){
+		return courseApplicantRepository.getActiveCourses(studentId);
+	}
+	
 
 
 

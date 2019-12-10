@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Welcome Page</title>
+</head>
+<!--just for fun...... a script auto return -->
+<script type="text/javascript">
+            
+			var time = 6;
+	        function jump() {  
+	            window.setTimeout('jump()', 1000);  
+	            time = time - 1;  
+	            if(time<=0){
+	            	time = 0;
+	         window.setTimeout("location.href='/showMyLoginPage'", 0); 
+	            }
+	            document.getElementById("layer").innerHTML = time;  
+	        }  
+		</script>
+<hr><br>
+<body onload="jump()">
+   <p th:text="${param.message}">Default Message</p>
+   <p th:text="${name}">Default URI Path Variable</p>
+   <div >
+<a href="javascript:void(0)" onclick="window.location.href='/showMyLoginPage' " >
+<font size="5px" >Registration complete ,you will return to login page after <b><span id="layer">5</span></b> seconds, or click this link.</font></a></div>
+<br><hr>
+</body>
+</html>

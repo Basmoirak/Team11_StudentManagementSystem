@@ -62,23 +62,37 @@
             </a>
         </li>
         <!-- CRUD for student users end -->
-        
-        <!-- My applications start -->
-        <li class="treeview" th:classappend="${#httpServletRequest.getRequestURI() == '/courseApp/student/applications' || #httpServletRequest.getRequestURI() == '/courseApp/student/applications/pending' || #httpServletRequest.getRequestURI() == '/courseApp/student/applications/approved'? 'active' : ''}">
-            <a>
-                <i class="fa fa-folder"></i>
-                <span>My Applications</span>
-                <i class="fa fa-angle-left pull-right"></i>
+
+
+		<!-- CRUD for faculty users start -->
+        <li th:classappend="${#httpServletRequest.getRequestURI() == '/faculty/admin/list' ? 'active' : ''}">
+            <a th:href="@{/faculty/admin/list}">
+                <i class="fa fa-graduation-cap" ></i><span>Faculty Users</span>
             </a>
-            <ul class="treeview-menu">
-                <li th:classappend="${#httpServletRequest.getRequestURI() == '/courseApp/student/applications/pending' ? 'active' : ''}"><a href="/courseApp/student/applications/pending"><i class="fa fa-circle-o"></i> Pending Applications</a></li>
-            	<li th:classappend="${#httpServletRequest.getRequestURI() == '/courseApp/student/applications/approved' ? 'active' : ''}"><a href="/courseApp/student/applications/approved"><i class="fa fa-circle-o"></i> Approved Applications</a></li>
-            	<li th:classappend="${#httpServletRequest.getRequestURI() == '/courseApp/student/applications' ? 'active' : ''}"><a href="/courseApp/student/applications"><i class="fa fa-circle-o"></i> All Applications</a></li>
-            </ul>
         </li>
+        <!-- CRUD for faculty users end -->
+        
+        
+        <!-- CRUD for Courses start -->
+        <li th:classappend="${#httpServletRequest.getRequestURI() == '/course/admin/list' ? 'active' : ''}">
+            <a th:href="@{/course/admin/list}">
+                <i class="fa fa-graduation-cap" ></i><span>Courses</span>
+            </a>
+        </li>
+        <!-- CRUD for Courses end -->
+        
+        
+        <!-- CRUD for Departments start -->
+        <li th:classappend="${#httpServletRequest.getRequestURI() == '/department/admin/list' ? 'active' : ''}">
+            <a th:href="@{/department/admin/list}">
+                <i class="fa fa-graduation-cap" ></i><span>Departments</span>
+            </a>
+        </li>
+        <!-- CRUD for Departments end -->
     </ul>
 </div>	            
-    
-        <!-- My applications end -->
+
+<!-- ################## SIDEBAR FOR FACULTY ################## -->
+ 
 </section>
 <!-- /.sidebar -->

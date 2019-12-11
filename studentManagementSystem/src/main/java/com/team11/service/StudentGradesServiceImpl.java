@@ -1,5 +1,6 @@
 package com.team11.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -73,4 +74,56 @@ public class StudentGradesServiceImpl implements StudentGradesService {
 		
 		
 	}
+
+	@Override
+	@Transactional
+	public ArrayList<StudentGrades> findStudentGradesByStudentID(String studentId) {
+		// TODO Auto-generated method stub
+		return studentGradesRepository.findStudentGradesByStudentID(studentId);
+	}
+
+	@Override
+	@Transactional
+	public float getTotalUnits(String studentId) {
+		// TODO Auto-generated method stub
+		return studentGradesRepository.getTotalUnits(studentId);
+	}
+
+	@Override
+	//convert from letter grade to number grade
+	public double convertGrade(String letter) {
+		double numGrade = 0;
+		if (letter.equalsIgnoreCase("A+") || letter.equalsIgnoreCase("A")) {
+			numGrade = 5;
+		}
+		else if(letter.equalsIgnoreCase("A-")) {
+			numGrade = 4.5;
+		}
+		else if(letter.equalsIgnoreCase("B+")) {
+			numGrade = 4;
+		}
+		else if(letter.equalsIgnoreCase("B")) {
+			numGrade = 3.5;
+		}
+		else if(letter.equalsIgnoreCase("B-")) {
+			numGrade = 3;
+		}
+		else if(letter.equalsIgnoreCase("C+")) {
+			numGrade = 2.5;
+		}
+		else if(letter.equalsIgnoreCase("C")) {
+			numGrade = 2;
+		}
+		else if(letter.equalsIgnoreCase("D+")) {
+			numGrade = 1.5;
+		}
+		else if(letter.equalsIgnoreCase("D")) {
+			numGrade = 1;
+		}
+		else if(letter.equalsIgnoreCase("F")) {
+			numGrade = 0;
+		}
+		return numGrade;
+	}
+		
 }

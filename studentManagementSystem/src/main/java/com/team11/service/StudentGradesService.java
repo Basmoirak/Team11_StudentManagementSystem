@@ -1,5 +1,6 @@
 package com.team11.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.team11.entity.CourseApplicant;
@@ -16,4 +17,13 @@ public interface StudentGradesService {
 	public void deleteStudentGrades(int id);
 	
 	public void createNewStudentGrades(CourseApplicant ca);
+	
+	public ArrayList<StudentGrades> findStudentGradesByStudentID(String studentId);
+	
+	public float getTotalUnits(String studentId);
+	
+	//convert from letter grade to number grade
+	public double convertGrade(String letter);
+
+		
 }

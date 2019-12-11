@@ -40,8 +40,8 @@
         </li>
         
          <!-- Gradebook  -->
-        <li>
-            <a href="#">
+        <li th:classappend="${#httpServletRequest.getRequestURI() == '/studentGrade/student/grades' ? 'active' : '' }">
+            <a href="/studentGrade/student/grades">
                 <i class="fa fa-book" ></i><span>My Gradebook</span>
             </a>
         </li>

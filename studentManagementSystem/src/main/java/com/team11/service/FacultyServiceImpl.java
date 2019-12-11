@@ -53,5 +53,11 @@ public class FacultyServiceImpl implements FacultyService{
 	public Page<Faculty> getPaginated(Pageable pageable) {
 		return facultyRepository.findAll(pageable);
 	}
+	
+	@Override
+	@Transactional
+	public List<Faculty> getFacultiesByDepartmentId(int departmentID) {
+		return facultyRepository.getFacultiesByDepartmentId(departmentID);
+	}
 
 }

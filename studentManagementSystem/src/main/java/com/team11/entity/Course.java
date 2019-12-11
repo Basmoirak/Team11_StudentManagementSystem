@@ -60,6 +60,9 @@ public class Course {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date endDate;
 	
+	@Column(name = "faculty_id")
+	private String facultyID;
+	
 	public List<CourseApplicant> getCourseApplicants() {
 		return courseApplicants;
 	}
@@ -152,6 +155,14 @@ public class Course {
 
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
+	}
+	
+	public String getFacultyID() {
+		return facultyID;
+	}
+
+	public void setFacultyID(String facultyID) {
+		this.facultyID = facultyID;
 	}
 
 	@Override

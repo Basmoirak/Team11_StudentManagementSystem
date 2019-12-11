@@ -1,6 +1,8 @@
 package com.team11.controller;
 
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -13,6 +15,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.team11.entity.Faculty;
 import com.team11.service.DepartmentService;
@@ -62,7 +66,6 @@ public class FacultyController {
 			
 			return "admin/faculty-list";
 		}
-
 	
 	@GetMapping("/admin/update/{id}")
 	public String update(@PathVariable("id") String id, Model model) {
@@ -95,5 +98,12 @@ public class FacultyController {
 		// Save or Update faculty
 		facultyService.saveFaculty(faculty);
 		return "redirect:/faculty/admin/list";
+	}
+	
+	@GetMapping("/admin/getFacultyByDepartment")
+	@ResponseBody
+	public List<Faculty> getFacultyByDepartment(@RequestParam(value = "department", required = true) int department) {
+		System.out.println("In getFacultyByDepartment");
+		return facultyService.getFacultiesByDepartmentId(department);
 	}
 }

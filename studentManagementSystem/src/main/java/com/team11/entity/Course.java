@@ -36,7 +36,6 @@ public class Course {
 	@Range(min=1, max=200,message = "course unit must be between 1 to 200")
 	private int courseUnit;
 	
-	
 	@Column(name = "department_id")
 	private int departmentID;
 	

@@ -125,5 +125,11 @@ public class StudentGradesServiceImpl implements StudentGradesService {
 		}
 		return numGrade;
 	}
-		
+
+	@Override
+	@Transactional
+	public List<StudentGrades> getStudentGradesByCourseID(int courseId) {
+		return studentGradesRepository.getStudentGradesByCourseID(courseId);
+	}
+	
 }

@@ -111,14 +111,6 @@
             </a>
         </li>
         <!-- List of courses end -->
-		
-		<!-- List of students start -->
-        <li th:classappend="${#httpServletRequest.getRequestURI() == '/student/admin/list' ? 'active' : ''}">
-            <a th:href="@{/student/admin/list}">
-                <i class="fa fa-graduation-cap" ></i><span>Student Users</span>
-            </a>
-        </li>
-        <!-- List of students end -->
 		        
     </ul>
 </div>	      

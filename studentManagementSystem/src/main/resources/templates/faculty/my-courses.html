@@ -39,9 +39,10 @@
            		</div>
             	
             	
-           		<a th:if = "${execInfo.now.time >= c.startDate && execInfo.now.time <= c.endDate}" class="small-box-footer">
-             		Ongoing <i class="fa fa-arrow-circle-right"></i>
-          		</a>	
+            	<a 	th:if = "${execInfo.now.time >= c.startDate && execInfo.now.time <= c.endDate}"
+            		th:href="@{/studentGrade/faculty/courses/view/{id}(id=${c.courseId})}" class="btn btn-primary" >
+                    View Student List
+                </a>
             	
             	<a th:if = "${execInfo.now.time < c.startDate}" class="small-box-footer">
              		Upcoming 

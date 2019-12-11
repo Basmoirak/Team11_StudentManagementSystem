@@ -25,5 +25,5 @@ public interface StudentGradesService {
 	//convert from letter grade to number grade
 	public double convertGrade(String letter);
 
-		
+	public List<StudentGrades> getStudentGradesByCourseID(int courseId);
 }

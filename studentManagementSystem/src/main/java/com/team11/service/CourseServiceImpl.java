@@ -25,28 +25,24 @@ public class CourseServiceImpl implements CourseService{
 	@Override
 	@Transactional
 	public List<Course> getCourses() {
-		// TODO Auto-generated method stub
 		return courseRepository.findAll();
 	}
 
 	@Override
 	@Transactional
 	public void saveCourse(Course course) {
-		// TODO Auto-generated method stub
 		courseRepository.save(course);
 	}
 
 	@Override
 	@Transactional
 	public Course getCourse(int id) {
-		// TODO Auto-generated method stub
 		return courseRepository.getOne(id);
 	}
 
 	@Override
 	@Transactional
 	public void deleteCourse(int id) {
-		// TODO Auto-generated method stub
 		courseRepository.deleteById(id);
 	}
 	
@@ -57,7 +53,20 @@ public class CourseServiceImpl implements CourseService{
 	}
 
 	@Override
+	@Transactional
 	public Page<Course> getPaginated(PageRequest pageable) {
 		return courseRepository.findAll(pageable);
+	}
+
+	@Override
+	@Transactional
+	public List<Course> getCourseByFacultyID(String id) {
+		return courseRepository.getCoursesByFacultyID(id);
+	}
+
+	@Override
+	@Transactional
+	public List<Course> getActiveCourses(String id) {
+		return courseRepository.getActiveCourses(id);
 	}
 }

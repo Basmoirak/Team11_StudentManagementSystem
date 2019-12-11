@@ -20,4 +20,8 @@ public interface CourseService {
 	public List<Course> getAvailableCourses();
 
 	public Page<Course> getPaginated(PageRequest pageable);
+	
+	public List<Course> getCourseByFacultyID(String id);
+
+	public List<Course> getActiveCourses(String id);
 }

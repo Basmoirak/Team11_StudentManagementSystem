@@ -105,9 +105,9 @@
     <ul class="sidebar-menu" data-widget="tree">
         
         <!-- List of courses start -->
-        <li th:classappend="${#httpServletRequest.getRequestURI() == '/student/admin/list' ? 'active' : ''}">
-            <a th:href="@{/student/admin/list}">
-                <i class="fa fa-graduation-cap" ></i><span>Student Users</span>
+        <li th:classappend="${#httpServletRequest.getRequestURI() == '/faculty/faculty/courses/my' || #httpServletRequest.getRequestURI() == '/faculty/faculty/courses/my/all'  ? 'active' : ''}">
+            <a th:href="@{/faculty/faculty/courses/my}">
+                <i class="fa fa-graduation-cap" ></i><span>My Courses</span>
             </a>
         </li>
         <!-- List of courses end -->

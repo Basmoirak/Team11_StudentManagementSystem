@@ -18,11 +18,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.team11.entity.Course;
 import com.team11.entity.Faculty;
+import com.team11.service.CourseService;
+import com.team11.service.CourseServiceImpl;
 import com.team11.service.DepartmentService;
 import com.team11.service.DepartmentServiceImpl;
 import com.team11.service.FacultyService;
 import com.team11.service.FacultyServiceImpl;
+import com.team11.service.StudentGradesService;
+import com.team11.service.StudentGradesServiceImpl;
 import com.team11.service.UserService;
 import com.team11.service.UserServiceImpl;
 
@@ -38,14 +43,26 @@ public class FacultyController {
 	
 	private FacultyService facultyService;
 	@Autowired
-	public void SetFacultyService(FacultyServiceImpl facultyService) {
+	public void setFacultyService(FacultyServiceImpl facultyService) {
 		this.facultyService = facultyService;
 	}
 	
 	private UserService userService;
 	@Autowired
-	public void SetUserService(UserServiceImpl userService) {
+	public void setUserService(UserServiceImpl userService) {
 		this.userService = userService;
+	}
+	
+	private CourseService courseService;
+	@Autowired
+	public void setCourseService(CourseServiceImpl courseService) {
+		this.courseService = courseService;
+	}
+	
+	private StudentGradesService studentGradesService;
+	@Autowired
+	public void setStudentGradesService(StudentGradesServiceImpl studentGradesService) {
+		this.studentGradesService = studentGradesService;
 	}
 	
 	// *** ADMIN ROLE ***
@@ -103,7 +120,24 @@ public class FacultyController {
 	@GetMapping("/admin/getFacultyByDepartment")
 	@ResponseBody
 	public List<Faculty> getFacultyByDepartment(@RequestParam(value = "department", required = true) int department) {
-//		System.out.println("In getFacultyByDepartment");
 		return facultyService.getFacultiesByDepartmentId(department);
+	}
+	
+	// *** FACULTY ROLE ***
+	@GetMapping("/faculty/courses/my/all")
+	public String getCoursesByFacultyID(Model model, HttpServletRequest request) {
+		
+		//Retrieve list of courses based on faculty id
+		model.addAttribute("courses", 
+				courseService.getCourseByFacultyID((String) request.getSession().getAttribute("userID")));
+		
+		return "faculty/my-courses";
+	}
+	
+	@GetMapping("/faculty/courses/my")
+	public String myCourses(Model model, HttpServletRequest request) {
+		//get active courses
+		model.addAttribute("courses", courseService.getActiveCourses((String) request.getSession().getAttribute("userID")));
+		return "faculty/my-courses";
 	}
 }

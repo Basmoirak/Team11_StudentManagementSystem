@@ -27,8 +27,8 @@
 			<div class="small-box bg-green">
 				<div class="inner">
               		<h3 th:text="${c.course.courseName}"></h3>
-
-              		<p th:text="${c.course.department.name}"></p>
+					<i>By <span th:text="${c.course.faculty.firstName}"></span>&nbsp;<span th:text="${c.course.faculty.lastName}"></span></i>
+              		<p style="font-weight: bold" th:text="${c.course.department.name}"></p>
               
                		<p>
 						From <span th:text="${#dates.format(c.course.startDate, 'dd-MMM-yyyy')}"></span> 

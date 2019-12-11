@@ -41,6 +41,7 @@
                             </div>
                             
                             <div class="form-group col-md-6">
+                            	<input th:value="*{facultyID}" id="facultyID" type="hidden">
                             	<label for="faculty" class="col-form-label">Choose Instructor</label>
                             	<select class="form-control" th:field="*{facultyID}" name="faculty" id="faculty">
                             		<option value="0" disabled="disabled" selected="selected" > Select Instructor </option>
@@ -67,45 +68,64 @@
             </div>
         </div>
 	</div>    
+	<th:block layout:fragment="script">
+	<script type="application/javascript">
 
-<script type="application/javascript">
-	
-/* 	$('#department').change(
-	        function() {
-	            $.getJSON("http://localhost:8081/faculty/admin/getFacultyByDepartment", {
-	                department : $(this).val(),
-	                ajax : 'true'
-	            }, function(data) {
-	                var html = '<option value="">--alege agentia--</option>';
-	                var len = data.length;
-	                for ( var i = 0; i < len; i++) {
-	                    html += '<option value="' + data[i].firstName + '">'
-	                            + data[i].firstName + '</option>';
-	                }
-	                html += '</option>';
-	                $('#faculty').html(html);
-	            });
-	        });
-	); */
 			$(document).ready(function() {
+				
+				/* so the script will also run on edit form */
+				doAjax()
+				
 			    $('#department').change(function() {
-			    	sendAjaxRequest();
+			    	
+			    	doAjax()
 			    });
 			});
-	
-			function sendAjaxRequest() {
-				var department = $("#department").val();
-				$.get("/faculty/admin/getFacultyByDepartment?department=" + department,
-						function(data) {
-					$("#faculty").empty();
-					data.forEach(function(item, i){
-			            var option = "<option value = " + item + ">" + item +  "</option>";
-			            $("#faculty").append(option);
-					});
-				});
-			};
 			
-</script>
+			function doAjax(){
+				
+				var department = $("#department").val()
+
+				axios.get("/faculty/admin/getFacultyByDepartment?department=" + department)
+				.then((response)=>{
+					
+					/* emptying the dropdown  */
+					$("#faculty").empty()
+					
+					/* getting hidden facultyID  */
+					var facultyID = $('#facultyID').val()
+					
+					/* looping through the response.data array of objects */
+					response.data.forEach((item)=>{
+						
+						if(facultyID == item.faculty){
+							$("#faculty").append(
+									'<option selected th:field="*{facultyID}" value = '+ item.faculty +'>'
+									+ item.firstName + ' ' + item.lastName
+									+'</option>'
+								)
+						}
+						else {
+							$("#faculty").append(
+									'<option th:field="*{facultyID}"  value = '+ item.faculty +'>'
+									+ item.firstName + ' ' + item.lastName
+									+'</option>'
+								)
+						}
+				
+						
+					})
+					
+				})
+				.catch((error)=>{
+					console.log("Try again")
+				})
+			}
+			
+			
+	</script>
+</th:block>
+	
 	
     </body>
 </html>

@@ -1,11 +1,14 @@
 package com.team11.entity;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -24,6 +27,9 @@ public class Faculty {
 	@ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
 	@JoinColumn(name = "department_id", insertable = false, updatable = false, nullable = false)
 	private Department department;
+	
+	@OneToMany(mappedBy = "faculty")
+	private List<Course> courses;
 	
 	//Constructor
 	public Faculty() {

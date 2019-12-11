@@ -63,6 +63,18 @@ public class Course {
 	@Column(name = "faculty_id")
 	private String facultyID;
 	
+	@ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+	@JoinColumn(name = "faculty_id", insertable = false, updatable = false)
+	private Faculty faculty;
+	
+	public Faculty getFaculty() {
+		return faculty;
+	}
+
+	public void setFaculty(Faculty faculty) {
+		this.faculty = faculty;
+	}
+
 	public List<CourseApplicant> getCourseApplicants() {
 		return courseApplicants;
 	}
@@ -70,6 +82,8 @@ public class Course {
 	public void setCourseApplicants(List<CourseApplicant> courseApplicants) {
 		this.courseApplicants = courseApplicants;
 	}
+	
+	
 
 	//Constructors
 	public Course() {}

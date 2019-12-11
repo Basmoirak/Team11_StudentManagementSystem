@@ -103,7 +103,7 @@ public class FacultyController {
 	@GetMapping("/admin/getFacultyByDepartment")
 	@ResponseBody
 	public List<Faculty> getFacultyByDepartment(@RequestParam(value = "department", required = true) int department) {
-		System.out.println("In getFacultyByDepartment");
+//		System.out.println("In getFacultyByDepartment");
 		return facultyService.getFacultiesByDepartmentId(department);
 	}
 }

@@ -11,7 +11,7 @@
     <div layout:fragment="content">
         <div th:switch="${courses}" class="container my-5">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <h2 th:case="null">No courses yet!</h2>
                     <div th:case="*">
                         <h2 class="my-5">Courses</h2>
@@ -22,6 +22,7 @@
                                     <th>Course Name</th>
                                     <th>Course Unit</th>
                                     <th>Department</th>
+                                    <th>Instructor</th>
                                     <th>Start Date</th>
                                     <th>End Date</th>
                                     <th>Edit</th>
@@ -34,6 +35,13 @@
                                    	<td th:text="${course.courseName}"></td>
                                    	<td th:text="${course.courseUnit}"></td>
                                    	<td th:text="${course.department.name}"></td>
+                                   	<td th:if="${course.faculty}">
+                                   		<span th:text="${course.faculty.firstName}"></span>
+                                   		<span th:text="${course.faculty.LastName}"></span>
+                                   	</td>
+                                   	<td th:unless="${course.faculty}">
+                                   		-
+                                   	</td>
                                    	<td th:text="${#dates.format(course.startDate, 'dd-MMM-yyyy')}"></td>
                                    	<td th:text="${#dates.format(course.endDate, 'dd-MMM-yyyy')}"></td>
                                     <td><a th:href="@{update/{id}(id=${course.courseId})}" class="btn btn-primary"><i class="fa fa-pencil-square-o"></i></a></td>

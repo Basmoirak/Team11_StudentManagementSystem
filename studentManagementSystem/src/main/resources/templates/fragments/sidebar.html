@@ -101,6 +101,27 @@
 </div>	            
 
 <!-- ################## SIDEBAR FOR FACULTY ################## -->
- 
+<div sec:authorize="hasRole('ROLE_FACULTY')">
+    <ul class="sidebar-menu" data-widget="tree">
+        
+        <!-- List of courses start -->
+        <li th:classappend="${#httpServletRequest.getRequestURI() == '/student/admin/list' ? 'active' : ''}">
+            <a th:href="@{/student/admin/list}">
+                <i class="fa fa-graduation-cap" ></i><span>Student Users</span>
+            </a>
+        </li>
+        <!-- List of courses end -->
+		
+		<!-- List of students start -->
+        <li th:classappend="${#httpServletRequest.getRequestURI() == '/student/admin/list' ? 'active' : ''}">
+            <a th:href="@{/student/admin/list}">
+                <i class="fa fa-graduation-cap" ></i><span>Student Users</span>
+            </a>
+        </li>
+        <!-- List of students end -->
+		        
+    </ul>
+</div>	      
+
 </section>
 <!-- /.sidebar -->

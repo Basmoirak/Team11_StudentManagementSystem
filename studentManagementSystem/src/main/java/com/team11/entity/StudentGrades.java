@@ -1,6 +1,9 @@
 package com.team11.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -10,14 +13,22 @@ public class StudentGrades {
 	
 	//Fields
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int Id;
 	
+	//Insertable Foreign Key Values
+	@Column(name = "student_id")
+	private String studentID;
+	
+	@Column(name = "course_id")
+	private int courseID;
+	
 	@ManyToOne
-	@JoinColumn(name = "student_id")
+	@JoinColumn(name = "student_id", insertable = false, updatable = false, nullable = false)
 	private Student student;
 	
 	@ManyToOne
-	@JoinColumn(name = "course_id")
+	@JoinColumn(name = "course_id", insertable = false, updatable = false, nullable = false)
 	private Course course;
 	
 	private String grade;
@@ -74,6 +85,22 @@ public class StudentGrades {
 
 	public void setLevel(int level) {
 		this.level = level;
+	}
+	
+	public String getStudentID() {
+		return studentID;
+	}
+
+	public void setStudentID(String studentID) {
+		this.studentID = studentID;
+	}
+
+	public int getCourseID() {
+		return courseID;
+	}
+
+	public void setCourseID(int courseID) {
+		this.courseID = courseID;
 	}
 
 	@Override

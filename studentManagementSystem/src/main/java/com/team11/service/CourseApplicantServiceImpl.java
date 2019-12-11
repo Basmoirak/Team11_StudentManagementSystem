@@ -25,64 +25,51 @@ public class CourseApplicantServiceImpl implements CourseApplicantService{
 	@Override
 	@Transactional
 	public List<CourseApplicant> getCourseApplicants() {
-		// TODO Auto-generated method stub
 		return courseApplicantRepository.findAll();
 	}
 
 	@Override
 	@Transactional
 	public void saveCourseApplicant(CourseApplicant courseApplicant) {
-		// TODO Auto-generated method stub
 		courseApplicantRepository.save(courseApplicant);
 	}
 
 	@Override
 	@Transactional
 	public CourseApplicant getCourseApplicant(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return courseApplicantRepository.findById(id).orElse(null);
 	}
 
 	@Override
 	@Transactional
 	public void deleteCourseApplicant(int id) {
-		// TODO Auto-generated method stub
 		courseApplicantRepository.deleteById(id);
 	}
 
 	@Override
 	@Transactional
 	public ArrayList<CourseApplicant> findCourseApplicantsByStudentID(String studentId) {
-		// TODO Auto-generated method stub
 		return courseApplicantRepository.findCourseApplicantsByStudentID(studentId);
 	}
-
 
 	@Override
 	@Transactional
 	public ArrayList<CourseApplicant> findCourseApplicantsByStudentIDAndStatus(String studentId, int status) {
-		// TODO Auto-generated method stub
 		return courseApplicantRepository.findCourseApplicantsByStudentIDAndStatus(studentId, status);
 	}
-
 
 	@Override
 	@Transactional
 	public ArrayList<CourseApplicant> findCourseApplicantsByStatus(int status) {
-		// TODO Auto-generated method stub
 		return courseApplicantRepository.findCourseApplicantsByStatus(status);
 	}
-
 
 	@Override
 	@Modifying
 	@Transactional
 	public void approvePendingApplicant(int id) {
-		// TODO Auto-generated method stub
 		courseApplicantRepository.approvePendingApplicant(id);
-		
 	}
-	
 	
 	@Override
 	@Modifying
@@ -90,11 +77,13 @@ public class CourseApplicantServiceImpl implements CourseApplicantService{
 	public List<CourseApplicant> getActiveCourses(String studentId){
 		return courseApplicantRepository.getActiveCourses(studentId);
 	}
-	
 
-
-
-	
+	@Override
+	@Modifying
+	@Transactional
+	public CourseApplicant findByIdAndStatus(int id) {
+		return courseApplicantRepository.findByIdAndStatus(id);
+	}
 
 
 }

@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -43,19 +44,31 @@ public class Student {
 	@Pattern(regexp="^(8|9)[0-9]{7}$", message = "Singaporean Mobile Numbers only")
 	private String mobile;
 	
+	@NotBlank(message = "level is required")
+	@Column(name = "level_id")
+	private int levelID;
+	
+	@NotBlank(message = "semester is required")
+	@Column(name = "semester_id")
+	private int semesterID;
+	
+	@NotBlank(message = "status is required")
+	@Column(name = "status_id")
+	private int statusID;
+	
 	@ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-	@JoinColumn(name = "level")
+	@JoinColumn(name = "level_id", insertable = false, updatable = false, nullable = false)
 	private Level level;
 	
 	@ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-	@JoinColumn(name = "semester")
+	@JoinColumn(name = "semester_id", insertable = false, updatable = false, nullable = false)
 	private Semester semester;
 	
 	@OneToOne(mappedBy = "student", cascade = CascadeType.ALL)
 	private tblGPA cgpa;
 	
 	@ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-	@JoinColumn(name = "status")
+	@JoinColumn(name = "status_id", insertable = false, updatable = false, nullable = false)
 	private Status status;
 	
 	@OneToMany(mappedBy = "student")
@@ -195,6 +208,30 @@ public class Student {
 
 	public void setStudentGrades(List<StudentGrades> studentGrades) {
 		this.studentGrades = studentGrades;
+	}
+	
+	public int getLevelID() {
+		return levelID;
+	}
+
+	public void setLevelID(int levelID) {
+		this.levelID = levelID;
+	}
+
+	public int getSemesterID() {
+		return semesterID;
+	}
+
+	public void setSemesterID(int semesterID) {
+		this.semesterID = semesterID;
+	}
+
+	public int getStatusID() {
+		return statusID;
+	}
+
+	public void setStatusID(int statusID) {
+		this.statusID = statusID;
 	}
 
 	@Override

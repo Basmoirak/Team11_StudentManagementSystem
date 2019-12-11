@@ -17,22 +17,20 @@ public interface CourseApplicantRepository extends JpaRepository<CourseApplicant
 	
 	public ArrayList<CourseApplicant> findCourseApplicantsByStudentID(String studentId);
 	
-	@Modifying
-	@Transactional
 	@Query("select ca from CourseApplicant ca JOIN ca.course c where ca.studentID = :studentId and ca.status = :status order by c.startDate asc")
 	public ArrayList<CourseApplicant> findCourseApplicantsByStudentIDAndStatus(String studentId, int status);
 	
 	public ArrayList<CourseApplicant> findCourseApplicantsByStatus(int status);
 	
 	@Modifying
-	@Transactional
 	@Query("update CourseApplicant ca set ca.status =1 where ca.id =:id")
 	public void approvePendingApplicant(int id);
 	
+	@Query("select ca from CourseApplicant ca WHERE ca.status =1 and ca.id =:id")
+	public CourseApplicant findByIdAndStatus(int id);
+	
 	//getting active courses
 	//queried by login-ed student id, if today falls between startdate and enddate
-	@Modifying
-	@Transactional
 	@Query("select ca from CourseApplicant ca JOIN ca.course c where ca.studentID = :studentId and ca.status = 1 and CURRENT_DATE >= c.startDate and CURRENT_DATE <= c.endDate order by c.startDate asc")
 	public List<CourseApplicant> getActiveCourses(String studentId);
 	

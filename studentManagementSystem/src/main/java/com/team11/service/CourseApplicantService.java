@@ -22,7 +22,9 @@ public interface CourseApplicantService {
 	public ArrayList<CourseApplicant> findCourseApplicantsByStatus(int status);
 	
 	public void approvePendingApplicant(int id);
-
+	
+	public CourseApplicant findByIdAndStatus(int id);
+	
 	public List<CourseApplicant> getActiveCourses(String studentId);
 
 

@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.team11.entity.CourseApplicant;
+import com.team11.entity.StudentGrades;
 import com.team11.service.CourseApplicantService;
 import com.team11.service.CourseService;
+import com.team11.service.StudentGradesService;
+import com.team11.service.StudentService;
 
 @Controller
 @RequestMapping("/courseApp")
@@ -34,6 +37,14 @@ public class CourseApplicantController {
 	@Autowired
 	public void setCourseApplicantService(CourseApplicantService courseApplicantService) {
 		this.courseApplicantService = courseApplicantService;
+	}
+	
+	//injecting studentGradesService
+	private StudentGradesService studentGradesService;
+	
+	@Autowired
+	public void setStudentGradeService(StudentGradesService studentGradesService) {
+		this.studentGradesService = studentGradesService;
 	}
 	
 	// *** STUDENT ROLE ***
@@ -136,6 +147,9 @@ public class CourseApplicantController {
 	@GetMapping("/admin/applications/pending/approve/{id}")
 	public String approve(@PathVariable("id") int id) {
 		courseApplicantService.approvePendingApplicant(id);
+		
+		// Create new student grade
+		studentGradesService.createNewStudentGrades(courseApplicantService.findByIdAndStatus(id));
 		return "redirect:/courseApp/admin/applications/pending";
 	}
 	

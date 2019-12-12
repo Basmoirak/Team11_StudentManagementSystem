@@ -25,6 +25,11 @@
 
     <!-- Daterange picker -->
     <link rel="stylesheet" href="/plugins/timepicker/bootstrap-timepicker.min.css"/>
+    
+    <link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css"></link>
+
+    
+    <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"></link>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -34,6 +39,14 @@
     
     
     <![endif]-->
+    <style>
+	.dataTables_filter {
+		float : right;
+	}
+	.dataTables_paginate {
+		float : right;
+	}
+</style>
     
 </head>
 <body class="hold-transition skin-green sidebar-mini">
@@ -95,7 +108,15 @@
 <script src="/dist/js/adminlte.min.js"></script>
 <script src="/dist/js/pages/dashboard.js"></script>
 <script src="/dist/js/demo.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"> </script>
+<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
 
 <th:block layout:fragment = "script"></th>
+
+<script>
+	$(document).ready(()=>{})
+		$('.datatable').DataTable()
+</script>
+
 </body>
 </html>

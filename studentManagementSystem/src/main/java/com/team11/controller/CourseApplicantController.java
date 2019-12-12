@@ -13,11 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.team11.entity.CourseApplicant;
-import com.team11.entity.StudentGrades;
 import com.team11.service.CourseApplicantService;
 import com.team11.service.CourseService;
 import com.team11.service.StudentGradesService;
-import com.team11.service.StudentService;
 
 @Controller
 @RequestMapping("/courseApp")

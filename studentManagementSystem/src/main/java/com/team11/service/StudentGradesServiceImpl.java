@@ -61,8 +61,8 @@ public class StudentGradesServiceImpl implements StudentGradesService {
 			
 			studentGrade.setCourseID(ca.getCourseID());
 			studentGrade.setStudentID(ca.getStudentID());
-			studentGrade.setSemester(student.getSemesterID());
-			studentGrade.setLevel(student.getLevelID());
+			studentGrade.setSemester(student.getSemester().getSemester());
+			studentGrade.setLevel(student.getLevel().getId());
 			studentGrade.setGrade(null);
 			
 			studentGradesRepository.save(studentGrade);

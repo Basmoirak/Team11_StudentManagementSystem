@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.team11.entity.Course;
 import com.team11.entity.Faculty;
 import com.team11.service.CourseService;
 import com.team11.service.CourseServiceImpl;
@@ -26,8 +25,6 @@ import com.team11.service.DepartmentService;
 import com.team11.service.DepartmentServiceImpl;
 import com.team11.service.FacultyService;
 import com.team11.service.FacultyServiceImpl;
-import com.team11.service.StudentGradesService;
-import com.team11.service.StudentGradesServiceImpl;
 import com.team11.service.UserService;
 import com.team11.service.UserServiceImpl;
 
@@ -57,12 +54,6 @@ public class FacultyController {
 	@Autowired
 	public void setCourseService(CourseServiceImpl courseService) {
 		this.courseService = courseService;
-	}
-	
-	private StudentGradesService studentGradesService;
-	@Autowired
-	public void setStudentGradesService(StudentGradesServiceImpl studentGradesService) {
-		this.studentGradesService = studentGradesService;
 	}
 	
 	// *** ADMIN ROLE ***

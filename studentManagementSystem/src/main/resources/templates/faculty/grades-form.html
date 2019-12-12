@@ -12,13 +12,12 @@
 
 	<div layout:fragment="content">
 		<div class="container my-5">
-            <h2 class="mb-5">Grade Form</h2>
+			<h2 class="my-5" th:text="'Student: ' + ${grade.student.firstName} + ' ' + ${grade.student.lastName}"></h2>
             <div class="row">
                 <div class="col-md-6">
                     <form action="#" th:action="@{/studentGrade/faculty/updateGrade}" th:object="${grade}" method="POST">
                         <div class="row">
                             <input type="hidden" th:field="*{Id}">
-
                             <div class="form-group col-md-6">
                                 <label for="grade" class="col-form-label">Grade</label>
                                 <input type="text" th:field="*{grade}" class="form-control" id="grade" placeholder="Grade">

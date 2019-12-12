@@ -6,6 +6,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 
 import com.team11.dao.StudentGradesRepository;
@@ -43,11 +44,6 @@ public class StudentGradesServiceImpl implements StudentGradesService {
 		studentGradesRepository.save(studentGrade);
 	}
 
-	@Override
-	@Transactional
-	public StudentGrades getStudentGrades(int id) {
-		return studentGradesRepository.findById(id).orElse(null);
-	}
 
 	@Override
 	@Transactional
@@ -131,5 +127,17 @@ public class StudentGradesServiceImpl implements StudentGradesService {
 	public List<StudentGrades> getStudentGradesByCourseID(int courseId) {
 		return studentGradesRepository.getStudentGradesByCourseID(courseId);
 	}
+
+	@Override
+	@Transactional
+	public StudentGrades getStudentGradesById(int id) {
+		return studentGradesRepository.findById(id).orElse(null);
+	}
 	
+	@Override
+	@Transactional
+	@Modifying
+	public void updateGrade(String grade, int id) {
+		studentGradesRepository.updateGrade(grade, id);
+	}
 }

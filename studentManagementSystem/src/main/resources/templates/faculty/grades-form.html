@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+
+<head>
+<meta charset="ISO-8859-1">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Grade Form</title>
+</head>
+
+<body>
+
+	<div layout:fragment="content">
+		<div class="container my-5">
+            <h2 class="mb-5">Grade Form</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <form action="#" th:action="@{/studentGrade/faculty/updateGrade}" th:object="${grade}" method="POST">
+                        <div class="row">
+                            <input type="hidden" th:field="*{Id}">
+
+                            <div class="form-group col-md-6">
+                                <label for="grade" class="col-form-label">Grade</label>
+                                <input type="text" th:field="*{grade}" class="form-control" id="grade" placeholder="Grade">
+                                <span th:if="${#fields.hasErrors('grade')}" th:errors="*{grade}" class="text-danger"></span>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mt-5">
+                                <input type="submit" class="btn btn-primary" value="Confirm">
+                            </div>
+                        </div>    
+                    </form>
+                </div>
+            </div>
+        </div>
+	</div>
+</body>
+</html>

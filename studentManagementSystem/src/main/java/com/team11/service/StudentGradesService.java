@@ -12,7 +12,7 @@ public interface StudentGradesService {
 	
 	public void saveStudentGrades(StudentGrades course);
 	
-	public StudentGrades getStudentGrades(int id);
+	public StudentGrades getStudentGradesById(int id);
 	
 	public void deleteStudentGrades(int id);
 	
@@ -26,4 +26,6 @@ public interface StudentGradesService {
 	public double convertGrade(String letter);
 
 	public List<StudentGrades> getStudentGradesByCourseID(int courseId);
+	
+	public void updateGrade(String grade, int id);
 }

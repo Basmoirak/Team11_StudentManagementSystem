@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,7 +78,7 @@ public class RegistrationController {
 				@Valid @ModelAttribute("crmUser") CrmUser theCrmUser, 
 				BindingResult theBindingResult, 
 				Model theModel,
-				RedirectAttributes redirectAttributes) {
+				HttpSession session) {
 		
 		String userName = theCrmUser.getUserName();
 		logger.info("Processing registration form for: " + userName);
@@ -102,8 +103,7 @@ public class RegistrationController {
         // ** CREATE USER ACCOUNT **    						
         String formRole = theCrmUser.getFormRole();
         User newUser = userService.createNewUser(theCrmUser, formRole);
-        userService.save(newUser);
-        redirectAttributes.addFlashAttribute("newUser", newUser);
+        session.setAttribute("newUser", newUser);
         
         if(formRole.equals("ROLE_STUDENT")) {
         	return "redirect:/register/registerStudentForm";
@@ -118,9 +118,8 @@ public class RegistrationController {
 	
 	// Register Student
 	@GetMapping("/registerStudentForm")
-	public String showStudentForm(@ModelAttribute("newUser") User newUser ,Student student, Model model) {
+	public String showStudentForm(Student student, Model model) {
 		
-		student.setId(newUser.getId());
 		model.addAttribute("student", student);
 		model.addAttribute("levels", studentService.getLevels());
 		model.addAttribute("semesters", studentService.getSemesters());
@@ -130,7 +129,7 @@ public class RegistrationController {
 	}
 	
 	@PostMapping("/saveStudentForm")
-	public String saveStudentForm(@Valid Student student, BindingResult result, Model model) {
+	public String saveStudentForm(@Valid Student student, BindingResult result, Model model,HttpSession session) {
 		
 		//Don't allow user to add student if there are any form validation errors
 		if(result.hasErrors()) {
@@ -140,29 +139,33 @@ public class RegistrationController {
 			model.addAttribute("statuses", studentService.getStatuses());
 			return "registration/student-form";
 		}
-		
+		User newUser=(User)session.getAttribute("newUser");
+		student.setId(newUser.getId());
+		userService.save(newUser);
 		studentService.saveStudent(student);
 		return "registration/welcome";
 	}	
 	
 	// Register Faculty
 	@GetMapping("/registerFacultyForm")
-	public String showFacultyForm(@ModelAttribute("newUser") User newUser ,Faculty faculty, Model model) {
+	public String showFacultyForm(Faculty faculty, Model model) {
 		
-		faculty.setFaculty(newUser.getId());
 		model.addAttribute("faculty", faculty);
 		model.addAttribute("departments", departmentService.getDepartments());
 		return "registration/faculty-form";
 	}
 	
 	@PostMapping("/saveFacultyForm")
-	public String saveFacultyForm(@Valid Faculty faculty, BindingResult result, Model model) {
+	public String saveFacultyForm(@Valid Faculty faculty, BindingResult result, Model model, HttpSession session) {
 		if(result.hasErrors()) { 
 			model.addAttribute("departments", departmentService.getDepartments());
 			return "registration/faculty-form";
 		}
 		
 		// Save or Update faculty
+		User newUser=(User)session.getAttribute("newUser");
+		faculty.setFaculty(newUser.getId());
+		userService.save(newUser);
 		facultyService.saveFaculty(faculty);
 		return "registration/welcome";
 	}

@@ -13,7 +13,7 @@
 		<!-- mini nav starts -->
 		<ul class="nav nav-tabs nav-justified">
 			  <li role="presentation" th:classappend="${#httpServletRequest.getRequestURI() == '/faculty/faculty/courses/my' ? 'active' : ''}"><a href="/faculty/faculty/courses/my">Active Courses</a></li>
-			  <li role="presentation" th:classappend="${#httpServletRequest.getRequestURI() == '/faculty/faculty/courses/my/all' ? 'active' : ''}"><a href="/faculty/faculty/courses/my/all">All Courses taken</a></li>
+			  <li role="presentation" th:classappend="${#httpServletRequest.getRequestURI() == '/faculty/faculty/courses/my/all' ? 'active' : ''}"><a href="/faculty/faculty/courses/my/all">All Courses</a></li>
 		</ul>
 		<hr>
 		<!-- nav ends -->
@@ -40,16 +40,18 @@
             	
             	
             	<a 	th:if = "${execInfo.now.time >= c.startDate && execInfo.now.time <= c.endDate}"
-            		th:href="@{/studentGrade/faculty/courses/view/{id}(id=${c.courseId})}" class="btn btn-primary" >
-                    View Student List
+            		th:href="@{/studentGrade/faculty/courses/viewUpdate/{id}(id=${c.courseId})}" class="btn btn-primary" >
+                    Ongoing - View Student List
                 </a>
             	
-            	<a th:if = "${execInfo.now.time < c.startDate}" class="small-box-footer">
-             		Upcoming 
+            	<a  th:if = "${execInfo.now.time < c.startDate}" 
+            		th:href="@{/studentGrade/faculty/courses/view/{id}(id=${c.courseId})}" class="btn btn-warning" >
+             		Upcoming - View Student List
           		</a>	
           		
-            	<a th:if = "${execInfo.now.time > c.endDate}" class="small-box-footer">
-             		Completed 
+            	<a  th:if = "${execInfo.now.time > c.endDate}"
+            	   	th:href="@{/studentGrade/faculty/courses/view/{id}(id=${c.courseId})}" class="btn btn-danger" > 	 
+             		Completed - View Student List
           		</a>
           		
 			</div>	

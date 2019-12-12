@@ -59,11 +59,21 @@ public class StudentGradesController {
 	
 	// *** FACULTY ROLE ***
 	
-	@GetMapping("/faculty/courses/view/{id}")
-	public String myAllCourses(@PathVariable("id") int id, Model model) {
+	// Can view can update student grades
+	@GetMapping("/faculty/courses/viewUpdate/{id}")
+	public String myAllCoursesViewUpdate(@PathVariable("id") int id, Model model) {
 		
 		model.addAttribute("studentgrades", studentGradesService
 				.getStudentGradesByCourseID(id));
-		return "faculty/my-student-list";
+		return "faculty/my-student-list-update";
+	}
+	
+	// Can only view student grades
+	@GetMapping("/faculty/courses/view/{id}")
+	public String myAllCoursesView(@PathVariable("id") int id, Model model) {
+		
+		model.addAttribute("studentgrades", studentGradesService
+				.getStudentGradesByCourseID(id));
+		return "faculty/my-student-list-view";
 	}
 }

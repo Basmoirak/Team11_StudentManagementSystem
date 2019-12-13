@@ -14,7 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.team11.entity.StudentGrades;
 import com.team11.entity.tblGPA;
+import com.team11.service.CourseService;
+import com.team11.service.CourseServiceImpl;
 import com.team11.service.StudentGradesService;
+import com.team11.service.StudentGradesServiceImpl;
 
 @RequestMapping("/studentGrade")
 @Controller
@@ -24,8 +27,14 @@ public class StudentGradesController {
 	private StudentGradesService studentGradesService;
 	
 	@Autowired
-	public void setStudentGradeService(StudentGradesService studentGradesService) {
+	public void setStudentGradeService(StudentGradesServiceImpl studentGradesService) {
 		this.studentGradesService = studentGradesService;
+	}
+	
+	private CourseService courseService;
+	@Autowired
+	public void setCourseService(CourseServiceImpl courseService) {
+		this.courseService = courseService;
 	}
 	
 //	*****  for student role  *****
@@ -71,6 +80,8 @@ public class StudentGradesController {
 		
 		model.addAttribute("studentgrades", studentGradesService
 				.getStudentGradesByCourseID(id));
+		
+		model.addAttribute("course", courseService.getCourse(id));
 		return "faculty/my-student-list-update";
 	}
 	
@@ -80,6 +91,7 @@ public class StudentGradesController {
 		
 		model.addAttribute("studentgrades", studentGradesService
 				.getStudentGradesByCourseID(id));
+		model.addAttribute("course", courseService.getCourse(id));
 		return "faculty/my-student-list-view";
 	}
 	

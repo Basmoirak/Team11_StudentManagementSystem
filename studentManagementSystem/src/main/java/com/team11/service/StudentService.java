@@ -7,7 +7,6 @@ import org.springframework.data.domain.Pageable;
 
 import com.team11.entity.Level;
 import com.team11.entity.Semester;
-import com.team11.entity.Status;
 import com.team11.entity.Student;
 
 public interface StudentService {
@@ -23,8 +22,6 @@ public interface StudentService {
 	public List<Level> getLevels();
 	
 	public List<Semester> getSemesters();
-	
-	public List<Status> getStatuses();
 	
 	public Page<Student> searchAndPaginate(String search, Pageable pageable);
 }

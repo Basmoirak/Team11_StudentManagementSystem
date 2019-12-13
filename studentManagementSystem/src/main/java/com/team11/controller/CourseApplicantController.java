@@ -1,22 +1,15 @@
 package com.team11.controller;
 
 import java.util.Date;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.team11.entity.CourseApplicant;
@@ -26,7 +19,6 @@ import com.team11.service.CourseService;
 import com.team11.service.CourseServiceImpl;
 import com.team11.service.StudentGradesService;
 
-import ch.qos.logback.core.status.Status;
 
 @Controller
 @RequestMapping("/courseApp")

@@ -1,9 +1,12 @@
 package com.team11.controller;
 
+import java.util.Optional;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.team11.entity.StudentGrades;
 import com.team11.entity.tblGPA;
@@ -74,26 +78,26 @@ public class StudentGradesController {
 	
 	// *** FACULTY ROLE ***
 	
-	// Can view can update student grades
+	// Can view can view and update student grades
 	@GetMapping("/faculty/courses/viewUpdate/{id}")
-	public String myAllCoursesViewUpdate(@PathVariable("id") int id, Model model) {
+	public String myAllCoursesViewUpdate(@PathVariable("id") int courseId, Model model) {
 		
-		model.addAttribute("studentgrades", studentGradesService
-				.getStudentGradesByCourseID(id));
+		model.addAttribute("studentgrades", studentGradesService.getStudentGradesByCourseID(courseId));
 		
-		model.addAttribute("course", courseService.getCourse(id));
+		model.addAttribute("course", courseService.getCourse(courseId));
 		return "faculty/my-student-list-update";
 	}
 	
 	// Can only view student grades
 	@GetMapping("/faculty/courses/view/{id}")
-	public String myAllCoursesView(@PathVariable("id") int id, Model model) {
+	public String myAllCoursesView(@PathVariable("id") int courseId, Model model) {
 		
-		model.addAttribute("studentgrades", studentGradesService
-				.getStudentGradesByCourseID(id));
-		model.addAttribute("course", courseService.getCourse(id));
+		model.addAttribute("studentgrades", studentGradesService.getStudentGradesByCourseID(courseId));
+		
+		model.addAttribute("course", courseService.getCourse(courseId));
 		return "faculty/my-student-list-view";
 	}
+	
 	
 	@GetMapping("/faculty/courses/viewUpdate/update/{id}")
 	public String update(@PathVariable("id") int id, Model model) {

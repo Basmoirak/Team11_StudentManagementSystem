@@ -3,6 +3,9 @@ package com.team11.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import com.team11.entity.CourseApplicant;
 import com.team11.entity.StudentGrades;
 
@@ -28,4 +31,6 @@ public interface StudentGradesService {
 	public List<StudentGrades> getStudentGradesByCourseID(int courseId);
 	
 	public void updateGrade(String grade, int id);
+	
+	public Page<StudentGrades> searchAndPaginate(String search, Pageable pageable, int courseId);
 }

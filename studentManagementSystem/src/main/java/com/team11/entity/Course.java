@@ -27,7 +27,7 @@ public class Course {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int courseId;
 	
-	@Size(min = 3, max = 20)
+	@Size(min = 1, max = 20)
 	private String courseCode;
 	@Size(min = 3, max = 10)
 	private String courseName;

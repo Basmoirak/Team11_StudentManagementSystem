@@ -137,6 +137,7 @@ public class CourseApplicantController {
 	public String pendingApplications(Model model, HttpServletRequest request) {
 		model.addAttribute("appliedCourses", courseApplicantService
 				.findCourseApplicantsByStudentIDAndStatus((String) request.getSession().getAttribute("userID"), 0));
+		
 		return "student/applications";
 	}
 	
@@ -149,31 +150,12 @@ public class CourseApplicantController {
 	// *** ADMIN ROLE ***
 	// Show paginated list of course applicants
 	@GetMapping("/admin/applications/pending")
-	public String search(
-			@RequestParam Optional<String> search, 
-			Model model, HttpServletRequest request) {
-
-		int page = 0;
-		int size = 5; 
+	public String search(Model model) {
 		
-		if(request.getParameter("page") != null && !request.getParameter("page").isEmpty()) {
-			page = Integer.parseInt(request.getParameter("page")) - 1; }
-		
-		if(request.getParameter("size") != null && !request.getParameter("size").isEmpty()) {
-			size=Integer.parseInt(request.getParameter("size")); }
-		
-		
-		model.addAttribute("pendingCourses", courseApplicantService.searchAndPaginate(search.orElse("_"), PageRequest.of(page, size)));
+		model.addAttribute("pendingCourses", courseApplicantService.findCourseApplicantsByStatus(0));
 		
 		return "admin/admin-pending";
 	}
-	
-	
-//	@GetMapping("/admin/applications/pending")
-//	public String adminPendingApplications(Model model) {
-//		model.addAttribute("pendingCourses", courseApplicantService.findCourseApplicantsByStatus(0));
-//		return "admin/admin-pending";
-//	}
 	
 	@GetMapping("/admin/applications/pending/approve/{id}")
 	public String approve(@PathVariable("id") int id) {

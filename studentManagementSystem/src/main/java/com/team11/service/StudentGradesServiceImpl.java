@@ -6,6 +6,8 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 
@@ -139,5 +141,11 @@ public class StudentGradesServiceImpl implements StudentGradesService {
 	@Modifying
 	public void updateGrade(String grade, int id) {
 		studentGradesRepository.updateGrade(grade, id);
+	}
+
+	@Override
+	@Transactional
+	public Page<StudentGrades> searchAndPaginate(String search, Pageable pageable, int courseId) {
+		return studentGradesRepository.searchAndPaginate(search, pageable, courseId);
 	}
 }

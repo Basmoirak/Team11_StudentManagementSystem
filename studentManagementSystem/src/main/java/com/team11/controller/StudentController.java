@@ -45,31 +45,12 @@ public class StudentController {
 	
 	//show paginated list of students
 	@GetMapping("/admin/list")
-	public String search(
-			@RequestParam Optional<String> search, 
-			Model model, HttpServletRequest request) {
-
-		int page = 0;
-		int size = 5; 
+	public String search(Model model) {
 		
-		if(request.getParameter("page") != null && !request.getParameter("page").isEmpty()) {
-			page = Integer.parseInt(request.getParameter("page")) - 1; }
-		
-		if(request.getParameter("size") != null && !request.getParameter("size").isEmpty()) {
-			size=Integer.parseInt(request.getParameter("size")); }
-		
-		model.addAttribute("students", studentService.searchAndPaginate(search.orElse("_"), PageRequest.of(page, size)));
+		model.addAttribute("students", studentService.getStudents());
 		
 		return "admin/student-list";
 	}
-	
-//	// For admin to view list of students
-//		@GetMapping("/admin/list")
-//		public String listAll(Model model) {
-//
-//			model.addAttribute("students", studentService.getStudents());
-//			return "admin/student-list";
-//		}
 	
 	//For all users to save student details
 	@PostMapping("/admin/save")

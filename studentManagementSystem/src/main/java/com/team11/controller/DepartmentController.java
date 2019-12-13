@@ -38,20 +38,9 @@ public class DepartmentController {
 	
 	//search and show paginated list of departments
 	@GetMapping("/admin/list")
-	public String search(
-			@RequestParam Optional<String> search, 
-			Model model, HttpServletRequest request) {
-
-		int page = 0;
-		int size = 5; 
+	public String search(Model model) {
 		
-		if(request.getParameter("page") != null && !request.getParameter("page").isEmpty()) {
-			page = Integer.parseInt(request.getParameter("page")) - 1; }
-		
-		if(request.getParameter("size") != null && !request.getParameter("size").isEmpty()) {
-			size=Integer.parseInt(request.getParameter("size")); }
-		
-		model.addAttribute("departments", departmentService.searchAndPaginate(search.orElse("_"), PageRequest.of(page, size)));
+		model.addAttribute("departments", departmentService.getDepartments());
 		
 		return "admin/department-list";
 	}

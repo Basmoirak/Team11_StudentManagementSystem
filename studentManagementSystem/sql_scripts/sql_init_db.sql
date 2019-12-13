@@ -32,14 +32,14 @@ VALUES
 (9, 1), (10, 1), (11, 1), (12, 1), (13, 1), (14, 1);
 
 -- Create students 
-INSERT INTO `student` (id,address,birth_date,degree,first_name,last_name,gender,mobile,level_id,semester_id,status_id)
+INSERT INTO `student` (id,address,birth_date,degree,first_name,last_name,gender,mobile,level_id,semester_id)
 VALUES
-('9', 'Central Perk', '1995-02-08 23:35:21', 'Business', 'Chandler', 'Bing', 'Male', '91234567', 1, 1, 1),
-('10', 'Central Perk', '1996-02-08 23:35:21', 'Business', 'Ross', 'Geller', 'Male', '91234567', 1, 1, 1),
-('11', 'Central Perk', '1996-02-08 23:35:21', 'Business', 'Monica', 'Geller', 'Female', '91234567', 1, 1, 1),
-('12', 'Central Perk', '1995-02-08 23:35:21', 'Business', 'Joey', 'Tribbiani', 'Male', '91234567', 1, 1, 1),
-('13', 'Central Perk', '1996-02-08 23:35:21', 'Business', 'Rachel', 'Green', 'Female', '91234567', 1, 1, 1),
-('14', 'Central Perk', '1996-02-08 23:35:21', 'Business', 'Phoebe', 'Buffay', 'Female', '91234567', 1, 1, 1);
+('9', 'Central Perk', '1995-02-08 23:35:21', 'Business', 'Chandler', 'Bing', 'Male', '91234567', 1, 1),
+('10', 'Central Perk', '1996-02-08 23:35:21', 'Business', 'Ross', 'Geller', 'Male', '91234567', 1, 1),
+('11', 'Central Perk', '1996-02-08 23:35:21', 'Business', 'Monica', 'Geller', 'Female', '91234567', 1, 1),
+('12', 'Central Perk', '1995-02-08 23:35:21', 'Business', 'Joey', 'Tribbiani', 'Male', '91234567', 1, 1),
+('13', 'Central Perk', '1996-02-08 23:35:21', 'Business', 'Rachel', 'Green', 'Female', '91234567', 1, 1),
+('14', 'Central Perk', '1996-02-08 23:35:21', 'Business', 'Phoebe', 'Buffay', 'Female', '91234567', 1, 1);
 
 -- Create departments 
 INSERT INTO `department` (name)

@@ -146,7 +146,7 @@ public class CourseApplicantController {
 		
 		model.addAttribute("pendingCourses", courseApplicantService.findCourseApplicantsByStatus(0));
 		
-		return "admin/admin-pending";
+		return "admin/student-admin-pending";
 	}
 	
 	@GetMapping("/admin/applications/pending/approve/{id}")

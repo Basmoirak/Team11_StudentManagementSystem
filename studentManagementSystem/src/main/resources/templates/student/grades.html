@@ -9,11 +9,13 @@
 
 	<!-- Content starts -->
 	<div layout:fragment="content">
-		<h2>My Gradebook</h2>
+		<div class="container-fluid">
+		<a class="btn btn-primary" th:href="@{/studentGrade/student/GPA}">View GPA for this semester</a>
+			<h2>My Gradebook</h2>
 		
 		<div class="row">
-			<div class="col-md-9">
-				<table class="table table-bordered">
+			<div class="col-md-12">
+				<table class="table table-striped datatable" style="width:100%">
 					<thead>
 						<tr>
 							<th>Course Name</th>
@@ -34,12 +36,11 @@
 					</tbody>
 				</table>
 			</div>
-			
-			<div class="col-md-3">
-				<a class="btn btn-primary" th:href="@{/studentGrade/student/GPA}">View GPA for this semester</a>
-			</div>
+
 		</div>
 	
+		</div>
+		
 		
 	</div>
 	

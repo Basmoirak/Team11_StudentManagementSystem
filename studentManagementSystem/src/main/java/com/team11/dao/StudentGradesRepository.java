@@ -13,9 +13,10 @@ import com.team11.entity.StudentGrades;
 @Repository
 public interface StudentGradesRepository extends JpaRepository<StudentGrades, Integer>{
 	
+	@Query("select sg from StudentGrades sg where sg.studentID = :studentId")
 	public ArrayList<StudentGrades> findStudentGradesByStudentID(String studentId);
 
-	@Query("select sum(c.courseUnit) from StudentGrades g join g.course c where g.studentID = :studentId")
+	@Query("select sum(c.courseUnit) from StudentGrades sg join sg.course c where sg.studentID = :studentId and sg.grade != 'N/A'")
 	public float getTotalUnits(String studentId);	
 	
 	@Query("select sg from StudentGrades sg where sg.courseID = :courseId")

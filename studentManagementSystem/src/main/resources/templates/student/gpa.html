@@ -12,8 +12,8 @@
 		<h2>My GPA</h2>
 		
 		<div class="row">
-			<h3>Your GPA is <span th:text = "${gpa}"></span></h3>
-			
+			<h3 th:if="${gpa}">Your GPA is <span th:text = "${gpa}"></span></h3>
+			<p th:unless = "${gpa}" class="alert alert-primary">You haven't started any courses yet!</p>
 			
 		</div>
 	

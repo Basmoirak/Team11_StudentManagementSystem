@@ -1,5 +1,7 @@
 package com.team11.controller;
 
+import java.util.Optional;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.team11.entity.Department;
 import com.team11.service.DepartmentService;
@@ -33,9 +36,11 @@ public class DepartmentController {
 	
 	// *** ADMIN ROLE ***
 	
-	//show paginated list of departments
+	//search and show paginated list of departments
 	@GetMapping("/admin/list")
-	public String listAll(Model model, HttpServletRequest request) {
+	public String search(
+			@RequestParam Optional<String> search, 
+			Model model, HttpServletRequest request) {
 
 		int page = 0;
 		int size = 5; 
@@ -46,7 +51,7 @@ public class DepartmentController {
 		if(request.getParameter("size") != null && !request.getParameter("size").isEmpty()) {
 			size=Integer.parseInt(request.getParameter("size")); }
 		
-		model.addAttribute("departments", departmentService.getPaginated(PageRequest.of(page, size)));
+		model.addAttribute("departments", departmentService.searchAndPaginate(search.orElse("_"), PageRequest.of(page, size)));
 		
 		return "admin/department-list";
 	}

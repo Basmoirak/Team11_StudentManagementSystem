@@ -47,8 +47,8 @@ public class DepartmentServiceImpl implements DepartmentService{
 
 	@Override
 	@Transactional
-	public Page<Department> getPaginated(Pageable pageable) {
-		return departmentRepository.findAll(pageable);
+	public Page<Department> searchAndPaginate(String search, Pageable pageable){
+		return departmentRepository.searchAndPaginate(search, pageable);
 	}
 	
 }

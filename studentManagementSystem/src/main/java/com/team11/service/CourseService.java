@@ -3,7 +3,7 @@ package com.team11.service;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import com.team11.entity.Course;
 
@@ -18,10 +18,10 @@ public interface CourseService {
 	public void deleteCourse(int id);
 	
 	public List<Course> getAvailableCourses();
-
-	public Page<Course> getPaginated(PageRequest pageable);
 	
 	public List<Course> getCourseByFacultyID(String id);
 
 	public List<Course> getActiveCourses(String id);
+	
+	public Page<Course> searchAndPaginate(String search, Pageable pageable);
 }

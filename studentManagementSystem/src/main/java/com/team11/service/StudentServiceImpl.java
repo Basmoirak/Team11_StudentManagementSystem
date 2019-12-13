@@ -96,8 +96,8 @@ public class StudentServiceImpl implements StudentService {
 	
 	@Override
 	@Transactional
-	public Page<Student> getPaginated(Pageable pageable) {
-		return studentRepository.findAll(pageable);
+	public Page<Student> searchAndPaginate(String search, Pageable pageable) {
+		return studentRepository.searchAndPaginate(search, pageable);
 	}
 
 }

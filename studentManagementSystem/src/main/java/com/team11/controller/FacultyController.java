@@ -2,6 +2,7 @@ package com.team11.controller;
 
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -59,7 +60,9 @@ public class FacultyController {
 	// *** ADMIN ROLE ***
 	//show paginated list of faculties
 		@GetMapping("/admin/list")
-		public String listAll(Model model, HttpServletRequest request) {
+		public String search(
+				@RequestParam Optional<String> search, 
+				Model model, HttpServletRequest request) {
 
 			int page = 0;
 			int size = 5; 
@@ -70,7 +73,7 @@ public class FacultyController {
 			if(request.getParameter("size") != null && !request.getParameter("size").isEmpty()) {
 				size=Integer.parseInt(request.getParameter("size")); }
 			
-			model.addAttribute("faculties", facultyService.getPaginated(PageRequest.of(page, size)));
+			model.addAttribute("faculties", facultyService.searchAndPaginate(search.orElse("_"), PageRequest.of(page, size)));
 			
 			return "admin/faculty-list";
 		}

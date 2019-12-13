@@ -1,21 +1,32 @@
 package com.team11.controller;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.team11.entity.CourseApplicant;
 import com.team11.service.CourseApplicantService;
+import com.team11.service.CourseApplicantServiceImpl;
 import com.team11.service.CourseService;
+import com.team11.service.CourseServiceImpl;
 import com.team11.service.StudentGradesService;
+
+import ch.qos.logback.core.status.Status;
 
 @Controller
 @RequestMapping("/courseApp")
@@ -25,7 +36,7 @@ public class CourseApplicantController {
 	private CourseService courseService;
 	
 	@Autowired
-	public void setCourseService(CourseService courseService) {
+	public void setCourseService(CourseServiceImpl courseService) {
 		this.courseService = courseService;
 	}
 	
@@ -33,7 +44,7 @@ public class CourseApplicantController {
 	private CourseApplicantService courseApplicantService;
 	
 	@Autowired
-	public void setCourseApplicantService(CourseApplicantService courseApplicantService) {
+	public void setCourseApplicantService(CourseApplicantServiceImpl courseApplicantService) {
 		this.courseApplicantService = courseApplicantService;
 	}
 	
@@ -136,11 +147,33 @@ public class CourseApplicantController {
 	}
 	
 	// *** ADMIN ROLE ***
+	// Show paginated list of course applicants
 	@GetMapping("/admin/applications/pending")
-	public String adminPendingApplications(Model model) {
-		model.addAttribute("pendingCourses", courseApplicantService.findCourseApplicantsByStatus(0));
+	public String search(
+			@RequestParam Optional<String> search, 
+			Model model, HttpServletRequest request) {
+
+		int page = 0;
+		int size = 5; 
+		
+		if(request.getParameter("page") != null && !request.getParameter("page").isEmpty()) {
+			page = Integer.parseInt(request.getParameter("page")) - 1; }
+		
+		if(request.getParameter("size") != null && !request.getParameter("size").isEmpty()) {
+			size=Integer.parseInt(request.getParameter("size")); }
+		
+		
+		model.addAttribute("pendingCourses", courseApplicantService.searchAndPaginate(search.orElse("_"), PageRequest.of(page, size)));
+		
 		return "admin/admin-pending";
 	}
+	
+	
+//	@GetMapping("/admin/applications/pending")
+//	public String adminPendingApplications(Model model) {
+//		model.addAttribute("pendingCourses", courseApplicantService.findCourseApplicantsByStatus(0));
+//		return "admin/admin-pending";
+//	}
 	
 	@GetMapping("/admin/applications/pending/approve/{id}")
 	public String approve(@PathVariable("id") int id) {

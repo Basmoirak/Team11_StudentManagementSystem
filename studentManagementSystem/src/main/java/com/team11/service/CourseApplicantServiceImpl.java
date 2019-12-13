@@ -6,6 +6,8 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 
@@ -83,6 +85,12 @@ public class CourseApplicantServiceImpl implements CourseApplicantService{
 	@Transactional
 	public CourseApplicant findByIdAndStatus(int id) {
 		return courseApplicantRepository.findByIdAndStatus(id);
+	}
+
+	@Override
+	@Transactional
+	public Page<CourseApplicant> searchAndPaginate(String search, Pageable pageable) {
+		return courseApplicantRepository.searchAndPaginate(search, pageable);
 	}
 
 

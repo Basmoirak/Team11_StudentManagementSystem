@@ -16,5 +16,5 @@ public interface DepartmentService {
 	
 	public void deleteDepartment(int theId);
 	
-	public Page<Department> getPaginated(Pageable pageable);
+	public Page<Department> searchAndPaginate(String search, Pageable pageable);
 }

@@ -10,6 +10,13 @@
 <body>
 
   <div layout:fragment="content">
+        <form action="#" th:action="@{/courseApp/admin/applications/pending}" th:object="${search}">
+    	
+    	<!-- Search starts -->
+    		<label for="search_input">Search:</label> 
+    		<input name="search" id="search"></input>
+    	<!-- Search ends -->
+  
 	<div class="container my-5">
             <div class="row">
                 <div class="col-md-6">
@@ -30,7 +37,7 @@
                             <tbody>
                             	<tr th:each = "pc : ${pendingCourses}">
                             		<td th:text = "${pc.submittedDate}"></td>
-                            		<td th:text = "${pc.student.FirstName}"></td>
+                            		<td th:text = "${pc.student.firstName} + ' ' + ${pc.student.lastName}"></td>
                             		<td th:text = "${pc.course.courseCode}"></td>
                             		<td th:text = "${pc.course.courseName}"></td>
                             		<td th:text = "${pc.course.department.name}"></td>
@@ -46,6 +53,7 @@
                 </div>
             </div>
         </div>
+        </form>
    	</div>
 </body>
 </html>

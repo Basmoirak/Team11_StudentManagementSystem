@@ -16,7 +16,7 @@ public List<Faculty> getFaculties();
 	
 	public void deleteFaculty(String theId);
 	
-	public Page<Faculty> getPaginated(Pageable pageable);
-	
 	public List<Faculty> getFacultiesByDepartmentId(int departmentID);
+	
+	public Page<Faculty> searchAndPaginate(String search, Pageable pageable);
 }

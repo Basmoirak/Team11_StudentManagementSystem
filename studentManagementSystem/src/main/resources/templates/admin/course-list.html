@@ -9,6 +9,13 @@
 
 <body>
     <div layout:fragment="content">
+    	<form action="#" th:action="@{/course/admin/list}" th:object="${search}">
+    	
+    	<!-- Search starts -->
+    		<label for="search_input">Search:</label> 
+    		<input name="search" id="search"></input>
+    	<!-- Search ends -->
+    	
         <div th:switch="${courses}" class="container my-5">
             <div class="row">
                 <div class="col-md-12">
@@ -86,6 +93,8 @@
                 </div>
             </div>
         </div>
+    		
+    	</form>
     </div>
 </body>
 </html>

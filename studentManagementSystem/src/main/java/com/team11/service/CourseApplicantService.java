@@ -3,6 +3,9 @@ package com.team11.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import com.team11.entity.CourseApplicant;
 
 public interface CourseApplicantService {
@@ -27,6 +30,6 @@ public interface CourseApplicantService {
 	
 	public List<CourseApplicant> getActiveCourses(String studentId);
 
-
+	public Page<CourseApplicant> searchAndPaginate(String search, Pageable pageable);
 	
 }

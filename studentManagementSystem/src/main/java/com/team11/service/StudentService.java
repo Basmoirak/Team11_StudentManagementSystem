@@ -26,5 +26,5 @@ public interface StudentService {
 	
 	public List<Status> getStatuses();
 	
-	public Page<Student> getPaginated(Pageable pageable);
+	public Page<Student> searchAndPaginate(String search, Pageable pageable);
 }

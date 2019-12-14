@@ -40,7 +40,7 @@
         </li>
         
          <!-- Gradebook  -->
-        <li th:classappend="${#httpServletRequest.getRequestURI() == '/studentGrade/student/grades' ? 'active' : '' }">
+        <li th:classappend="${#httpServletRequest.getRequestURI() == '/studentGrade/student/grades' || #httpServletRequest.getRequestURI() == '/studentGrade/student/GPA' ? 'active' : '' }">
             <a href="/studentGrade/student/grades">
                 <i class="fa fa-book" ></i><span>My Gradebook</span>
             </a>
@@ -125,7 +125,16 @@
             </a>
         </li>
         <!-- List of courses end -->
-		
+        
+        <!-- List of courses start -->
+        <li th:classappend="${#httpServletRequest.getRequestURI() == '/report/faculty/GpaByStudent' ? 'active' : ''}">
+            <a th:href="@{/report/faculty/GpaByStudent}">
+                <i class="fa fa-graduation-cap" ></i><span>GPA Report</span>
+            </a>
+        </li>
+        <!-- List of courses end -->
+		        
+
 		<!-- My leave applications start -->
         <li class="treeview" th:classappend="${#httpServletRequest.getRequestURI() == '/leave/faculty/applications' || #httpServletRequest.getRequestURI() == '/leave/faculty/applications/pending' || #httpServletRequest.getRequestURI() == '/leave/faculty/applications/approved'? 'active' : ''}">
             <a>
@@ -140,7 +149,7 @@
             </ul>
         </li>
 		<!-- My leave applications end -->
-		
+	
     </ul>
     
 </div>	      

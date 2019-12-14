@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>GPA Report</title>
+    </head>
+
+<body>
+    <div layout:fragment="content">
+    	<div class="row">
+    	<form method="get" th:object="${course}" th:action="@{/report/faculty/GpaByStudent}">
+    		<div class="col-md-2">
+    			<select class="form-control select2" th:field="*{courseId}">
+    				<option value="0">Choose a course</option>
+    				
+    				<option th:each="c : ${courses}" th:value="${c.courseId}" th:text="${c.courseName}" >
+    				
+    				</option>
+    				
+    			</select>
+    		</div>
+    		<div class="col-md-2">
+    			<button class="btn btn-primary form-control" type="submit">Search</button>
+    		</div>
+    	</form>
+    			
+    	</div>
+        <div class="row">
+        	<div class="col-md-12">
+        		<table class="table table-striped table table-hover">
+        			<thead>
+        				<tr>
+        					<th>Student ID</th>
+        					<th>Student Name</th>
+        					<th>Course</th>
+        					<th>GPA</th>
+        				</tr>
+        			</thead>
+        			<tbody>
+        				<tr th:each="sg : ${sgs}">
+        					<td th:text="${sg.student.Id}"></td>
+        					<td th:text="${sg.student.firstName + ' ' + sg.student.lastName}"></td>
+        					<td th:text="${sg.course.courseName}"></td>
+        				</tr>
+        			</tbody>
+        		</table>
+        	</div>
+        </div>
+    </div>
+</body>
+</html>

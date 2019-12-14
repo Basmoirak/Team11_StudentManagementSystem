@@ -19,7 +19,12 @@
                         <h2 class="my-5">Courses</h2>
                       
                         	<p th:if = "${appliedCourses.isEmpty()}" >No applications yet</p>
+ 							
+ 							
  							<a th:unless = "${appliedCourses.isEmpty()}" th:href="@{/courseApp/student/applications}">See your applications</a>
+                        	
+             
+                        	
                         <table class="table table-striped table-responsive datatable">
                             <thead>
                                 <tr>
@@ -45,7 +50,7 @@
                                 
                                 	<td>
                                 		<a th:href="@{/courseApp/student/courses/apply/{id}(id=${course.courseId})}" class="btn btn-primary" >
-                                				<i class="fas fa-check ml-2"></i> Apply
+                                				<i class="fa fa-check-circle ml-2"></i> Apply
                                 		</a>
                              
                                 	</td>

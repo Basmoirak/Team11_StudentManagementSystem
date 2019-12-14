@@ -122,7 +122,6 @@ public class RegistrationController {
 		model.addAttribute("student", student);
 		model.addAttribute("levels", studentService.getLevels());
 		model.addAttribute("semesters", studentService.getSemesters());
-		model.addAttribute("statuses", studentService.getStatuses());
 		
 		return "registration/student-form";
 	}
@@ -135,7 +134,6 @@ public class RegistrationController {
 			model.addAttribute("student", student);
 			model.addAttribute("levels", studentService.getLevels());
 			model.addAttribute("semesters", studentService.getSemesters());
-			model.addAttribute("statuses", studentService.getStatuses());
 			return "registration/student-form";
 		}
 		User newUser=(User)session.getAttribute("newUser");

@@ -16,6 +16,7 @@
                     <h2 th:case="null">No departments yet!</h2>
                     <div th:case="*">
                         <h2 class="my-5">Departments</h2>
+                        <p class="alert alert-danger" th:if = "${error}" th:text = "${error}"></p>                        
                         <table class="table table-striped table-responsive datatable">
                             <thead>
                                 <tr>

@@ -9,7 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -51,13 +50,6 @@ public class Student {
 	@JoinColumn(name = "semester_id")
 	private Semester semester;
 	
-	@OneToOne(mappedBy = "student", cascade = CascadeType.ALL)
-	private tblGPA cgpa;
-	
-	@ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-	@JoinColumn(name = "status_id")
-	private Status status;
-	
 	@OneToMany(mappedBy = "student")
 	private List<StudentGrades> studentGrades;
 	
@@ -68,7 +60,7 @@ public class Student {
 	public List<CourseApplicant> getCourseApplicants() {
 		return courseApplicants;
 	}
-
+	
 	public void setCourseApplicants(List<CourseApplicant> courseApplicants) {
 		this.courseApplicants = courseApplicants;
 	}
@@ -77,7 +69,7 @@ public class Student {
 	public Student() {}
 	
 	public Student(String firstName, String lastName, String gender, Date birthDate,
-			String degree, String address, String mobile, Level level, Semester semester, tblGPA cgpa, Status status) {
+			String degree, String address, String mobile, Level level, Semester semester) {
 		
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -88,8 +80,6 @@ public class Student {
 		this.mobile = mobile;
 		this.level = level;
 		this.semester = semester;
-		this.cgpa = cgpa;
-		this.status = status;
 	}
 
 	// Getters and Setters
@@ -173,22 +163,6 @@ public class Student {
 		this.semester = semester;
 	}
 
-	public tblGPA getCgpa() {
-		return cgpa;
-	}
-
-	public void setCgpa(tblGPA cgpa) {
-		this.cgpa = cgpa;
-	}
-
-	public Status getStatus() {
-		return status;
-	}
-
-	public void setStatus(Status status) {
-		this.status = status;
-	}
-
 	public List<StudentGrades> getStudentGrades() {
 		return studentGrades;
 	}
@@ -196,14 +170,16 @@ public class Student {
 	public void setStudentGrades(List<StudentGrades> studentGrades) {
 		this.studentGrades = studentGrades;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Student [Id=" + Id + ", firstName=" + firstName + ", lastName=" + lastName + ", gender=" + gender
 				+ ", birthDate=" + birthDate + ", degree=" + degree + ", address=" + address + ", mobile=" + mobile
-				+ ", level=" + level + ", semester=" + semester + ", cgpa=" + cgpa + ", status=" + status
-				+ ", studentGrades=" + studentGrades + "]";
+				+ ", level=" + level + ", semester=" + semester + ", studentGrades=" + studentGrades
+				+ ", courseApplicants=" + courseApplicants + "]";
 	}
 	
 }
+	
+
 

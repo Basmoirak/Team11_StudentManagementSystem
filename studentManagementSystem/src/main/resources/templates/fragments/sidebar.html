@@ -55,13 +55,19 @@
 <div sec:authorize="hasRole('ROLE_ADMIN')">
     <ul class="sidebar-menu" data-widget="tree">
     
-    	<!-- Pending course applications for approval start -->
-        <li th:classappend="${#httpServletRequest.getRequestURI() == '/courseApp/admin/applications/pending' ? 'active' : ''}">
-            <a th:href="@{/courseApp/admin/applications/pending}">
-                <i class="fa fa-bell-o" ></i><span>Pending Applications</span>
+    	<!-- My leave applications start -->
+        <li class="treeview" th:classappend="${#httpServletRequest.getRequestURI() == '/leave/admin/applications/pending' || #httpServletRequest.getRequestURI() == '/courseApp/admin/applications/pending' ? 'active' : ''}">
+            <a>
+                <i class="fa fa-folder"></i>
+                <span>Pending Applications</span>
+                <i class="fa fa-angle-left pull-right"></i>
             </a>
+            <ul class="treeview-menu">
+                <li th:classappend="${#httpServletRequest.getRequestURI() == '/leave/admin/applications/pending' ? 'active' : ''}"><a href="/leave/admin/applications/pending"><i class="fa fa-circle-o"></i> Pending Leave Applications</a></li>
+            	<li th:classappend="${#httpServletRequest.getRequestURI() == '/courseApp/admin/applications/pending' ? 'active' : ''}"><a href="/courseApp/admin/applications/pending"><i class="fa fa-circle-o"></i> Pending Course Applications</a></li>
+            </ul>
         </li>
-        <!-- Pending course applications for approval ends -->
+		<!-- My leave applications end -->
         
         <!-- CRUD for student users start -->
         <li th:classappend="${#httpServletRequest.getRequestURI() == '/student/admin/list' ? 'active' : ''}">
@@ -104,6 +110,14 @@
 <div sec:authorize="hasRole('ROLE_FACULTY')">
     <ul class="sidebar-menu" data-widget="tree">
         
+        <!-- Apply for leave start -->
+        <li th:classappend="${#httpServletRequest.getRequestURI() == '/leave/faculty/applyLeaveForm'  ? 'active' : ''}">
+            <a th:href="@{/leave/faculty/applyLeaveForm}">
+                <i class="fa fa-graduation-cap" ></i><span>Apply for Leave</span>
+            </a>
+        </li>
+        <!-- Apply for leave end -->
+        
         <!-- List of courses start -->
         <li th:classappend="${#httpServletRequest.getRequestURI() == '/faculty/faculty/courses/my' || #httpServletRequest.getRequestURI() == '/faculty/faculty/courses/my/all'  ? 'active' : ''}">
             <a th:href="@{/faculty/faculty/courses/my}">
@@ -120,7 +134,24 @@
         </li>
         <!-- List of courses end -->
 		        
+
+		<!-- My leave applications start -->
+        <li class="treeview" th:classappend="${#httpServletRequest.getRequestURI() == '/leave/faculty/applications' || #httpServletRequest.getRequestURI() == '/leave/faculty/applications/pending' || #httpServletRequest.getRequestURI() == '/leave/faculty/applications/approved'? 'active' : ''}">
+            <a>
+                <i class="fa fa-folder"></i>
+                <span>My Leave Applications</span>
+                <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                <li th:classappend="${#httpServletRequest.getRequestURI() == '/leave/faculty/applications/pending' ? 'active' : ''}"><a href="/leave/faculty/applications/pending"><i class="fa fa-circle-o"></i> Pending Leave Applications</a></li>
+            	<li th:classappend="${#httpServletRequest.getRequestURI() == '/leave/faculty/applications/approved' ? 'active' : ''}"><a href="/leave/faculty/applications/approved"><i class="fa fa-circle-o"></i> Approved Leave Applications</a></li>
+            	<li th:classappend="${#httpServletRequest.getRequestURI() == '/leave/faculty/applications' ? 'active' : ''}"><a href="/leave/faculty/applications"><i class="fa fa-circle-o"></i> All Leave Applications</a></li>
+            </ul>
+        </li>
+		<!-- My leave applications end -->
+	
     </ul>
+    
 </div>	      
 
 </section>

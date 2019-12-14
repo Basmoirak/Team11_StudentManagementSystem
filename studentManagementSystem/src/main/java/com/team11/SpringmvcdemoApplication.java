@@ -9,10 +9,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.team11.dao.LevelRepository;
 import com.team11.dao.SemesterRepository;
-import com.team11.dao.StatusRepository;
 import com.team11.entity.Level;
 import com.team11.entity.Semester;
-import com.team11.entity.Status;
 
 @SpringBootApplication
 public class SpringmvcdemoApplication implements CommandLineRunner{
@@ -26,8 +24,7 @@ public class SpringmvcdemoApplication implements CommandLineRunner{
 private LevelRepository levelRepository;
 @Autowired
 private SemesterRepository semesterRepository;
-@Autowired
-private StatusRepository statusRepository;
+
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -46,13 +43,6 @@ private StatusRepository statusRepository;
 		semesters.add(new Semester(3,"Semester Three"));
 		semesterRepository.saveAll(semesters);
 		
-		//Sample status data
-		ArrayList<Status> statuses = new ArrayList<Status>();
-		statuses.add(new Status(1, "Undergraduate"));
-		statuses.add(new Status(2, "Applied for graduation"));
-		statuses.add(new Status(3, "Graduated"));
-		statuses.add(new Status(4, "Other"));
-		statusRepository.saveAll(statuses);
 	}
 	
 }

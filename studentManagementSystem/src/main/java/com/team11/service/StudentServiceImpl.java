@@ -11,11 +11,9 @@ import org.springframework.stereotype.Service;
 
 import com.team11.dao.LevelRepository;
 import com.team11.dao.SemesterRepository;
-import com.team11.dao.StatusRepository;
 import com.team11.dao.StudentRepository;
 import com.team11.entity.Level;
 import com.team11.entity.Semester;
-import com.team11.entity.Status;
 import com.team11.entity.Student;
 
 @Service
@@ -25,7 +23,6 @@ public class StudentServiceImpl implements StudentService {
 	private StudentRepository studentRepository;
 	private LevelRepository levelRepository;
 	private SemesterRepository semesterRepository;
-	private StatusRepository statusRepository;
 	
 	//Setter Injection
 	@Autowired
@@ -39,10 +36,6 @@ public class StudentServiceImpl implements StudentService {
 	@Autowired
 	public void setSemesterRepository(SemesterRepository semesterRepository) {
 		this.semesterRepository = semesterRepository;
-	}
-	@Autowired
-	public void setStatusRepository(StatusRepository statusRepository) {
-		this.statusRepository = statusRepository;
 	}
 	
 	//Get full list of students
@@ -87,12 +80,6 @@ public class StudentServiceImpl implements StudentService {
 		return semesterRepository.findAll();
 	}
 	
-	//Retrieve all student statuses
-	@Override
-	@Transactional
-	public List<Status> getStatuses() {
-		return statusRepository.findAll();
-	}
 	
 	@Override
 	@Transactional

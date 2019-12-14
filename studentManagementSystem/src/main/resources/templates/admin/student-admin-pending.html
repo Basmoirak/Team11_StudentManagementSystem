@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+
+<head>
+<meta charset="ISO-8859-1">
+<title>Applications</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+
+  <div layout:fragment="content">
+  
+	<div class="container my-5">
+            <div class="row">
+                <div class="col-md-6">
+                    <div>
+                        <h2 class="my-5">Pending Courses</h2>
+                        <table class="table table-striped table-responsive datatable">
+                            <thead>
+                                <tr>
+                                    <th>Submitted Date</th>
+                                    <th>Student</th>
+                                    <th>Course Code</th>
+                                    <th>Course Name</th>
+                                    <th>Department</th>
+                                    <th>Approval</th>
+      
+                                </tr>
+                            </thead>
+                            <tbody>
+                            	<tr th:each = "pc : ${pendingCourses}">
+                            		<td th:text = "${#dates.format(pc.submittedDate, 'dd-MMM-yyyy')}"></td>
+                            		<td th:text = "${pc.student.firstName} + ' ' + ${pc.student.lastName}"></td>
+                            		<td th:text = "${pc.course.courseCode}"></td>
+                            		<td th:text = "${pc.course.courseName}"></td>
+                            		<td th:text = "${pc.course.department.name}"></td>
+                            		
+                            		<td>
+                            			<a th:href="@{/courseApp/admin/applications/pending/approve/{id}(id=${pc.Id})}" class="btn btn-success">Approve</a>
+                            		</td>
+                            	</tr>
+                                 
+                            </tbody>
+                        </table>
+                    </div>      
+                </div>
+            </div>
+        </div>
+   	</div>
+</body>
+</html>

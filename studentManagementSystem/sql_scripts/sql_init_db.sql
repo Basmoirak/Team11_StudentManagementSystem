@@ -32,14 +32,14 @@ VALUES
 (9, 1), (10, 1), (11, 1), (12, 1), (13, 1), (14, 1);
 
 -- Create students 
-INSERT INTO `student` (id,address,birth_date,degree,first_name,last_name,gender,mobile,level_id,semester_id,status_id)
+INSERT INTO `student` (id,address,birth_date,degree,first_name,last_name,gender,mobile,level_id,semester_id)
 VALUES
-('9', 'Central Perk', '1995-02-08 23:35:21', 'Business', 'Chandler', 'Bing', 'Male', '91234567', 1, 1, 1),
-('10', 'Central Perk', '1996-02-08 23:35:21', 'Business', 'Ross', 'Geller', 'Male', '91234567', 1, 1, 1),
-('11', 'Central Perk', '1996-02-08 23:35:21', 'Business', 'Monica', 'Geller', 'Female', '91234567', 1, 1, 1),
-('12', 'Central Perk', '1995-02-08 23:35:21', 'Business', 'Joey', 'Tribbiani', 'Male', '91234567', 1, 1, 1),
-('13', 'Central Perk', '1996-02-08 23:35:21', 'Business', 'Rachel', 'Green', 'Female', '91234567', 1, 1, 1),
-('14', 'Central Perk', '1996-02-08 23:35:21', 'Business', 'Phoebe', 'Buffay', 'Female', '91234567', 1, 1, 1);
+('9', 'Central Perk', '1995-02-08 23:35:21', 'Business', 'Chandler', 'Bing', 'Male', '91234567', 1, 1),
+('10', 'Central Perk', '1996-02-08 23:35:21', 'Business', 'Ross', 'Geller', 'Male', '91234567', 1, 1),
+('11', 'Central Perk', '1996-02-08 23:35:21', 'Business', 'Monica', 'Geller', 'Female', '91234567', 1, 1),
+('12', 'Central Perk', '1995-02-08 23:35:21', 'Business', 'Joey', 'Tribbiani', 'Male', '91234567', 1, 1),
+('13', 'Central Perk', '1996-02-08 23:35:21', 'Business', 'Rachel', 'Green', 'Female', '91234567', 1, 1),
+('14', 'Central Perk', '1996-02-08 23:35:21', 'Business', 'Phoebe', 'Buffay', 'Female', '91234567', 1, 1);
 
 -- Create departments 
 INSERT INTO `department` (name)
@@ -103,11 +103,20 @@ VALUES
  (12, 'B+', 1, 1, '9'), (12, 'B+', 1, 1, '10'), (12, 'A-', 1, 1, '11'),
  (12, 'A-', 1, 1, '12'), (12, 'B+', 1, 1, '13'), (12, 'B+', 1, 1, '14'),
  -- Current courses
- (1, NULL , 1, 1, '9'), (1, NULL , 1, 1, '10'), (1, NULL , 1, 1, '11'), 
- (1, NULL , 1, 1, '12'), (1, NULL , 1, 1, '13'), (1, NULL , 1, 1, '14'),
- (2, NULL , 1, 1, '9'), (2, NULL , 1, 1, '10'), (2, NULL , 1, 1, '11'), 
- (3, NULL , 1, 1, '12'), (3, NULL , 1, 1, '13'), (3, NULL , 1, 1, '14'),
- (4, NULL , 1, 1, '9'), (4, NULL , 1, 1, '10'), (4, NULL , 1, 1, '11'), (4, NULL, 1, 1, '12'),
- (5, NULL , 1, 1, '12'), (5, NULL , 1, 1, '13'), (5, NULL , 1, 1, '14'),
- (9, NULL , 1, 1, '9'), (9, NULL , 1, 1, '10'), (9, NULL , 1, 1, '11'), 
- (9, NULL , 1, 1, '12'), (9, NULL , 1, 1, '13'), (9, NULL , 1, 1, '14');
+ (1, 'N/A' , 1, 1, '9'), (1, 'N/A' , 1, 1, '10'), (1, 'N/A' , 1, 1, '11'), 
+ (1, 'N/A' , 1, 1, '12'), (1, 'N/A' , 1, 1, '13'), (1, 'N/A' , 1, 1, '14'),
+ (2, 'N/A' , 1, 1, '9'), (2, 'N/A' , 1, 1, '10'), (2, 'N/A' , 1, 1, '11'), 
+ (3, 'N/A' , 1, 1, '12'), (3, 'N/A' , 1, 1, '13'), (3, 'N/A' , 1, 1, '14'),
+ (4, 'N/A' , 1, 1, '9'), (4, 'N/A' , 1, 1, '10'), (4, 'N/A' , 1, 1, '11'), (4, 'N/A', 1, 1, '12'),
+ (5, 'N/A' , 1, 1, '12'), (5, 'N/A' , 1, 1, '13'), (5, 'N/A' , 1, 1, '14'),
+ (9, 'N/A' , 1, 1, '9'), (9, 'N/A' , 1, 1, '10'), (9, 'N/A' , 1, 1, '11'), 
+ (9, 'N/A' , 1, 1, '12'), (9, 'N/A' , 1, 1, '13'), (9, 'N/A' , 1, 1, '14');
+
+-- Leave applications 
+INSERT INTO leave_applicant (`start_date`,`end_date`,`faculty_id`,`status`)
+VALUES 
+('2019-10-10', '2019-10-12', '4', 1), ('2019-11-11', '2019-11-12', '4', 1), ('2019-12-08', '2019-12-10', '4', 1), (NOW()+INTERVAL 5 DAY, NOW()+INTERVAL 7 DAY, '4', 0),
+('2019-10-11', '2019-10-14', '5', 1), ('2019-11-12', '2019-11-14', '5', 1), (NOW()+INTERVAL 5 DAY, NOW()+INTERVAL 7 DAY, '5', 0),
+('2019-10-08', '2019-10-11', '6', 1), ('2019-12-01', '2019-12-03', '6', 1), (NOW()+INTERVAL 4 DAY, NOW()+INTERVAL 7 DAY, '6', 0),
+('2019-12-01', '2019-12-02', '7', 1), ('2019-12-04', '2019-12-06', '7', 1), (NOW()+INTERVAL 6 DAY, NOW()+INTERVAL 7 DAY, '7', 0),
+('2019-11-22', '2019-11-25', '8', 1), ('2019-12-05', '2019-12-08', '8', 1), (NOW()+INTERVAL 7 DAY, NOW()+INTERVAL 9 DAY, '8', 0);

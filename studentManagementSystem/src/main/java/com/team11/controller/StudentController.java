@@ -1,13 +1,11 @@
 package com.team11.controller;
 
 
-import java.util.Optional;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,7 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.team11.entity.Student;
 import com.team11.service.StudentService;
@@ -60,7 +58,6 @@ public class StudentController {
 		if(result.hasErrors()) {
 			model.addAttribute("levels", studentService.getLevels());
 			model.addAttribute("semesters", studentService.getSemesters());
-			model.addAttribute("statuses", studentService.getStatuses());
 			return "admin/student-form";
 		}
 		
@@ -85,17 +82,21 @@ public class StudentController {
 		model.addAttribute("student", theStudent);
 		model.addAttribute("levels", studentService.getLevels());
 		model.addAttribute("semesters", studentService.getSemesters());
-		model.addAttribute("statuses", studentService.getStatuses());
 		
 		return "admin/student-form";
 	}
 	
 	// For admin to remove students
 	@GetMapping("/admin/delete/{id}")
-	public String delete(@PathVariable("id") String theId) {
-		studentService.deleteStudent(theId);
-		userService.deactivateUser(theId);
-		return "redirect:/student/admin/list";
+	public String delete(@PathVariable("id") String theId, RedirectAttributes redirectAttributes) {
+		try {
+			studentService.deleteStudent(theId);
+			userService.deactivateUser(theId);
+			return "redirect:/student/admin/list";
+		} catch (DataIntegrityViolationException e) {
+			redirectAttributes.addFlashAttribute("error", "Cannot delete student [" + e.getClass().getSimpleName() + "]");
+			return "redirect:/student/admin/list";
+		}
 	}
 	
 }

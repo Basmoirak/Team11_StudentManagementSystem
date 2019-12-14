@@ -73,6 +73,8 @@ public class CourseApplicantController {
 		return "student/available-courses";
 	}
 	
+	
+	
 	@GetMapping("/student/courses/my")
 	public String myCourses(Model model, HttpServletRequest request) {
 		//get active courses

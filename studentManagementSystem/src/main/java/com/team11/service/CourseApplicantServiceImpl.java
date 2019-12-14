@@ -92,6 +92,12 @@ public class CourseApplicantServiceImpl implements CourseApplicantService{
 	public Page<CourseApplicant> searchAndPaginate(String search, Pageable pageable) {
 		return courseApplicantRepository.searchAndPaginate(search, pageable);
 	}
+	
+	@Override
+	@Transactional
+	public List<String> findStudentEmailByCourseId(int courseId) {
+		return courseApplicantRepository.findStudentEmailByCourseId(courseId);
+	}
 
 
 }

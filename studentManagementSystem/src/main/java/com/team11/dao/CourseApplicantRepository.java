@@ -39,4 +39,8 @@ public interface CourseApplicantRepository extends JpaRepository<CourseApplicant
 //			+ "or ca.course.courseName like %?1% or " 
 //			+ "ca.course.department.name like %?1% order by ca.Id")
 	public Page<CourseApplicant> searchAndPaginate(String search, Pageable pageable);
+	
+	//For email use ,get students under course  
+	@Query("select u.email from User u where u.id IN(select ca.studentID from CourseApplicant ca where ca.courseID=:courseId)")
+	public List<String> findStudentEmailByCourseId(int courseId);
 }

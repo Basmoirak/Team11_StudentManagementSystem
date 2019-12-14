@@ -4,6 +4,7 @@ package com.team11.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.team11.entity.Department;
 import com.team11.service.DepartmentService;
@@ -60,9 +62,15 @@ public class DepartmentController {
 	}
 	
 	@GetMapping("/admin/delete/{id}")
-	public String delete(@PathVariable("id") int theId) {
-		departmentService.deleteDepartment(theId);
-		return "redirect:/department/admin/list";
+	public String delete(@PathVariable("id") int theId, RedirectAttributes redirectAttributes) {
+		try {
+			departmentService.deleteDepartment(theId);
+			return "redirect:/department/admin/list";
+		} catch (DataIntegrityViolationException e) {
+			System.out.println(e);
+			redirectAttributes.addFlashAttribute("error", "Cannot delete department [" + e.getClass().getSimpleName() + "]");
+			return "redirect:/department/admin/list";
+		}
 	}
 	
 	@PostMapping("/admin/save")

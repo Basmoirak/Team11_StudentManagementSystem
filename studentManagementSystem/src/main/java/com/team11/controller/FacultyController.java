@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.team11.entity.Faculty;
 import com.team11.service.CourseService;
@@ -79,11 +81,18 @@ public class FacultyController {
 	}
 	
 	@GetMapping("/admin/delete/{id}")
-	public String delete(@PathVariable("id") String id) {
-		facultyService.deleteFaculty(id);
-		userService.deactivateUser(id);
+	public String delete(@PathVariable("id") String id, RedirectAttributes redirectAttributes) {
+		try {
+			facultyService.deleteFaculty(id);
+			userService.deactivateUser(id);
+			
+			return "redirect:/faculty/admin/list";
+		} catch (DataIntegrityViolationException e) {
+			System.out.println(e);
+			redirectAttributes.addFlashAttribute("error", "Cannot delete faculty [" + e.getClass().getSimpleName() + "]");
+			return "redirect:/faculty/admin/list";
+		}
 		
-		return "redirect:/faculty/admin/list";
 	}
 	
 	@PostMapping("/admin/save")

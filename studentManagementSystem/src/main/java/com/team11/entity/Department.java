@@ -1,4 +1,4 @@
-package com.team11.entity;
+	package com.team11.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,6 +18,8 @@ public class Department {
 	
 	//Constructors
 	public Department() {}
+	
+	public Department(String name) {}
 
 	//Getters & Setters
 	public int getId() {

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Send Email</title>
+</head>
+<body>
+<div layout:fragment="content">
+<div class="box box-info" style="position: relative; left: 0px; top: 0px;">
+            <div class="box-header ui-sortable-handle" style="cursor: move;">
+              <i class="fa fa-envelope"></i>
+
+              <h3 class="box-title">Quick Email</h3>
+              <!-- tools box -->
+              <div class="pull-right box-tools">
+                <button type="button" class="btn btn-info btn-sm" data-widget="remove" data-toggle="tooltip" title="" data-original-title="Remove">
+                  <i class="fa fa-times"></i></button>
+              </div>
+              <!-- /. tools -->
+            </div>
+            <div class="box-body">
+              <form action="#" method="post" th:action="@{/faculty/faculty/send/(cn=${coursename},dp=${departmentname})}">
+                <div class="form-group">
+                <label>To: </label>
+                  <input type="email" multiple class="form-control" name="emailto" th:value="${emaillist}">
+                </div>
+                <div class="form-group">
+                <label>Subject:</label>
+                  <input type="text" class="form-control" name="subject" th:value="${subject}" placeholder="Subject">
+                </div>
+                <div>
+
+
+<textarea rows="10" cols="149" class="textarea"  name="body" placeholder="Input message here..."></textarea>
+<input  name="footer" th:value="${footer}" style="border:none;min-width: 1000px;" readonly="readonly"  >
+                </div>
+            <div class="box-footer clearfix">
+              <button type="submit" class="pull-right btn btn-default" id="sendEmail">Send
+                <i class="fa fa-arrow-circle-right"></i></button>
+            </div>                
+            </form>  
+            </div>
+
+           
+          </div>
+</div>
+</body>
+</html>

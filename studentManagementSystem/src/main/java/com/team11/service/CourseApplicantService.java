@@ -32,4 +32,6 @@ public interface CourseApplicantService {
 
 	public Page<CourseApplicant> searchAndPaginate(String search, Pageable pageable);
 	
+	public List<String> findStudentEmailByCourseId(int courseId);
+	
 }

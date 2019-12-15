@@ -19,4 +19,5 @@ public interface UserService extends UserDetailsService {
 	public List<Role> getRoles();
 
 	User createNewUser(CrmUser crmUser, String roleName);
+	
 }

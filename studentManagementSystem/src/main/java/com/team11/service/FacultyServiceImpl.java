@@ -29,9 +29,10 @@ public class FacultyServiceImpl implements FacultyService{
 
 	@Override
 	@Transactional
-	public void saveFaculty(Faculty faculty) {
+	public Faculty saveFaculty(Faculty faculty) {
 		// TODO Auto-generated method stub
 		facultyRepository.save(faculty);
+		return faculty;
 	}
 
 	@Override

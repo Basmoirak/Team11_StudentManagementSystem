@@ -11,7 +11,7 @@ public interface CourseService {
 	
 	public List<Course> getCourses();
 	
-	public void saveCourse(Course course);
+	public Course saveCourse(Course course);
 	
 	public Course getCourse(int id);
 	

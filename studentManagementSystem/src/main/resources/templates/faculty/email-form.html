@@ -21,131 +21,19 @@
               <!-- /. tools -->
             </div>
             <div class="box-body">
-              <form action="#" method="post" th:action="@{/faculty/faculty/send}">
+              <form action="#" method="post" th:action="@{/faculty/faculty/send/(cn=${coursename},dp=${departmentname})}">
                 <div class="form-group">
-                  <input type="email" class="form-control" name="emailto" th:value="${emaillist}" readonly="readonly" >
+                <label>To: </label>
+                  <input type="email" multiple class="form-control" name="emailto" th:value="${emaillist}">
                 </div>
                 <div class="form-group">
-                  <input type="text" class="form-control" name="subject" th:value="${subject}">
+                <label>Subject:</label>
+                  <input type="text" class="form-control" name="subject" th:value="${subject}" placeholder="Subject">
                 </div>
                 <div>
-                <ul class="wysihtml5-toolbar" style=""><li class="dropdown">
-  <a class="btn btn-default dropdown-toggle " data-toggle="dropdown" aria-expanded="false">
-    
-      <span class="glyphicon glyphicon-font"></span>
-    
-    <span class="current-font">Normal text</span>
-    <b class="caret"></b>
-  </a>
-  <ul class="dropdown-menu">
-    <li><a data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="p" tabindex="-1" href="javascript:;" >Normal text</a></li>
-    <li><a data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h1" tabindex="-1" href="javascript:;" >Heading 1</a></li>
-    <li><a data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h2" tabindex="-1" href="javascript:;" >Heading 2</a></li>
-    <li><a data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h3" tabindex="-1" href="javascript:;" >Heading 3</a></li>
-    <li><a data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h4" tabindex="-1" href="javascript:;" >Heading 4</a></li>
-    <li><a data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h5" tabindex="-1" href="javascript:;" >Heading 5</a></li>
-    <li><a data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="h6" tabindex="-1" href="javascript:;" >Heading 6</a></li>
-  </ul>
-</li>
-<li>
-  <div class="btn-group">
-    <a class="btn  btn-default" data-wysihtml5-command="bold" title="CTRL+B" tabindex="-1" href="javascript:;" >Bold</a>
-    <a class="btn  btn-default" data-wysihtml5-command="italic" title="CTRL+I" tabindex="-1" href="javascript:;" >Italic</a>
-    <a class="btn  btn-default" data-wysihtml5-command="underline" title="CTRL+U" tabindex="-1" href="javascript:;" >Underline</a>
-    
-    <a class="btn  btn-default" data-wysihtml5-command="small" title="CTRL+S" tabindex="-1" href="javascript:;" >Small</a>
-    
-  </div>
-</li>
 
-<li>
-  <div class="btn-group">
-    <a class="btn  btn-default" data-wysihtml5-command="insertUnorderedList" title="Unordered list" tabindex="-1" href="javascript:;" >
-    
-      <span class="glyphicon glyphicon-list"></span>
-    
-    </a>
-    <a class="btn  btn-default" data-wysihtml5-command="insertOrderedList" title="Ordered list" tabindex="-1" href="javascript:;" >
-    
-      <span class="glyphicon glyphicon-th-list"></span>
-    
-    </a>
-    <a class="btn  btn-default" data-wysihtml5-command="Outdent" title="Outdent" tabindex="-1" href="javascript:;" >
-    
-      <span class="glyphicon glyphicon-indent-right"></span>
-    
-    </a>
-    <a class="btn  btn-default" data-wysihtml5-command="Indent" title="Indent" tabindex="-1" href="javascript:;" >
-    
-      <span class="glyphicon glyphicon-indent-left"></span>
-    
-    </a>
-  </div>
-</li>
-<li>
-  <div class="bootstrap-wysihtml5-insert-link-modal modal fade" data-wysihtml5-dialog="createLink">
-    <div class="modal-dialog ">
-      <div class="modal-content">
-        <div class="modal-header">
-          <a class="close" data-dismiss="modal">×</a>
-          <h3>Insert link</h3>
-        </div>
-        <div class="modal-body">
-          <div class="form-group">
-            <input value="http://" class="bootstrap-wysihtml5-insert-link-url form-control" data-wysihtml5-dialog-field="href">
-          </div> 
-          <div class="checkbox">
-            <label> 
-              <input type="checkbox" class="bootstrap-wysihtml5-insert-link-target" >Open link in new window
-            </label>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <a class="btn btn-default" data-dismiss="modal" data-wysihtml5-dialog-action="cancel" href="#">Cancel</a>
-          <a href="#" class="btn btn-primary" data-dismiss="modal" data-wysihtml5-dialog-action="save">Insert link</a>
-        </div>
-      </div>
-    </div>
-  </div>
-  <a class="btn  btn-default" data-wysihtml5-command="createLink" title="Insert link" tabindex="-1" href="javascript:;" >
-    
-      <span class="glyphicon glyphicon-share"></span>
-    
-  </a>
-</li>
-<li>
-  <div class="bootstrap-wysihtml5-insert-image-modal modal fade" data-wysihtml5-dialog="insertImage">
-    <div class="modal-dialog ">
-      <div class="modal-content">
-        <div class="modal-header">
-          <a class="close" data-dismiss="modal">×</a>
-          <h3>Insert image</h3>
-        </div>
-        <div class="modal-body">
-          <div class="form-group">
-            <input value="http://" class="bootstrap-wysihtml5-insert-image-url form-control" data-wysihtml5-dialog-field="src">
-          </div> 
-        </div>
-        <div class="modal-footer">
-          <a class="btn btn-default" data-dismiss="modal" data-wysihtml5-dialog-action="cancel" href="#">Cancel</a>
-          <a class="btn btn-primary" data-dismiss="modal" data-wysihtml5-dialog-action="save" href="#">Insert image</a>
-        </div>
-      </div>
-    </div>
-  </div>
-  <a class="btn  btn-default" data-wysihtml5-command="insertImage" title="Insert image" tabindex="-1" href="javascript:;" >
-    
-      <span class="glyphicon glyphicon-picture"></span>
-    
-  </a>
-</li>
-</ul>
 
-Course Name:<input name="coursename" th:value="${coursename}" style="border:none;min-width: 975px;" readonly="readonly" >
-Department Name:<input name="departmentname" th:value="${departmentname}" style="border:none;min-width: 947px;" readonly="readonly">
-Teaching Staff:<input name="teachingstaff" th:value="${teachingstaff}" style="border:none;min-width: 971px;" readonly="readonly">
-Please add comment below:
-<textarea th:text="${body}"  rows="5" cols="149" class="textarea"  name="body" placeholder="Message"></textarea>
+<textarea rows="10" cols="149" class="textarea"  name="body" placeholder="Input message here..."></textarea>
 <input  name="footer" th:value="${footer}" style="border:none;min-width: 1000px;" readonly="readonly"  >
                 </div>
             <div class="box-footer clearfix">

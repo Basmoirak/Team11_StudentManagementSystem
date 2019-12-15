@@ -48,8 +48,9 @@ public class StudentServiceImpl implements StudentService {
 	//Save or Update student
 	@Override
 	@Transactional
-	public void saveStudent(Student student) {
+	public Student saveStudent(Student student) {
 		studentRepository.save(student);
+		return student;
 	}
 
 	//Retrieve one student

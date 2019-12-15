@@ -30,8 +30,9 @@ public class CourseServiceImpl implements CourseService{
 
 	@Override
 	@Transactional
-	public void saveCourse(Course course) {
+	public Course saveCourse(Course course) {
 		courseRepository.save(course);
+		return course;
 	}
 
 	@Override

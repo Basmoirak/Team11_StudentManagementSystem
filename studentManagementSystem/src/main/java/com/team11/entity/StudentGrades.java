@@ -38,6 +38,16 @@ public class StudentGrades {
 	//Constructors
 	public StudentGrades() {}
 	
+
+	
+	@Override
+	public String toString() {
+		return "StudentGrades [Id=" + Id + ", studentID=" + studentID + ", courseID=" + courseID + ", student="
+				+ student + ", course=" + course + ", grade=" + grade + ", semester=" + semester + ", level=" + level
+				+ "]";
+	}
+	
+	
 	//Getters & Setters
 	public int getId() {
 		return Id;
@@ -45,6 +55,22 @@ public class StudentGrades {
 
 	public void setId(int id) {
 		Id = id;
+	}
+
+	public String getStudentID() {
+		return studentID;
+	}
+
+	public void setStudentID(String studentID) {
+		this.studentID = studentID;
+	}
+
+	public int getCourseID() {
+		return courseID;
+	}
+
+	public void setCourseID(int courseID) {
+		this.courseID = courseID;
 	}
 
 	public Student getStudent() {
@@ -86,28 +112,8 @@ public class StudentGrades {
 	public void setLevel(int level) {
 		this.level = level;
 	}
+
 	
-	public String getStudentID() {
-		return studentID;
-	}
-
-	public void setStudentID(String studentID) {
-		this.studentID = studentID;
-	}
-
-	public int getCourseID() {
-		return courseID;
-	}
-
-	public void setCourseID(int courseID) {
-		this.courseID = courseID;
-	}
-
-	@Override
-	public String toString() {
-		return "StudentGrades [Id=" + Id + ", student=" + student + ", course=" + course + ", grade=" + grade
-				+ ", semester=" + semester + ", level=" + level + "]";
-	}
 	
 }
 

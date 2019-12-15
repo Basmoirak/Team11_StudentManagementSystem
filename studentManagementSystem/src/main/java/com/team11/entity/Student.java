@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -53,6 +54,9 @@ public class Student {
 	@OneToMany(mappedBy = "student")
 	private List<StudentGrades> studentGrades;
 	
+	@OneToOne(mappedBy = "student", cascade = CascadeType.ALL)
+	private tblGPA cgpa;
+	
 	//course applicant  one to many
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "course")
 	private List<CourseApplicant> courseApplicants;
@@ -89,6 +93,14 @@ public class Student {
 
 	public void setId(String id) {
 		Id = id;
+	}
+	
+	public tblGPA getCgpa() {
+		return cgpa;
+	}
+
+	public void setCgpa(tblGPA cgpa) {
+		this.cgpa = cgpa;
 	}
 
 	public String getFirstName() {

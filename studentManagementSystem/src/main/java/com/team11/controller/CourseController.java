@@ -54,11 +54,17 @@ public class CourseController {
 	
 	//saving
 	@PostMapping("/admin/save")
-	public String save(@Valid Course course, BindingResult bindingResult,Model model) {
+	public String save(@Valid Course course, BindingResult bindingResult,Model model, RedirectAttributes redirectAttributes) {
 		if(bindingResult.hasErrors()) { 
 			model.addAttribute("departments", departmentService.getDepartments());
 			return "admin/course-form";
 		}
+		//check if enddate is larger than startdate
+		if(course.getEndDate().before(course.getStartDate())) {
+			redirectAttributes.addFlashAttribute("error", "Please input a valid date range");
+			return "redirect:/course/admin/showForm";
+		}
+		
 		courseService.saveCourse(course);
 		return "redirect:/course/admin/list";
 	}	

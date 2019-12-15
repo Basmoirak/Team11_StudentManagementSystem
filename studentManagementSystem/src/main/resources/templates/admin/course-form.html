@@ -12,6 +12,7 @@
         <div class="container my-5">
             <h2 class="mb-5">Course Form</h2>
             <div class="row">
+            <p class="alert alert-danger" th:if = "${error}" th:text = "${error}"></p>
                 <div class="col-md-6">
                     <form action="#" th:action="@{/course/admin/save}" th:object="${course}" method="POST">
                         <div class="row">
@@ -34,7 +35,7 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="department" class="col-form-label">Choose Department</label>
-                                <select class="form-control" th:field="*{departmentID}" id="department">
+                                <select class="form-control select2" th:field="*{departmentID}" id="department">
     								<option th:each="department : ${departments}" th:value="${department.id}" th:text="${department.name}"></option>
     							</select>
                                 <span th:if="${#fields.hasErrors('departmentID')}" th:errors="*{departmentID}" class="text-danger"></span>
@@ -42,8 +43,8 @@
                             
                             <div class="form-group col-md-6">
                             	<input th:value="*{facultyID}" id="facultyID" type="hidden">
-                            	<label for="faculty" class="col-form-label">Choose Instructor</label>
-                            	<select class="form-control" th:field="*{facultyID}" name="faculty" id="faculty">
+                            	<label for="faculty" class="col-form-label select2">Choose Instructor</label>
+                            	<select class="form-control select2" th:field="*{facultyID}" name="faculty" id="faculty">
                             		<option value="0" disabled="disabled" selected="selected" > Select Instructor </option>
                             	</select>
                             	

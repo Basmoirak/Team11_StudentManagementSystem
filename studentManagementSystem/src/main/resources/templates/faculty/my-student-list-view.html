@@ -16,7 +16,7 @@
                     <h2 th:case="null">No student grades yet!</h2>
                     <div th:case="*">
                         <h2 class="my-5" th:text="${course.courseName}"></h2>
-                        <table class="table table-striped table-responsive datatable">
+                        <table class="table table-striped table-responsive datatable export">
                             <thead>
                                 <tr>
                                     <th>Student Name</th>

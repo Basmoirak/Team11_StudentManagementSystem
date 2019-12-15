@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.team11.entity.StudentGrades;
+import com.team11.entity.tblGPA;
 import com.team11.service.CourseService;
 import com.team11.service.CourseServiceImpl;
 import com.team11.service.StudentGradesService;
 import com.team11.service.StudentGradesServiceImpl;
+import com.team11.service.tblGPAService;
 
 @RequestMapping("/studentGrade")
 @Controller
@@ -37,40 +39,23 @@ public class StudentGradesController {
 		this.courseService = courseService;
 	}
 	
+	private tblGPAService tblGPAService;
+	@Autowired
+	public void setTblGPAService(tblGPAService tblGPAService) {
+		this.tblGPAService = tblGPAService;
+	}
+	
 //	*****  for student role  *****
 	@GetMapping("/student/grades")
 	public String getGrades(Model model, HttpServletRequest request) {
+		
 		model.addAttribute("grades", studentGradesService.findStudentGradesByStudentID((String) request.getSession().getAttribute("userID")));
+		
+		model.addAttribute("gpa", studentGradesService.getGpa((String)request.getSession().getAttribute("userID")));
+		
 		return "student/grades";
 	}
-	
-	@GetMapping("/student/GPA")
-	public String getGpa(Model model, HttpServletRequest request) {		
-		
-		try {
-			double totalUnits = studentGradesService.getTotalUnits((String) request.getSession().getAttribute("userID"));
-		
-			double totalGrades = 0;
-			
-			double gpa = 0;
-			
 
-//			System.out.println(totalUnits);
-			for (StudentGrades g : studentGradesService.findStudentGradesByStudentID((String) request.getSession().getAttribute("userID"))) {
-											
-				totalGrades += studentGradesService.convertGrade(g.getGrade()) * g.getCourse().getCourseUnit();
-				
-				gpa = totalGrades / totalUnits;
-			}
-			 model.addAttribute("gpa", gpa);
-		}
-		catch (Exception e) {
-			System.err.println(e);
-		}
-
-
-		return "student/gpa";
-	}
 	
 	// *** FACULTY ROLE ***
 	
@@ -118,6 +103,13 @@ public class StudentGradesController {
 		
 		// Save or Update faculty
 		studentGradesService.updateGrade(grade.getGrade(), grade.getId());
+		
+		double cgpa = studentGradesService.getGpa(grade.getStudentID());
+		
+	
+		tblGPAService.updateGPA(grade.getStudentID(), cgpa);
+		
+		
 		return "redirect:/faculty/faculty/courses/my";
 	}
 }

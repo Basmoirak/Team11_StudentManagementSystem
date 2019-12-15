@@ -112,6 +112,15 @@ VALUES
  (9, 'N/A' , 1, 1, '9'), (9, 'N/A' , 1, 1, '10'), (9, 'N/A' , 1, 1, '11'), 
  (9, 'N/A' , 1, 1, '12'), (9, 'N/A' , 1, 1, '13'), (9, 'N/A' , 1, 1, '14');
 
+ --add student gpas
+ INSERT INTO `tbl_gpa` (gpa_calculated, student_id)
+ VALUES 
+ (0, '9'),
+ (0, '10'),
+ (0, '11'),
+ (0, '12'),
+ (0, '13'),
+ (0, '14')
 -- Leave applications 
 INSERT INTO leave_applicant (`start_date`,`end_date`,`faculty_id`,`status`)
 VALUES 

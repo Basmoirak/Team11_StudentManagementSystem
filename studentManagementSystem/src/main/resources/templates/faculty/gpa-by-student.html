@@ -29,7 +29,7 @@
     	</div>
         <div class="row">
         	<div class="col-md-12">
-        		<table class="table table-striped table table-hover">
+        		<table class="table table-striped table table-hover export">
         			<thead>
         				<tr>
         					<th>Student ID</th>
@@ -43,6 +43,8 @@
         					<td th:text="${sg.student.Id}"></td>
         					<td th:text="${sg.student.firstName + ' ' + sg.student.lastName}"></td>
         					<td th:text="${sg.course.courseName}"></td>
+        					<td th:text="${#numbers.formatDecimal(sg.student.cgpa.gpaCalculated == null ? 0 : sg.student.cgpa.gpaCalculated, 0, 2)}"></td>
+
         				</tr>
         			</tbody>
         		</table>

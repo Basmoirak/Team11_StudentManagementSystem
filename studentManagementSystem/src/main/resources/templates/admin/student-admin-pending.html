@@ -37,7 +37,7 @@
                             		<td th:text = "${pc.course.department.name}"></td>
                             		
                             		<td>
-                            			<a th:href="@{/courseApp/admin/applications/pending/approve/{id}(id=${pc.Id})}" class="btn btn-success">Approve</a>
+                            			<a th:href="@{/courseApp/admin/applications/pending/approve/{id}/{sid}(id=${pc.Id}, sid=${pc.student.Id})}" class="btn btn-success">Approve</a>
                             		</td>
                             	</tr>
                                  

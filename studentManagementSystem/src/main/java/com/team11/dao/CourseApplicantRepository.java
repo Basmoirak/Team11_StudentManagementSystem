@@ -43,4 +43,5 @@ public interface CourseApplicantRepository extends JpaRepository<CourseApplicant
 	//For email use ,get students under course  
 	@Query("select u.email from User u where u.id IN(select ca.studentID from CourseApplicant ca where ca.courseID=:courseId)")
 	public List<String> findStudentEmailByCourseId(int courseId);
+
 }

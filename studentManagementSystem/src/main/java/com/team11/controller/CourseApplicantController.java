@@ -18,6 +18,7 @@ import com.team11.service.CourseApplicantServiceImpl;
 import com.team11.service.CourseService;
 import com.team11.service.CourseServiceImpl;
 import com.team11.service.StudentGradesService;
+import com.team11.service.tblGPAService;
 
 
 @Controller
@@ -46,6 +47,14 @@ public class CourseApplicantController {
 	@Autowired
 	public void setStudentGradeService(StudentGradesService studentGradesService) {
 		this.studentGradesService = studentGradesService;
+	}
+	
+	//injecting tblGPA
+	private tblGPAService tblGPAService;
+	
+	@Autowired
+	public void setTblGPAService(tblGPAService tblGPAService) {
+		this.tblGPAService = tblGPAService;
 	}
 	
 	// *** STUDENT ROLE ***
@@ -151,12 +160,22 @@ public class CourseApplicantController {
 		return "admin/student-admin-pending";
 	}
 	
-	@GetMapping("/admin/applications/pending/approve/{id}")
-	public String approve(@PathVariable("id") int id) {
-		courseApplicantService.approvePendingApplicant(id);
+	@GetMapping("/admin/applications/pending/approve/{id}/{sid}")
+	public String approve(@PathVariable("id") int id, @PathVariable("sid") String studentId) {
 		
+		System.err.println("1");
+		courseApplicantService.approvePendingApplicant(id);
+		System.err.println("2");
 		// Create new student grade
 		studentGradesService.createNewStudentGrades(courseApplicantService.findByIdAndStatus(id));
+		//System.out.println(tblGPAService.findtblGPAsByStudentId(studentId));
+		
+		System.err.println("here");
+		// Create new gpa row		
+		
+		tblGPAService.createNewGPA(studentId);
+		
+		
 		return "redirect:/courseApp/admin/applications/pending";
 	}
 	

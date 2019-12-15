@@ -39,4 +39,5 @@ public interface CourseApplicantRepository extends JpaRepository<CourseApplicant
 //			+ "or ca.course.courseName like %?1% or " 
 //			+ "ca.course.department.name like %?1% order by ca.Id")
 	public Page<CourseApplicant> searchAndPaginate(String search, Pageable pageable);
+	
 }

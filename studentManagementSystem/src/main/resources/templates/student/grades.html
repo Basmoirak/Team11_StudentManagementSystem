@@ -10,11 +10,11 @@
 	<!-- Content starts -->
 	<div layout:fragment="content">
 		<div class="container-fluid">
-		<a class="btn btn-primary" th:href="@{/studentGrade/student/GPA}">View GPA for this semester</a>
+		
 			<h2>My Gradebook</h2>
 		
 		<div class="row">
-			<div class="col-md-12">
+			<div class="col-md-8">
 				<table class="table table-striped datatable" style="width:100%">
 					<thead>
 						<tr>
@@ -36,7 +36,10 @@
 					</tbody>
 				</table>
 			</div>
-
+			<div class="col-md-4 well text-center">
+				<p >Cumulative GPA is</p>
+				<p th:text="${gpa}" style="font-size: 40px;"></p>
+			</div>
 		</div>
 	
 		</div>

@@ -28,6 +28,9 @@ public interface StudentGradesService {
 	//convert from letter grade to number grade
 	public double convertGrade(String letter);
 
+	//testing
+	public double getGpa(String studentId);
+	
 	public List<StudentGrades> getStudentGradesByCourseID(int courseId);
 	
 	public void updateGrade(String grade, int id);

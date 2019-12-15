@@ -33,6 +33,7 @@
 	
 	<link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
 
+	<link href="https://unpkg.com/tableexport@5.2.0/dist/css/tableexport.min.css"></link>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -48,10 +49,17 @@
 	.dataTables_paginate {
 		float : right;
 	}
+	.content-wrapper {
+		background-color: light-grey;
+	}
+	.form-control {
+		border-radius: 7px;
+	
+	}
 </style>
     
 </head>
-<body class="hold-transition skin-green sidebar-mini">
+<body class="hold-transition skin-black sidebar-mini">
 <div class="wrapper">
 
     <header class="main-header">
@@ -92,7 +100,7 @@
     </div>
     <!-- /.content-wrapper -->
     <footer class="main-footer">
-        <strong>Team11 #Student Management System</strong>
+        <i class="fa fa-graduation-cap"></i> <strong>Team11 #Student Management System</strong>
     </footer>
 </div>
 <!-- ./wrapper -->
@@ -115,6 +123,9 @@
 
 <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
 
+
+<script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.2/dist/FileSaver.min.js"></script>
+<script src="https://unpkg.com/tableexport@5.2.0/dist/js/tableexport.min.js"></script>
 <th:block layout:fragment = "script"></th>
 
 <script>
@@ -123,6 +134,8 @@
 		$('.datatable').DataTable()
 		
 		$('.select2').select2()
+		
+		$('.export').tableExport();
 	})
 		
 </script>

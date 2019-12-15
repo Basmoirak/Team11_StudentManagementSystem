@@ -86,7 +86,37 @@ public class StudentGradesServiceImpl implements StudentGradesService {
 		// TODO Auto-generated method stub
 		return studentGradesRepository.getTotalUnits(studentId);
 	}
+	
+	//testing
+	@Override 
+	public double getGpa(String studentId) {
+		
+		double gpa = 0;
+		
+		double totalGrades = 0;
+		
+		try {
+			double totalUnits = getTotalUnits(studentId);
+						
 
+//			System.out.println(totalUnits);
+			for (StudentGrades g : findStudentGradesByStudentID(studentId)) {
+											
+				totalGrades += convertGrade(g.getGrade()) * g.getCourse().getCourseUnit();
+				
+				gpa = totalGrades / totalUnits;
+			}
+			
+			
+		}
+		catch (Exception e) {
+			System.err.println(e);
+		}
+		return gpa;
+		
+	}
+	
+	
 	@Override
 	//convert from letter grade to number grade
 	public double convertGrade(String letter) {

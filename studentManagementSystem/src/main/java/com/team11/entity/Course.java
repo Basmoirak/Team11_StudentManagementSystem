@@ -29,7 +29,7 @@ public class Course {
 	
 	@Size(min = 1, max = 20)
 	private String courseCode;
-	@Size(min = 3, max = 10)
+	@Size(min = 3, max = 25)
 	private String courseName;
 	
 	@NotNull

@@ -29,14 +29,15 @@ public class DepartmentServiceImpl implements DepartmentService{
 	@Override
 	@Transactional
 	public void deleteDepartment(int theId) {
+		
 		departmentRepository.deleteById(theId);
 	}
 
 	@Override
 	@Transactional
-	public void saveDepartment(Department department) {
+	public Department saveDepartment(Department department) {
 		departmentRepository.save(department);
-		
+		return department;
 	}
 
 	@Override

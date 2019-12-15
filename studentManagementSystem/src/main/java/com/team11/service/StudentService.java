@@ -13,7 +13,7 @@ public interface StudentService {
 	
 	public List<Student> getStudents();
 	
-	public void saveStudent(Student student);
+	public Student saveStudent(Student student);
 	
 	public Student getStudent(String theId);
 	

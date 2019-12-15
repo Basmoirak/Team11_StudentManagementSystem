@@ -18,6 +18,8 @@ public class Department {
 	
 	//Constructors
 	public Department() {}
+	
+	public Department(String name) {}
 
 	//Getters & Setters
 	public int getId() {

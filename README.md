@@ -16,11 +16,11 @@
 ## To Login 
 **As Administrator Role**
 - Username: admin | Password: fun123
--
+
 **As Faculty Role**
 - Username: ted | Password: fun123
 - Or any cast member from "How I Met Your Mother" tv show
--
+
 **As Student Role**
 - Username: chandler | Password: fun123
 - Or any other cast member from "FRIENDS" tv show
